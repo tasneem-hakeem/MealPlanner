@@ -47,6 +47,8 @@ dependencies {
     implementation(libs.fragment)
     // Retrofit
     implementation(libs.retrofit)
+    // Gson Converter
+    implementation(libs.converter.gson)
     // Glide
     implementation(libs.glide)
     // Room
