@@ -1,5 +1,7 @@
 package com.tasneem.mealplanner.datasource.remote.dto.meal;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -107,4 +109,21 @@ public class MealDto {
     public void setIngredients(List<MealIngredientDto> ingredients) {
         this.ingredients = ingredients;
     }
+
+    /*@NonNull
+    @Override
+    public String toString() {
+        return "MealDto{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", originCountry='" + originCountry + '\'' +
+                ", steps='" + steps + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", sourceUrl='" + sourceUrl + '\'' +
+                ", lastEditTime='" + lastEditTime + '\'' +
+                ", ingredients=" + ingredients +
+                '}';
+    }*/
 }

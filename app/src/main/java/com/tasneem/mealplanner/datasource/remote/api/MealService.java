@@ -1,8 +1,6 @@
 package com.tasneem.mealplanner.datasource.remote.api;
 
-import com.tasneem.mealplanner.datasource.remote.dto.areaslist.AreasDto;
 import com.tasneem.mealplanner.datasource.remote.dto.areaslist.AreasListResponse;
-import com.tasneem.mealplanner.datasource.remote.dto.categorieslist.CategoriesDto;
 import com.tasneem.mealplanner.datasource.remote.dto.categorieslist.CategoriesListResponse;
 import com.tasneem.mealplanner.datasource.remote.dto.category.CategoryResponse;
 import com.tasneem.mealplanner.datasource.remote.dto.ingredient.IngredientsResponse;
