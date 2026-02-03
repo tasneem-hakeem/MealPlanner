@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base Text Style -->
+
+    <style name="TextBase">
+        <item name="android:fontFamily">@font/plusjakartasans_regular</item>
+        <item name="android:textColor">@color/on_surface</item>
+    </style>
+
+    <!-- Headlines (Branding & Main Titles) -->
+
+    <style name="TextHeadlineLarge" parent="TextBase">
+        <item name="android:textSize">32sp</item>
+        <item name="android:letterSpacing">-0.015</item>
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+    </style>
+
+    <style name="TextHeadlineMedium" parent="TextBase">
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+    </style>
+
+    <style name="TextHeadlineSmall" parent="TextBase">
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+    </style>
+
+    <!-- Titles (Sections & Cards)-->
+
+    <style name="TextTitleLarge" parent="TextBase">
+        <item name="android:textSize">18sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
+    </style>
+
+    <style name="TextTitleMedium" parent="TextBase">
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+    </style>
+
+    <style name="TextTitleSmall" parent="TextBase">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+    </style>
+
+    <!-- Body Text (Descriptions & Content)-->
+
+    <style name="TextBodyLarge" parent="TextBase">
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="fontFamily">@font/plusjakartasans_regular</item>
+    </style>
+
+    <style name="TextBodyMedium" parent="TextBase">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="fontFamily">@font/plusjakartasans_regular</item>
+    </style>
+
+    <style name="TextBodySmall" parent="TextBase">
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="fontFamily">@font/plusjakartasans_regular</item>
+    </style>
+
+    <!-- Labels (Buttons, Links, Captions)-->
+
+    <style name="TextLabelLarge" parent="TextBase">
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+    </style>
+
+    <style name="TextLabelMedium" parent="TextBase">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+    </style>
+
+    <style name="TextLabelSmall" parent="TextBase">
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="fontFamily">@font/plusjakartasans_medium</item>
+    </style>
+
+</resources>
