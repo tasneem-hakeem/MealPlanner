@@ -54,6 +54,8 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
+    // Lottie
+    implementation(libs.lottie)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

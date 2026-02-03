@@ -3,6 +3,25 @@
     <style name="Base.Theme.MealPlanner" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- Primary -->
+        <item name="colorPrimary">@color/primary_coral</item>
+        <item name="colorOnPrimary">@color/surface</item>
+
+        <!-- Secondary -->
+        <item name="colorSecondary">@color/secondary_green</item>
+        <item name="colorOnSecondary">@color/surface</item>
+
+        <!-- Background & Surface -->
+        <!--<item name="colorBackground">@color/background</item>-->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">@color/outline</item>
+
+        <!-- Error -->
+        <item name="colorError">@color/error</item>
     </style>
 
     <style name="Theme.MealPlanner" parent="Base.Theme.MealPlanner" />

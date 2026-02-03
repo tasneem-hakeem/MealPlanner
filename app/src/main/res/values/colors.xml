@@ -2,4 +2,27 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Brand Colors -->
+    <color name="primary_coral">#FF726A</color>
+    <color name="secondary_green">#4CAF50</color>
+    <color name="dark_navy">#1A1C1E</color>
+
+    <!-- Light Mode Palette -->
+    <color name="background">#FBFDF8</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#1A1C1E</color>
+    <color name="on_surface_variant">#70777C</color>
+    <color name="outline">#DDE3EA</color>
+
+    <!-- Semantic Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="error">#BA1A1A</color>
+    <color name="warning">#FBBC04</color>
+    <color name="favorite_red">#FF0000</color>
+
+    <!-- Overlays -->
+    <color name="scrim_30">#4D000000</color> <!-- 30% -->
+    <color name="scrim_50">#80000000</color> <!-- 50% -->
+
 </resources>

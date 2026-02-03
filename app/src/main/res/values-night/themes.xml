@@ -3,5 +3,16 @@
     <style name="Base.Theme.MealPlanner" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+        <item name="colorPrimary">@color/primary_coral</item>
+        <item name="colorOnPrimary">@color/dark_navy</item>
+
+        <item name="colorSecondary">@color/secondary_green</item>
+
+        <!--<item name="colorBackground">@color/background</item>-->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+
+        <item name="colorError">@color/error</item>
     </style>
 </resources>
