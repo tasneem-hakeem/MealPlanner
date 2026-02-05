@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Primary Brand Colors (same as light) -->
+    <color name="primary">#FF726A</color>
+    <color name="primary_variant">#FF6B6B</color>
+    <color name="on_primary">#FFFFFF</color>
 
-    <!-- Dark Mode Palette -->
-    <color name="background">#121212</color>
+    <!-- Primary with opacity variations -->
+    <color name="primary_10">#1AFF726A</color>
+    <color name="primary_20">#33FF726A</color>
+    <color name="primary_30">#4DFF726A</color>
+
+    <!-- Surface Colors -->
     <color name="surface">#1E1E1E</color>
-    <color name="on_surface">#E1E2E1</color>
-    <color name="primary_coral">#FF8A84</color>
+    <color name="surface_variant">#2C2C2C</color>
+    <color name="surface_container">#121212</color>
+    <color name="on_surface">#E0E0E0</color>
+    <color name="on_surface_variant">#A0A0A0</color>
 
+    <!-- Background Colors -->
+    <color name="background">#121212</color>
+    <color name="background_secondary">#111827</color>
+    <color name="on_background">#E0E0E0</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#E0E0E0</color>
+    <color name="text_secondary">#A0A0A0</color>
+    <color name="text_tertiary">#6B7280</color>
+    <color name="text_disabled">#4B5563</color>
+
+    <!-- Border & Divider Colors -->
+    <color name="outline">#374151</color>
+    <color name="input_stroke_color">#1e293b</color> <!--TODO (check this)-->
+    <color name="outline_variant">#1F2937</color>
+    <color name="divider">#374151</color>
+
+    <!-- Card Colors -->
+    <color name="card_background">#1E1E1E</color>
+    <color name="card_stroke">#0DFFFFFF</color>
+
+    <!-- Semantic Colors (same as light) -->
+    <color name="success">#10B981</color>
+    <color name="warning">#F59E0B</color>
+    <color name="error">#EF4444</color>
+    <color name="info">#3B82F6</color>
+    <color name="on_error">#FFFFFF</color>
+
+    <!-- Special Colors -->
+    <color name="favorite">#EF4444</color>
+    <color name="scrim">#66000000</color>
+    <color name="shadow">#33000000</color>
+
+    <!-- Overlay Colors -->
+    <color name="overlay_light">#1AFFFFFF</color>
+    <color name="overlay_medium">#33FFFFFF</color>
+    <color name="overlay_dark">#4D000000</color>
+
+    <!-- Static Colors (same in both modes) -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
 </resources>

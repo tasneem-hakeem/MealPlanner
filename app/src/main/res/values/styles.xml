@@ -1,92 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base Text Style -->
-
-    <style name="TextBase">
-        <item name="android:fontFamily">@font/plusjakartasans_regular</item>
-        <item name="android:textColor">@color/on_surface</item>
+    <!-- =============== Text Styles ============= -->
+    <!-- Display Styles -->
+    <style name="TextAppearance.MealPlanner.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="fontFamily">@font/plusjakartasans_extrabold</item>
+        <item name="android:textSize">57sp</item>
     </style>
 
-    <!-- Headlines (Branding & Main Titles) -->
+    <style name="TextAppearance.MealPlanner.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="fontFamily">@font/plusjakartasans_extrabold</item>
+        <item name="android:textSize">45sp</item>
+    </style>
 
-    <style name="TextHeadlineLarge" parent="TextBase">
+    <!-- Headline Styles -->
+    <style name="TextAppearance.MealPlanner.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">@font/plusjakartasans_extrabold</item>
         <item name="android:textSize">32sp</item>
-        <item name="android:letterSpacing">-0.015</item>
-        <item name="fontFamily">@font/plusjakartasans_bold</item>
     </style>
 
-    <style name="TextHeadlineMedium" parent="TextBase">
+    <style name="TextAppearance.MealPlanner.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="TextAppearance.MealPlanner.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/plusjakartasans_bold</item>
         <item name="android:textSize">24sp</item>
-        <item name="android:letterSpacing">0</item>
-        <item name="fontFamily">@font/plusjakartasans_bold</item>
     </style>
 
-    <style name="TextHeadlineSmall" parent="TextBase">
-        <item name="android:textSize">20sp</item>
-        <item name="android:letterSpacing">0</item>
+    <!-- Title Styles -->
+    <style name="TextAppearance.MealPlanner.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="fontFamily">@font/plusjakartasans_bold</item>
+        <item name="android:textSize">22sp</item>
     </style>
 
-    <!-- Titles (Sections & Cards)-->
-
-    <style name="TextTitleLarge" parent="TextBase">
-        <item name="android:textSize">18sp</item>
-        <item name="android:letterSpacing">0.01</item>
+    <style name="TextAppearance.MealPlanner.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
         <item name="fontFamily">@font/plusjakartasans_semibold</item>
-    </style>
-
-    <style name="TextTitleMedium" parent="TextBase">
         <item name="android:textSize">16sp</item>
-        <item name="android:letterSpacing">0.01</item>
-        <item name="fontFamily">@font/plusjakartasans_medium</item>
+
     </style>
 
-    <style name="TextTitleSmall" parent="TextBase">
+    <style name="TextAppearance.MealPlanner.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:letterSpacing">0.01</item>
-        <item name="fontFamily">@font/plusjakartasans_medium</item>
+
     </style>
 
-    <!-- Body Text (Descriptions & Content)-->
-
-    <style name="TextBodyLarge" parent="TextBase">
+    <!-- Body Styles -->
+    <style name="TextAppearance.MealPlanner.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/plusjakartasans_regular</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:letterSpacing">0.02</item>
-        <item name="fontFamily">@font/plusjakartasans_regular</item>
     </style>
 
-    <style name="TextBodyMedium" parent="TextBase">
+    <style name="TextAppearance.MealPlanner.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/plusjakartasans_regular</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:letterSpacing">0.02</item>
-        <item name="fontFamily">@font/plusjakartasans_regular</item>
     </style>
 
-    <style name="TextBodySmall" parent="TextBase">
+    <style name="TextAppearance.MealPlanner.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/plusjakartasans_regular</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:letterSpacing">0.03</item>
-        <item name="fontFamily">@font/plusjakartasans_regular</item>
     </style>
 
-    <!-- Labels (Buttons, Links, Captions)-->
-
-    <style name="TextLabelLarge" parent="TextBase">
-        <item name="android:textSize">16sp</item>
-        <item name="android:letterSpacing">0.01</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="fontFamily">@font/plusjakartasans_bold</item>
-    </style>
-
-    <style name="TextLabelMedium" parent="TextBase">
+    <!-- Label Styles -->
+    <style name="TextAppearance.MealPlanner.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:letterSpacing">0.01</item>
-        <item name="fontFamily">@font/plusjakartasans_bold</item>
+        <item name="android:letterSpacing">0.08</item>
+
     </style>
 
-    <style name="TextLabelSmall" parent="TextBase">
+    <style name="TextAppearance.MealPlanner.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
+        <item name="android:textSize">12sp</item>
+
+    </style>
+
+    <style name="TextAppearance.MealPlanner.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
         <item name="android:textSize">11sp</item>
-        <item name="android:letterSpacing">0.04</item>
-        <item name="fontFamily">@font/plusjakartasans_medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <!-- Custom Styles -->
+    <style name="TextAppearance.MealPlanner.Caption" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/plusjakartasans_semibold</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+
+
+    <!-- =============== Shape Styles ============= -->
+    <!-- Small Components -->
+    <style name="ShapeAppearance.MealPlanner.SmallComponent" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <!-- Medium Components -->
+    <style name="ShapeAppearance.MealPlanner.MediumComponent" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Large Components -->
+    <style name="ShapeAppearance.MealPlanner.LargeComponent" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <!-- Extra Large Components -->
+    <style name="ShapeAppearance.MealPlanner.ExtraLargeComponent" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <!-- Cards -->
+    <style name="ShapeAppearance.MealPlanner.Card" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <!-- Buttons -->
+    <style name="ShapeAppearance.MealPlanner.Button" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Pills/Chips -->
+    <style name="ShapeAppearance.MealPlanner.Pill" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50dp</item>
+    </style>
+
+    <!-- Bottom Sheet -->
+    <style name="ShapeAppearance.MealPlanner.BottomSheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">32dp</item>
+        <item name="cornerSizeTopRight">32dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <!-- =============== Button Styles ============= -->
+    <!-- Primary Button -->
+    <style name="Widget.MealPlanner.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:textAppearance">@style/TextAppearance.MealPlanner.LabelLarge</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MealPlanner.Button</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="elevation">4dp</item>
+    </style>
+
+    <!-- Secondary Button -->
+    <style name="Widget.MealPlanner.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textAppearance">@style/TextAppearance.MealPlanner.LabelLarge</item>
+        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MealPlanner.Button</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+
+    <!-- Text Button -->
+    <style name="Widget.MealPlanner.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textAppearance">@style/TextAppearance.MealPlanner.LabelMedium</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+
+    <!-- =============== Card Styles ============= -->
+    <!-- Base Card -->
+    <style name="Widget.MealPlanner.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="shapeAppearance">@style/ShapeAppearance.MealPlanner.Card</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/card_stroke</item>
+    </style>
+
+    <!-- Meal Card -->
+    <style name="Widget.MealPlanner.Card.Meal" parent="Widget.MealPlanner.Card">
+        <item name="android:layout_margin">@dimen/spacing_12</item>
+        <item name="contentPadding">@dimen/padding_small</item>
+    </style>
+
+    <!-- Recipe Card -->
+    <style name="Widget.MealPlanner.Card.Recipe" parent="Widget.MealPlanner.Card">
+        <item name="shapeAppearance">@style/ShapeAppearance.MealPlanner.LargeComponent</item>
+    </style>
+
+    <!-- =============== Chip Styles ============= -->
+    <!-- Category Chip -->
+    <style name="Widget.MealPlanner.Chip.Category" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/outline_variant</item>
+        <item name="android:textAppearance">@style/TextAppearance.MealPlanner.LabelMedium</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MealPlanner.Pill</item>
+        <item name="chipMinHeight">40dp</item>
+    </style>
+
+    <!-- Info Chip -->
+    <style name="Widget.MealPlanner.Chip.Info" parent="Widget.Material3.Chip.Suggestion">
+        <item name="chipBackgroundColor">@color/primary_10</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textAppearance">@style/TextAppearance.MealPlanner.Caption</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MealPlanner.Pill</item>
+    </style>
+
+    <!--=============== Input Field Styles  ============= -->
+    <style name="Widget.MealPlanner.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">?attr/colorSurfaceVariant</item>
+        <item name="boxStrokeColor">@drawable/textfield_stroke</item> <!--#F1F5F9-->
+        <item name="boxStrokeErrorColor">@color/error</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MealPlanner.MediumComponent</item>
+        <item name="hintTextAppearance">@style/TextAppearance.MealPlanner.LabelSmall</item>
+        <item name="android:textColorHint">@color/text_secondary</item>
+    </style>
+
+    <style name="Widget.MealPlanner.TextInputEditText" parent="Widget.Material3.TextInputEditText.OutlinedBox">
+        <item name="android:textAppearance">@style/TextAppearance.MealPlanner.BodyLarge</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
     </style>
 
 </resources>
