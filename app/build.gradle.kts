@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -54,6 +55,11 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
+    // Firebase
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     // Lottie
     implementation(libs.lottie)
 
