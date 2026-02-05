@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MealPlanner</string>
+    <string name="create_account">Create Account</string>
+    <string name="join_us_to_start_your_healthy_journey">Join us to start your healthy journey.</string>
+    <string name="full_name">Full Name</string>
+    <string name="knife_and_spoon_icon">Knife and Spoon Icon</string>
+    <string name="person_name">John Doe</string>
+    <string name="email">Email</string>
+    <string name="hello_example_com">hello@example.com</string>
+    <string name="password_dots">••••••••</string>
+    <string name="password">Password</string>
+    <string name="or_sign_up_with">Or Sign Up With</string>
+    <string name="google">Google</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
