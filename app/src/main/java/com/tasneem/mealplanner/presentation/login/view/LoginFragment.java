@@ -42,7 +42,8 @@ public class LoginFragment extends Fragment implements LoginView {
 
         setupListeners();
 
-        presenter = new LoginPresenterImpl(requireActivity().getApplication(), this);
+        presenter = new LoginPresenterImpl(requireActivity().getApplication());
+        presenter.attachView(this);
         presenter.checkUserLoggedIn();
     }
 
@@ -138,5 +139,8 @@ public class LoginFragment extends Fragment implements LoginView {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        if (presenter != null) {
+            presenter.detachView();
+        }
     }
 }

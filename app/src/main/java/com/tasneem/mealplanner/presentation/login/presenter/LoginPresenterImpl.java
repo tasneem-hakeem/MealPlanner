@@ -16,22 +16,34 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class LoginPresenterImpl implements LoginPresenter {
-    private final LoginView view;
+    private LoginView view;
     private final Context context;
     private final AuthenticationRepository authRepository;
     private final CompositeDisposable compositeDisposable;
 
     private static final String TAG = "LoginPresenter";
 
-    public LoginPresenterImpl(Application application, LoginView view) {
-        this.view = view;
+    public LoginPresenterImpl(Application application) {
         this.context = application.getApplicationContext();
         this.authRepository = new AuthenticationRepositoryImpl();
         this.compositeDisposable = new CompositeDisposable();
     }
 
     @Override
+    public void attachView(LoginView view) {
+        this.view = view;
+    }
+
+    @Override
+    public void detachView() {
+        this.view = null;
+        compositeDisposable.clear();
+    }
+
+    @Override
     public void onLoginClicked() {
+        if (view == null) return;
+
         String email = view.getEmail();
         String password = view.getPassword();
 
@@ -51,6 +63,8 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void onSignUpClicked() {
+        if (view == null) return;
+
         String email = view.getEmail();
         String password = view.getPassword();
 
@@ -70,6 +84,8 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void checkUserLoggedIn() {
+        if (view == null) return;
+
         Disposable disposable = authRepository.isUserSignedIn()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
