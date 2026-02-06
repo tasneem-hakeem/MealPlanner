@@ -249,7 +249,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnText"
+        android:id="@+id/btnTextSignIn"
         style="@style/Widget.MealPlanner.Button.Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
