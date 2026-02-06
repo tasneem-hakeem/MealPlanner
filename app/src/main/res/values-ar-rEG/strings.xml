@@ -25,4 +25,5 @@
     <string name="password_cannot_be_empty">كلمة المرور لا يمكن أن تكون فارغة</string>
     <string name="password_must_be_at_least_6_characters">يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل</string>
     <string name="login_successful">تم تسجيل الدخول بنجاح</string>
+    <string name="registration_successful">تم التسجيل بنجاح</string>
 </resources>
