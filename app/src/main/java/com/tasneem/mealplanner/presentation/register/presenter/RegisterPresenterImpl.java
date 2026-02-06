@@ -48,12 +48,12 @@ public class RegisterPresenterImpl implements RegisterPresenter{
 
         String email = view.getEmail();
         String password = view.getPassword();
-
+        String name = view.getFullName();
         boolean isValid = validateInputs(email, password);
         if (!isValid) return;
 
         view.showLoading();
-        Disposable disposable = authRepository.signUp(email, password)
+        Disposable disposable = authRepository.signUp(email, password, name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -89,6 +89,7 @@ public class RegisterPresenterImpl implements RegisterPresenter{
 
         if (result.isSuccess()) {
             view.showSuccess(context.getString(R.string.registration_successful));
+            Log.d(TAG, result.getUser().toString());
             view.clearInputFields();
             view.navigateToLogin();
         } else {

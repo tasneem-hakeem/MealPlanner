@@ -16,8 +16,8 @@ public class AuthenticationRepositoryImpl implements AuthenticationRepository {
     }
 
     @Override
-    public Single<AuthResult> signUp(String email, String password) {
-        return datasource.signUpWithEmailAndPassword(email, password)
+    public Single<AuthResult> signUp(String email, String password, String name) {
+        return datasource.signUpWithEmailAndPassword(email, password, name)
                 .map(user -> new AuthResult(true, user, null))
                 .onErrorReturn(throwable -> new AuthResult(false, null, getErrorMessage(throwable)));
     }

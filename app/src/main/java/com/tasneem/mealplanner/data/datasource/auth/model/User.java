@@ -1,5 +1,7 @@
 package com.tasneem.mealplanner.data.datasource.auth.model;
 
+import androidx.annotation.NonNull;
+
 public class User {
     private String uid;
     private String email;
@@ -35,5 +37,16 @@ public class User {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid='" + uid + '\'' +
+                ", email='" + email + '\'' +
+                ", displayName='" + displayName + '\'' +
+                '}';
+
     }
 }

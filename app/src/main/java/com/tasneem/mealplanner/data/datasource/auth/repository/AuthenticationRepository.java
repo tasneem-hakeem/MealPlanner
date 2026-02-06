@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Single;
 
 public interface AuthenticationRepository {
-    Single<AuthResult> signUp(String email, String password);
+    Single<AuthResult> signUp(String email, String password, String name);
     Single<AuthResult> signIn(String email, String password);
     Completable signOut();
     Single<User> getCurrentUser();
