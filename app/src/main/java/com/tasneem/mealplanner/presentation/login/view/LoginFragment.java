@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.auth.model.User;
 import com.tasneem.mealplanner.databinding.FragmentLoginBinding;
 import com.tasneem.mealplanner.presentation.login.presenter.LoginPresenter;
@@ -21,6 +22,8 @@ public class LoginFragment extends Fragment implements LoginView {
     private FragmentLoginBinding binding;
 
     private LoginPresenter presenter;
+
+    private boolean isPasswordVisible = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -45,7 +48,32 @@ public class LoginFragment extends Fragment implements LoginView {
         presenter = new LoginPresenterImpl(requireActivity().getApplication());
         presenter.attachView(this);
         presenter.checkUserLoggedIn();
+
+        setupPasswordToggle();
     }
+
+    private void setupPasswordToggle() {
+        binding.tilPassword.setEndIconOnClickListener(v -> {
+            isPasswordVisible = !isPasswordVisible;
+
+            if (isPasswordVisible) {
+                binding.etPassword.setTransformationMethod(
+                        android.text.method.HideReturnsTransformationMethod.getInstance()
+                );
+                binding.tilPassword.setEndIconDrawable(R.drawable.ic_eye);
+            } else {
+                binding.etPassword.setTransformationMethod(
+                        android.text.method.PasswordTransformationMethod.getInstance()
+                );
+                binding.tilPassword.setEndIconDrawable(R.drawable.ic_eye_off);
+            }
+
+            binding.etPassword.setSelection(
+                    Objects.requireNonNull(binding.etPassword.getText()).length()
+            );
+        });
+    }
+
 
     private void setupListeners() {
         binding.btnSignIn.setOnClickListener(v -> {
@@ -116,23 +144,17 @@ public class LoginFragment extends Fragment implements LoginView {
 
     @Override
     public void showEmailError(String error) {
-        binding.etEmail.setError(error);
-        binding.tilEmail.setErrorEnabled(true);
+        binding.tilEmail.setError(error);
     }
 
     @Override
     public void showPasswordError(String error) {
-        binding.etPassword.setError(error);
-        binding.tilPassword.setErrorEnabled(true);
+        binding.tilPassword.setError(error);
     }
 
     private void clearErrors() {
-        binding.etEmail.setError(null);
-        binding.etPassword.setError(null);
-        binding.tilEmail.setErrorEnabled(false);
-        binding.tilPassword.setErrorEnabled(false);
-        binding.etEmail.clearFocus();
-        binding.etPassword.clearFocus();
+        binding.tilEmail.setError(null);
+        binding.tilPassword.setError(null);
     }
 
     @Override

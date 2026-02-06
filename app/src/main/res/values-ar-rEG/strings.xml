@@ -13,14 +13,16 @@
     <string name="or_sign_up_with">أو التسجيل باستخدام</string>
     <string name="google">جوجل</string>
     <string name="already_have_an_account">هل لديك حساب بالفعل؟</string>
-    <string name="sign_up">التسجيل</string>
+    <string name="sign_up">أنشئ حساب</string>
     <string name="welcome_back">مرحبًا بعودتك!</string>
     <string name="sign_in_to_continue_your_healthy_journey">سجل الدخول لمتابعة رحلتك الصحية.</string>
     <string name="sign_in">تسجيل الدخول</string>
-    <string name="or_sign_in_with">أو تسجيل الدخول باستخدام</string>
+    <string name="or_sign_in_with">أو سجل الدخول باستخدام</string>
     <string name="don_t_have_an_account">أليس لديك حساب؟</string>
     <string name="authentication_failed">فشل التحقق</string>
+    <string name="invalid_email_format">صيغة البريد الإلكتروني غير صالحة</string>
     <string name="email_cannot_be_empty">البريد الإلكتروني لا يمكن أن يكون فارغًا</string>
     <string name="password_cannot_be_empty">كلمة المرور لا يمكن أن تكون فارغة</string>
     <string name="password_must_be_at_least_6_characters">يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل</string>
+    <string name="login_successful">تم تسجيل الدخول بنجاح</string>
 </resources>

@@ -6,6 +6,5 @@ public interface LoginPresenter {
     void attachView(LoginView view);
     void detachView();
     void onLoginClicked();
-    void onSignUpClicked();
     void checkUserLoggedIn();
 }

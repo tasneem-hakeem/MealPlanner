@@ -8,6 +8,8 @@ import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.auth.model.AuthResult;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepository;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepositoryImpl;
+import com.tasneem.mealplanner.presentation.common.UserInputValidator;
+import com.tasneem.mealplanner.presentation.common.ValidationResult;
 import com.tasneem.mealplanner.presentation.login.view.LoginView;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -47,7 +49,8 @@ public class LoginPresenterImpl implements LoginPresenter {
         String email = view.getEmail();
         String password = view.getPassword();
 
-        if (!validateInputs(email, password)) return;
+        boolean isValid = validateInputs(email, password);
+        if (!isValid) return;
 
         view.showLoading();
         Disposable disposable = authRepository.signIn(email, password)
@@ -61,25 +64,22 @@ public class LoginPresenterImpl implements LoginPresenter {
         compositeDisposable.add(disposable);
     }
 
-    @Override
-    public void onSignUpClicked() {
-        if (view == null) return;
+    private boolean validateInputs(String email, String password) {
+        boolean isValid = true;
 
-        String email = view.getEmail();
-        String password = view.getPassword();
+        ValidationResult emailResult = UserInputValidator.validateEmail(email);
+        if (!emailResult.isValid()) {
+            view.showEmailError(context.getString(emailResult.getErrorStringResource()));
+            isValid = false;
+        }
 
-        if (!validateInputs(email, password)) return;
+        ValidationResult passwordResult = UserInputValidator.validatePassword(password);
+        if (!passwordResult.isValid()) {
+            view.showPasswordError(context.getString(passwordResult.getErrorStringResource()));
+            isValid = false;
+        }
 
-        view.showLoading();
-        Disposable disposable = authRepository.signUp(email, password)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        this::handleAuthResult,
-                        this::handleError
-                );
-
-        compositeDisposable.add(disposable);
+        return isValid;
     }
 
     @Override
@@ -120,32 +120,13 @@ public class LoginPresenterImpl implements LoginPresenter {
         compositeDisposable.add(disposable);
     }
 
-    private boolean validateInputs(String email, String password) {
-        boolean isValid = true;
-
-        if (email == null || email.trim().isEmpty()) {
-            view.showEmailError(context.getString(R.string.email_cannot_be_empty));
-            isValid = false;
-        }
-
-        if (password == null || password.trim().isEmpty()) {
-            view.showPasswordError(context.getString(R.string.password_cannot_be_empty));
-            isValid = false;
-        } else if (password.length() < 6) {
-            view.showPasswordError(context.getString(R.string.password_must_be_at_least_6_characters));
-            isValid = false;
-        }
-
-        return isValid;
-    }
-
     private void handleAuthResult(AuthResult result) {
         if (view == null) return;
 
         view.hideLoading();
 
         if (result.isSuccess()) {
-            view.showSuccess("Login successful");
+            view.showSuccess(context.getString(R.string.login_successful));
             view.clearInputFields();
             view.navigateToHome(result.getUser());
         } else {
