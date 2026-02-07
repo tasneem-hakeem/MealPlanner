@@ -1,34 +1,34 @@
 package com.tasneem.mealplanner.data.datasource.meals.remote;
 
-import com.tasneem.mealplanner.data.datasource.meals.remote.dto.areaslist.AreasDto;
-import com.tasneem.mealplanner.data.datasource.meals.remote.dto.categorieslist.CategoriesDto;
-import com.tasneem.mealplanner.data.datasource.meals.remote.dto.category.CategoryDto;
-import com.tasneem.mealplanner.data.datasource.meals.remote.dto.ingredient.IngredientDto;
-import com.tasneem.mealplanner.data.datasource.meals.remote.dto.meal.MealDto;
+import com.tasneem.mealplanner.data.datasource.meals.remote.dto.areaslist.AreasListResponse;
+import com.tasneem.mealplanner.data.datasource.meals.remote.dto.categorieslist.CategoriesListResponse;
+import com.tasneem.mealplanner.data.datasource.meals.remote.dto.category.CategoryResponse;
+import com.tasneem.mealplanner.data.datasource.meals.remote.dto.ingredient.IngredientsResponse;
+import com.tasneem.mealplanner.data.datasource.meals.remote.dto.meal.MealResponse;
 
-import java.util.List;
+import io.reactivex.rxjava3.core.Single;
 
 public interface MealsRemoteDatasource {
 
-    void getRandomMeal(ResultCallback<List<MealDto>> callback);
+    Single<MealResponse> getRandomMeal();
 
-    void getMealsByName(String name, ResultCallback<List<MealDto>> callback);
+    Single<MealResponse> getMealsByName(String name);
 
-    void getMealsByFirstLetter(char firstLetter, ResultCallback<List<MealDto>> callback);
+    Single<MealResponse> getMealsByFirstLetter(char firstLetter);
 
-    void getMealDetailsById(String id, ResultCallback<List<MealDto>> callback);
+    Single<MealResponse> getMealDetailsById(String id);
 
-    void getMealsByCategory(String category, ResultCallback<List<MealDto>> callback);
+    Single<MealResponse> getMealsByCategory(String category);
 
-    void getMealsByArea(String area, ResultCallback<List<MealDto>> callback);
+    Single<MealResponse> getMealsByArea(String area);
 
-    void getMealsByMainIngredient(String ingredient, ResultCallback<List<MealDto>> callback);
+    Single<MealResponse> getMealsByMainIngredient(String ingredient);
 
-    void getAllCategories(ResultCallback<List<CategoryDto>> callback);
+    Single<CategoryResponse> getAllCategories();
 
-    void getAllIngredients(ResultCallback<List<IngredientDto>> callback);
+    Single<IngredientsResponse> getAllIngredients();
 
-    void getCategoriesList(ResultCallback<List<CategoriesDto>> callback);
+    Single<CategoriesListResponse> getCategoriesList();
 
-    void getAreasList(ResultCallback<List<AreasDto>> callback);
+    Single<AreasListResponse> getAreasList();
 }
