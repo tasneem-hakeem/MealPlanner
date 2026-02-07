@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.auth.model.User;
+import com.tasneem.mealplanner.data.utils.GoogleSignInHelper;
 import com.tasneem.mealplanner.databinding.FragmentLoginBinding;
 import com.tasneem.mealplanner.presentation.login.presenter.LoginPresenter;
 import com.tasneem.mealplanner.presentation.login.presenter.LoginPresenterImpl;
@@ -22,6 +23,7 @@ public class LoginFragment extends Fragment implements LoginView {
     private FragmentLoginBinding binding;
 
     private LoginPresenter presenter;
+    private GoogleSignInHelper googleSignInHelper;
 
     private boolean isPasswordVisible = false;
 
@@ -42,6 +44,9 @@ public class LoginFragment extends Fragment implements LoginView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        String serverClientId = getString(R.string.default_web_client_id);
+        googleSignInHelper = new GoogleSignInHelper(requireContext(), serverClientId);
 
         setupListeners();
 
@@ -82,7 +87,8 @@ public class LoginFragment extends Fragment implements LoginView {
         });
 
         binding.chipGoogle.setOnClickListener(v -> {
-            // TODO: Handle Google sign-in
+            clearErrors();
+            presenter.onGoogleSignInClicked();
         });
 
         binding.btnTextSignUp.setOnClickListener(v -> navigateToSignUp());
@@ -124,6 +130,26 @@ public class LoginFragment extends Fragment implements LoginView {
     @Override
     public void navigateToHome(User user) {
         // TODO: Navigate to Home screen
+    }
+
+    @Override
+    public void launchGoogleSignIn() {
+        showLoading();
+
+        googleSignInHelper.signIn(new GoogleSignInHelper.GoogleSignInCallback() {
+            @Override
+            public void onSuccess(String idToken) {
+                requireActivity().runOnUiThread(() -> presenter.onGoogleSignInResult(idToken));
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                requireActivity().runOnUiThread(() -> {
+                    hideLoading();
+                    showError("Google Sign-In failed: " + errorMessage);
+                });
+            }
+        });
     }
 
     @Override

@@ -55,10 +55,6 @@ public class RegisterFragment extends Fragment implements RegisterView {
             presenter.onSignUpClicked();
         });
 
-        binding.chipGoogle.setOnClickListener(v -> {
-            // TODO: Handle Google sign-in
-        });
-
         binding.btnTextSignIn.setOnClickListener(v -> navigateToLogin());
     }
 
@@ -102,7 +98,6 @@ public class RegisterFragment extends Fragment implements RegisterView {
     public void showLoading() {
         binding.lottieView.setVisibility(View.VISIBLE);
         binding.btnCreateAccount.setEnabled(false);
-        binding.chipGoogle.setEnabled(false);
         binding.btnTextSignIn.setEnabled(false);
         binding.etEmail.clearFocus();
         binding.etPassword.clearFocus();
@@ -112,7 +107,6 @@ public class RegisterFragment extends Fragment implements RegisterView {
     public void hideLoading() {
         binding.lottieView.setVisibility(View.GONE);
         binding.btnCreateAccount.setEnabled(true);
-        binding.chipGoogle.setEnabled(true);
         binding.btnTextSignIn.setEnabled(true);
     }
 

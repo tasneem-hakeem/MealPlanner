@@ -30,6 +30,21 @@ public class AuthenticationRepositoryImpl implements AuthenticationRepository {
     }
 
     @Override
+    public Single<AuthResult> signInWithGoogle(String idToken) {
+        if (idToken == null || idToken.trim().isEmpty()) {
+            return Single.just(
+                    new AuthResult(false, null, "Invalid Google ID token")
+            );
+        }
+
+        return datasource.signInWithGoogle(idToken)
+                .map(user -> new AuthResult(true, user, null))
+                .onErrorReturn(throwable ->
+                        new AuthResult(false, null, getErrorMessage(throwable)));
+    }
+
+
+    @Override
     public Completable signOut() {
         return datasource.signOut();
     }

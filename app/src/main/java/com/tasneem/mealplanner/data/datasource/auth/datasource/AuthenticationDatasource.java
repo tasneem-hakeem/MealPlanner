@@ -8,6 +8,7 @@ import io.reactivex.rxjava3.core.Single;
 public interface AuthenticationDatasource {
     Single<User> signInWithEmailAndPassword(String email, String password);
     Single<User> signUpWithEmailAndPassword(String email, String password, String name);
+    Single<User> signInWithGoogle(String idToken);
     Completable signOut();
     Single<User> getCurrentUser();
     Single<Boolean> isUserSignedIn();

@@ -6,5 +6,7 @@ public interface LoginPresenter {
     void attachView(LoginView view);
     void detachView();
     void onLoginClicked();
+    void onGoogleSignInClicked();
+    void onGoogleSignInResult(String idToken);
     void checkUserLoggedIn();
 }

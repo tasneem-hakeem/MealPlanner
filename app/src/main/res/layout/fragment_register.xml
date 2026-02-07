@@ -189,7 +189,7 @@
         app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
         app:layout_constraintTop_toBottomOf="@+id/til_password" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/txtViewSignUpWith"
         style="@style/TextAppearance.MealPlanner.LabelLarge"
         android:layout_width="wrap_content"
@@ -201,8 +201,8 @@
         app:layout_constraintEnd_toStartOf="@+id/verticalGuidelineEnd"
         app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
         app:layout_constraintTop_toBottomOf="@id/btnCreateAccount" />
-
-    <com.google.android.material.divider.MaterialDivider
+-->
+   <!-- <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDivider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -220,9 +220,9 @@
         app:layout_constraintBottom_toBottomOf="@id/txtViewSignUpWith"
         app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
         app:layout_constraintStart_toEndOf="@+id/txtViewSignUpWith"
-        app:layout_constraintTop_toTopOf="@+id/txtViewSignUpWith" />
+        app:layout_constraintTop_toTopOf="@+id/txtViewSignUpWith" />-->
 
-    <com.google.android.material.chip.Chip
+    <!--<com.google.android.material.chip.Chip
         android:id="@+id/chipGoogle"
         style="@style/Widget.MealPlanner.Chip.Category"
         android:layout_width="wrap_content"
@@ -235,7 +235,7 @@
         app:layout_constraintEnd_toEndOf="@+id/txtViewSignUpWith"
         app:layout_constraintStart_toStartOf="@+id/txtViewSignUpWith"
         app:layout_constraintTop_toBottomOf="@+id/txtViewSignUpWith" />
-
+-->
     <TextView
         android:id="@+id/txtViewHaveAccount"
         style="@style/TextAppearance.MealPlanner.BodyMedium"

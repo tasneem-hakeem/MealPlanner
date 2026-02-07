@@ -9,6 +9,7 @@ public interface LoginView {
     void showSuccess(String message);
     void navigateToSignUp();
     void navigateToHome(User user);
+    void launchGoogleSignIn();
     String getEmail();
     String getPassword();
     void clearInputFields();

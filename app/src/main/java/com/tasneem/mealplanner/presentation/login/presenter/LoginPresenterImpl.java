@@ -64,6 +64,30 @@ public class LoginPresenterImpl implements LoginPresenter {
         compositeDisposable.add(disposable);
     }
 
+    @Override
+    public void onGoogleSignInClicked() {
+        if (view == null) return;
+
+        view.launchGoogleSignIn();
+    }
+
+    @Override
+    public void onGoogleSignInResult(String idToken) {
+        if (view == null) return;
+
+        view.showLoading();
+
+        Disposable disposable = authRepository.signInWithGoogle(idToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        this::handleAuthResult,
+                        this::handleError
+                );
+
+        compositeDisposable.add(disposable);
+    }
+
     private boolean validateInputs(String email, String password) {
         boolean isValid = true;
 
@@ -127,6 +151,7 @@ public class LoginPresenterImpl implements LoginPresenter {
 
         if (result.isSuccess()) {
             view.showSuccess(context.getString(R.string.login_successful));
+            Log.d(TAG, result.getUser().toString());
             view.clearInputFields();
             view.navigateToHome(result.getUser());
         } else {

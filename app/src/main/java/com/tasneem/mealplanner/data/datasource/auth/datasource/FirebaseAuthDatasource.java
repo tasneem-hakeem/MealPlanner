@@ -1,7 +1,9 @@
 package com.tasneem.mealplanner.data.datasource.auth.datasource;
 
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.tasneem.mealplanner.data.datasource.auth.model.User;
 
@@ -37,6 +39,29 @@ public class FirebaseAuthDatasource implements AuthenticationDatasource {
                 .flatMap(firebaseUser -> updateUserDisplayName(firebaseUser, name));
     }
 
+    @Override
+    public Single<User> signInWithGoogle(String idToken) {
+        return Single.create(emitter -> {
+            AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+
+            firebaseAuth.signInWithCredential(credential)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                            if (firebaseUser != null) {
+                                User user = mapFirebaseUserToUser(firebaseUser);
+                                emitter.onSuccess(user);
+                            } else {
+                                emitter.onError(new Exception("Failed to get user after Google sign in"));
+                            }
+                        } else {
+                            Exception exception = task.getException();
+                            emitter.onError(exception != null ? exception :
+                                    new Exception("Google sign in failed"));
+                        }
+                    });
+        });
+    }
 
     public Single<User> updateUserDisplayName(FirebaseUser firebaseUser, String name) {
         return Single.create(emitter ->
