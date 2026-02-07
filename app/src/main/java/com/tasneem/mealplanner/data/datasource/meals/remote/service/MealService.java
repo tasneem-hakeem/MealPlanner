@@ -6,41 +6,41 @@ import com.tasneem.mealplanner.data.datasource.meals.remote.dto.category.Categor
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.ingredient.IngredientsResponse;
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.meal.MealResponse;
 
-import retrofit2.Call;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface MealService {
     @GET("random.php")
-    Call<MealResponse> getRandomMeal();
+    Single<MealResponse> getRandomMeal();
 
     @GET("search.php")
-    Call<MealResponse> getMealsByName(@Query("s") String name);
+    Single<MealResponse> getMealsByName(@Query("s") String name);
 
     @GET("search.php")
-    Call<MealResponse> getMealsByFirstLetter(@Query("f") char firstLetter);
+    Single<MealResponse> getMealsByFirstLetter(@Query("f") char firstLetter);
 
     @GET("lookup.php")
-    Call<MealResponse> getMealDetailsById(@Query("i") String id);
+    Single<MealResponse> getMealDetailsById(@Query("i") String id);
 
     @GET("filter.php")
-    Call<MealResponse> getMealsByCategory(@Query("c") String category);
+    Single<MealResponse> getMealsByCategory(@Query("c") String category);
 
     @GET("filter.php")
-    Call<MealResponse> getMealsByArea(@Query("a") String area);
+    Single<MealResponse> getMealsByArea(@Query("a") String area);
 
     @GET("filter.php")
-    Call<MealResponse> getMealsByMainIngredient(@Query("i") String ingredient);
+    Single<MealResponse> getMealsByMainIngredient(@Query("i") String ingredient);
 
     @GET("categories.php")
-    Call<CategoryResponse> getAllCategories();
+    Single<CategoryResponse> getAllCategories();
 
     @GET("list.php")
-    Call<IngredientsResponse> getAllIngredients(@Query("i") String list);
+    Single<IngredientsResponse> getAllIngredients(@Query("i") String list);
 
     @GET("list.php")
-    Call<CategoriesListResponse> getCategoriesList(@Query("c") String list);
+    Single<CategoriesListResponse> getCategoriesList(@Query("c") String list);
 
     @GET("list.php")
-    Call<AreasListResponse> getAreasList(@Query("a") String list);
+    Single<AreasListResponse> getAreasList(@Query("a") String list);
 }

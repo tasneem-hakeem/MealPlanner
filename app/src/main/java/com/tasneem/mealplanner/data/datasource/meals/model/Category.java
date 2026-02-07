@@ -1,10 +1,10 @@
 package com.tasneem.mealplanner.data.datasource.meals.model;
 
 public class Category {
-    private String id;
-    private String name;
-    private String imageUrl;
-    private String description;
+    private final String id;
+    private final String name;
+    private final String imageUrl;
+    private final String description;
 
     public Category(String id, String name, String imageUrl, String description) {
         this.id = id;
@@ -17,31 +17,15 @@ public class Category {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
