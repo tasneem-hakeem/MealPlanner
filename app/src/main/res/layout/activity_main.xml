@@ -9,7 +9,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.tasneem.mealplanner.presentation.register.view.RegisterFragment"
+        android:name="com.tasneem.mealplanner.presentation.home.view.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

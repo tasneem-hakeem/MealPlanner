@@ -1,8 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.home.view.HomeFragment">
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tvHi"
+        style="@style/TextAppearance.MealPlanner.HeadlineMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Hi, Tasneem" />
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MealPlanner.Card.Meal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="0dp"
+        app:cardBackgroundColor="@color/card_background"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="false"
+        app:contentPadding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHi"
+        app:layout_constraintWidth_default="spread"
+        app:strokeColor="@color/card_stroke">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/mealOfTheDayLoading"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/cooking_loader" />
+
+            <ImageView
+                android:id="@+id/imgMeal"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:contentDescription="@string/meal_of_the_day"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:id="@+id/gradientOverlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/gradient_overlay"
+                app:layout_constraintTop_toTopOf="@id/imgMeal"
+                app:layout_constraintBottom_toBottomOf="@id/imgMeal"
+                app:layout_constraintStart_toStartOf="@id/imgMeal"
+                app:layout_constraintEnd_toEndOf="@id/imgMeal" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/tvBadge"
+                style="@style/Widget.MealPlanner.Chip.Info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/primary"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:text="@string/meal_of_the_day"
+                android:textColor="@color/white"
+                app:chipStrokeColor="@color/transparent"
+                app:layout_constraintStart_toStartOf="@id/imgMeal"
+                app:layout_constraintTop_toTopOf="@id/imgMeal" />
+
+            <TextView
+                android:id="@+id/tvMealName"
+                style="@style/TextAppearance.MealPlanner.HeadlineSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@id/imgMeal"
+                app:layout_constraintStart_toStartOf="@id/imgMeal"
+                app:layout_constraintTop_toBottomOf="@+id/tvBadge"
+                tools:text="Fresh Avocado &amp; Salmon Salad" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPlanNow"
+                style="@style/Widget.MealPlanner.Button.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/add_to_planner"
+                app:cornerRadius="32dp"
+                app:layout_constraintBottom_toBottomOf="@id/imgMeal"
+                app:layout_constraintEnd_toEndOf="@id/imgMeal"
+                app:layout_constraintTop_toBottomOf="@+id/tvMealName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

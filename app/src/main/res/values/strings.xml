@@ -26,4 +26,9 @@
     <string name="password_must_be_at_least_6_characters">Password must be at least 6 characters</string>
     <string name="login_successful">Login Successful</string>
     <string name="registration_successful">Registration Successful</string>
+    <string name="meal_of_the_day">Meal Of The Day</string>
+    <string name="plan_now">Plan Now</string>
+    <string name="add_to_planner">Add to Planner</string>
+    <string name="hi_user">Hi, %1$s</string>
+
 </resources>
