@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">مخطط الوجبات</string>
+    <string name="create_account">إنشاء حساب</string>
+    <string name="join_us_to_start_your_healthy_journey">انضم إلينا لبدء رحلتك الصحية.</string>
+    <string name="full_name">الاسم الكامل</string>
+    <string name="knife_and_spoon_icon">أيقونة سكين وملعقة</string>
+    <string name="person_name">جون دو</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="hello_example_com">hello@example.com</string>
+    <string name="password_dots">••••••••</string>
+    <string name="password">كلمة المرور</string>
+    <string name="or_sign_up_with">أو التسجيل باستخدام</string>
+    <string name="google">جوجل</string>
+    <string name="already_have_an_account">هل لديك حساب بالفعل؟</string>
+    <string name="sign_up">أنشئ حساب</string>
+    <string name="welcome_back">مرحبًا بعودتك!</string>
+    <string name="sign_in_to_continue_your_healthy_journey">سجل الدخول لمتابعة رحلتك الصحية.</string>
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="or_sign_in_with">أو سجل الدخول باستخدام</string>
+    <string name="don_t_have_an_account">أليس لديك حساب؟</string>
+    <string name="authentication_failed">فشل التحقق</string>
+    <string name="invalid_email_format">صيغة البريد الإلكتروني غير صالحة</string>
+    <string name="email_cannot_be_empty">البريد الإلكتروني لا يمكن أن يكون فارغًا</string>
+    <string name="password_cannot_be_empty">كلمة المرور لا يمكن أن تكون فارغة</string>
+    <string name="password_must_be_at_least_6_characters">يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل</string>
+    <string name="login_successful">تم تسجيل الدخول بنجاح</string>
+    <string name="registration_successful">تم التسجيل بنجاح</string>
+</resources>

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -32,6 +33,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -54,6 +59,19 @@ dependencies {
     // Room
     implementation(libs.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
+    // Firebase
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    // BoM for the Firebase platform
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.google.firebase.auth)
+    // Rx Java
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+    implementation(libs.adapter.rxjava3)
+    implementation(libs.room.rxjava3)
     // Lottie
     implementation(libs.lottie)
 

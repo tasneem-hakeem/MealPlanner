@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface"
+    tools:context=".presentation.register.view.RegisterFragment">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="380dp" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="@color/primary"
+        app:cardCornerRadius="@dimen/corner_radius_medium"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="@+id/verticalGuidelineStart"
+        app:layout_constraintTop_toTopOf="@+id/horizontalGuideline">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/knife_and_spoon_icon"
+            android:src="@drawable/icon_knife_spoon" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtViewCreateAccount"
+        style="@style/TextAppearance.MealPlanner.HeadlineLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/create_account"
+        android:textColor="@color/text_primary"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/cardView" />
+
+    <TextView
+        android:id="@+id/txtViewJoinUs"
+        style="@style/TextAppearance.MealPlanner.BodyMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/join_us_to_start_your_healthy_journey"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/txtViewCreateAccount" />
+
+    <TextView
+        android:id="@+id/txtViewFullName"
+        style="@style/TextAppearance.MealPlanner.LabelLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/full_name"
+        android:textAllCaps="true"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/txtViewJoinUs" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_name"
+        style="@style/Widget.MealPlanner.TextInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/txtViewFullName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_name"
+            style="@style/Widget.MealPlanner.TextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_person"
+            android:drawablePadding="8dp"
+            android:hint="@string/person_name"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/txtViewEmail"
+        style="@style/TextAppearance.MealPlanner.LabelLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/email"
+        android:textAllCaps="true"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/til_name" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_email"
+        style="@style/Widget.MealPlanner.TextInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/txtViewEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_email"
+            style="@style/Widget.MealPlanner.TextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_email"
+            android:drawablePadding="8dp"
+            android:hint="@string/hello_example_com"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/txtViewPassword"
+        style="@style/TextAppearance.MealPlanner.LabelLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/password"
+        android:textAllCaps="true"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/til_email" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        style="@style/Widget.MealPlanner.TextInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/txtViewPassword">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            style="@style/Widget.MealPlanner.TextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_lock"
+            android:drawableEnd="@drawable/ic_eye_off"
+            android:drawablePadding="8dp"
+            android:hint="@string/password_dots"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCreateAccount"
+        style="@style/Widget.MealPlanner.Button.Primary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/create_account"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/til_password" />
+
+    <!--<TextView
+        android:id="@+id/txtViewSignUpWith"
+        style="@style/TextAppearance.MealPlanner.LabelLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/or_sign_up_with"
+        android:textAllCaps="true"
+        android:textColor="@color/text_secondary"
+        app:layout_constraintEnd_toStartOf="@+id/verticalGuidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/btnCreateAccount" />
+-->
+   <!-- <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/materialDivider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/txtViewSignUpWith"
+        app:layout_constraintEnd_toStartOf="@id/txtViewSignUpWith"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintTop_toTopOf="@+id/txtViewSignUpWith" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/materialDivider2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/txtViewSignUpWith"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+        app:layout_constraintStart_toEndOf="@+id/txtViewSignUpWith"
+        app:layout_constraintTop_toTopOf="@+id/txtViewSignUpWith" />-->
+
+    <!--<com.google.android.material.chip.Chip
+        android:id="@+id/chipGoogle"
+        style="@style/Widget.MealPlanner.Chip.Category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:checkable="true"
+        android:text="@string/google"
+        app:chipIcon="@drawable/ic_google"
+        app:chipIconVisible="true"
+        app:layout_constraintEnd_toEndOf="@+id/txtViewSignUpWith"
+        app:layout_constraintStart_toStartOf="@+id/txtViewSignUpWith"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewSignUpWith" />
+-->
+    <TextView
+        android:id="@+id/txtViewHaveAccount"
+        style="@style/TextAppearance.MealPlanner.BodyMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/already_have_an_account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTextSignIn"
+        style="@style/Widget.MealPlanner.Button.Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start|center"
+        android:text="@string/sign_in"
+        app:layout_constraintBottom_toBottomOf="@id/txtViewHaveAccount"
+        app:layout_constraintStart_toEndOf="@id/txtViewHaveAccount"
+        app:layout_constraintTop_toTopOf="@id/txtViewHaveAccount" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/cooking_loader" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MealPlanner</string>
+    <string name="create_account">Create Account</string>
+    <string name="join_us_to_start_your_healthy_journey">Join us to start your healthy journey.</string>
+    <string name="full_name">Full Name</string>
+    <string name="knife_and_spoon_icon">Knife and Spoon Icon</string>
+    <string name="person_name">John Doe</string>
+    <string name="email">Email</string>
+    <string name="hello_example_com">hello@example.com</string>
+    <string name="password_dots">••••••••</string>
+    <string name="password">Password</string>
+    <string name="or_sign_up_with">Or Sign Up With</string>
+    <string name="google">Google</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="sign_in_to_continue_your_healthy_journey">Sign in to continue your healthy journey.</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or_sign_in_with">Or Sign In With</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="authentication_failed">Authentication failed</string>
+    <string name="invalid_email_format">Invalid email format</string>
+    <string name="email_cannot_be_empty">Email cannot be empty</string>
+    <string name="password_cannot_be_empty">Password cannot be empty</string>
+    <string name="password_must_be_at_least_6_characters">Password must be at least 6 characters</string>
+    <string name="login_successful">Login Successful</string>
+    <string name="registration_successful">Registration Successful</string>
 </resources>
