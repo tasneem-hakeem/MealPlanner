@@ -7,6 +7,7 @@ import com.tasneem.mealplanner.data.datasource.meals.remote.dto.meal.MealDeseria
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.meal.MealDto;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
@@ -25,6 +26,7 @@ public class RetrofitClient {
                 retrofit = new Retrofit.Builder()
                         .baseUrl(BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create(gson))
+                        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                         .build();
             }
         }
