@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.bumptech.glide.Glide;
 import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.databinding.FragmentHomeBinding;
@@ -19,9 +19,10 @@ import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment implements HomeView {
+public class HomeFragment extends Fragment implements HomeView, OnMealClickListener {
     private HomePresenter presenter;
     private FragmentHomeBinding binding;
+    private MealsAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,11 +34,16 @@ public class HomeFragment extends Fragment implements HomeView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentHomeBinding.bind(view);
+
         presenter = new HomePresenterImpl(requireActivity().getApplication());
-
         presenter.attachView(this);
-
         presenter.onViewStarted();
+
+        adapter = new MealsAdapter(this);
+        binding.rvHealthyMeals.setAdapter(adapter);
+        binding.rvHealthyMeals.setLayoutManager(
+                new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        );
     }
 
     @Override
@@ -52,12 +58,12 @@ public class HomeFragment extends Fragment implements HomeView {
 
     @Override
     public void showHealthyMealsLoading() {
-
+        binding.healthyMealsLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideHealthyMealsLoading() {
-
+        binding.healthyMealsLoading.setVisibility(View.GONE);
     }
 
     @Override
@@ -90,7 +96,7 @@ public class HomeFragment extends Fragment implements HomeView {
 
     @Override
     public void showHealthyMeals(List<Meal> meals) {
-
+        adapter.setMeals(meals);
     }
 
     @Override
@@ -105,7 +111,7 @@ public class HomeFragment extends Fragment implements HomeView {
 
     @Override
     public void navigateToMealDetails(String mealId) {
-
+        // TODO: Navigate to Meal Details screen
     }
 
     @Override
@@ -115,5 +121,10 @@ public class HomeFragment extends Fragment implements HomeView {
         if (presenter != null) {
             presenter.detachView();
         }
+    }
+
+    @Override
+    public void onMealClicked(String mealId) {
+        presenter.onMealClicked(mealId);
     }
 }

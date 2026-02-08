@@ -12,7 +12,6 @@ import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepositoryI
 import com.tasneem.mealplanner.presentation.home.view.HomeView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -32,8 +31,6 @@ public class HomePresenterImpl implements HomePresenter {
         this.mealsRepository = new MealsRepositoryImpl();
         this.authRepository = new AuthenticationRepositoryImpl();
         this.context = application.getApplicationContext();
-
-        onViewStarted();
     }
 
     @Override
@@ -88,11 +85,10 @@ public class HomePresenterImpl implements HomePresenter {
                         seafoodMeals,
                         (veg, vegan, seafood) -> {
                             List<Meal> allHealthyMeals = new ArrayList<>();
+                            allHealthyMeals.addAll(seafood);
                             allHealthyMeals.addAll(veg);
                             allHealthyMeals.addAll(vegan);
-                            allHealthyMeals.addAll(seafood);
 
-                            Collections.shuffle(allHealthyMeals);
                             Log.d("HomePresenter", String.valueOf(allHealthyMeals.size()));
 
                             return allHealthyMeals;
