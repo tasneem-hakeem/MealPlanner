@@ -32,4 +32,6 @@
     <string name="meal_image">صورة الوجبة</string>
     <string name="hi_user">أهلاً، %1$s</string>
     <string name="you_may_try">يمكنك تجربة...</string>
+    <string name="hello_breakfast">ابدأ يومك! 🍩</string>
+
 </resources>

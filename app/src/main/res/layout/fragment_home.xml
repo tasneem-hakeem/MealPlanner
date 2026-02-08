@@ -99,6 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@id/imgMeal"
                 app:layout_constraintStart_toStartOf="@id/imgMeal"
@@ -126,8 +128,8 @@
         style="@style/TextAppearance.MealPlanner.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/you_may_try"
         android:layout_marginTop="16dp"
+        android:text="@string/you_may_try"
         app:layout_constraintStart_toStartOf="@id/cardMealOfTheDay"
         app:layout_constraintTop_toBottomOf="@id/cardMealOfTheDay" />
 
@@ -153,5 +155,37 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/cooking_loader" />
 
+
+    <TextView
+        android:id="@+id/header_title2"
+        style="@style/TextAppearance.MealPlanner.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/hello_breakfast"
+        app:layout_constraintStart_toStartOf="@id/cardMealOfTheDay"
+        app:layout_constraintTop_toBottomOf="@id/rvHealthyMeals" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBreakfastSuggestions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_title2" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/breakfastSuggestionsLoading"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/rvBreakfastSuggestions"
+        app:layout_constraintEnd_toEndOf="@id/rvBreakfastSuggestions"
+        app:layout_constraintStart_toStartOf="@id/rvBreakfastSuggestions"
+        app:layout_constraintTop_toTopOf="@id/rvBreakfastSuggestions"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/cooking_loader" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

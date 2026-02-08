@@ -22,7 +22,8 @@ import java.util.List;
 public class HomeFragment extends Fragment implements HomeView, OnMealClickListener {
     private HomePresenter presenter;
     private FragmentHomeBinding binding;
-    private MealsAdapter adapter;
+    private MealsAdapter healthyMealsAdapter;
+    private MealsAdapter breakfastSuggestionsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,9 +40,15 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
         presenter.attachView(this);
         presenter.onViewStarted();
 
-        adapter = new MealsAdapter(this);
-        binding.rvHealthyMeals.setAdapter(adapter);
+        healthyMealsAdapter = new MealsAdapter(this);
+        binding.rvHealthyMeals.setAdapter(healthyMealsAdapter);
         binding.rvHealthyMeals.setLayoutManager(
+                new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        );
+
+        breakfastSuggestionsAdapter = new MealsAdapter(this);
+        binding.rvBreakfastSuggestions.setAdapter(breakfastSuggestionsAdapter);
+        binding.rvBreakfastSuggestions.setLayoutManager(
                 new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         );
     }
@@ -68,12 +75,12 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
     @Override
     public void showBreakfastSuggestionsLoading() {
-
+        binding.breakfastSuggestionsLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideBreakfastSuggestionsLoading() {
-
+        binding.breakfastSuggestionsLoading.setVisibility(View.GONE);
     }
 
     @Override
@@ -96,13 +103,11 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
     @Override
     public void showHealthyMeals(List<Meal> meals) {
-        adapter.setMeals(meals);
+        healthyMealsAdapter.setMeals(meals);
     }
 
     @Override
-    public void showBreakfastSuggestions(List<Meal> meals) {
-
-    }
+    public void showBreakfastSuggestions(List<Meal> meals) { breakfastSuggestionsAdapter.setMeals(meals); }
 
     @Override
     public void showError(String message) {

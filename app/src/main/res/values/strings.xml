@@ -32,5 +32,6 @@
     <string name="hi_user">Hi, %1$s</string>
     <string name="meal_image">Meal Image</string>
     <string name="you_may_try">You May Try...</string>
+    <string name="hello_breakfast">Hello, Breakfast! 🥞</string>
 
 </resources>

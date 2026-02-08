@@ -25,7 +25,7 @@ public class HomePresenterImpl implements HomePresenter {
     private final MealsRepository mealsRepository;
     private final AuthenticationRepository authRepository;
     private final Context context;
-    private CompositeDisposable disposables = new CompositeDisposable();
+    private final CompositeDisposable disposables = new CompositeDisposable();
 
     public HomePresenterImpl(Application application) {
         this.mealsRepository = new MealsRepositoryImpl();
@@ -111,7 +111,19 @@ public class HomePresenterImpl implements HomePresenter {
     }
 
     private void getBreakfastSuggestions() {
-
+        view.showBreakfastSuggestionsLoading();
+        Disposable disposable = mealsRepository.getMealsByCategory("Breakfast")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(meals -> {
+                            view.hideBreakfastSuggestionsLoading();
+                            view.showBreakfastSuggestions(meals);
+                        },
+                        throwable -> {
+                            view.hideBreakfastSuggestionsLoading();
+                            view.showError(throwable.getMessage());
+                        });
+        disposables.add(disposable);
     }
 
     private void getUserName() {
