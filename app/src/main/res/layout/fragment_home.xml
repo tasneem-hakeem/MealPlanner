@@ -129,7 +129,7 @@
 
         <TextView
             android:id="@+id/header_title"
-            style="@style/TextAppearance.MealPlanner.TitleMedium"
+            style="@style/TextAppearance.MealPlanner.TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -162,10 +162,9 @@
 
         <TextView
             android:id="@+id/header_title2"
-            style="@style/TextAppearance.MealPlanner.TitleMedium"
+            style="@style/TextAppearance.MealPlanner.TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="@string/hello_breakfast"
             app:layout_constraintStart_toStartOf="@id/cardMealOfTheDay"
             app:layout_constraintTop_toBottomOf="@id/rvHealthyMeals" />
