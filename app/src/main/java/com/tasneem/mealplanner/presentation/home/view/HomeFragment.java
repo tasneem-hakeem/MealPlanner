@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.tasneem.mealplanner.R;
@@ -43,7 +44,7 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
         healthyMealsAdapter = new MealsAdapter(this);
         binding.rvHealthyMeals.setAdapter(healthyMealsAdapter);
         binding.rvHealthyMeals.setLayoutManager(
-                new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                new GridLayoutManager(requireContext(), 2, LinearLayoutManager.HORIZONTAL, false)
         );
 
         breakfastSuggestionsAdapter = new MealsAdapter(this);
@@ -107,7 +108,9 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
     }
 
     @Override
-    public void showBreakfastSuggestions(List<Meal> meals) { breakfastSuggestionsAdapter.setMeals(meals); }
+    public void showBreakfastSuggestions(List<Meal> meals) {
+        breakfastSuggestionsAdapter.setMeals(meals);
+    }
 
     @Override
     public void showError(String message) {
