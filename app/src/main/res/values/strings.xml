@@ -39,5 +39,12 @@
     <string name="meal_image">Meal Image</string>
     <string name="you_may_try">You May Try...</string>
     <string name="hello_breakfast">Hello, Breakfast! 🥞</string>
+    <string name="back_button">Back Button</string>
+    <string name="time_icon">Time Icon</string>
+    <string name="video_thumbnail">Video Thumbnail</string>
+    <string name="play_button">Play Button</string>
+    <string name="tutorial_video">Tutorial Video</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="steps">Steps</string>
 
 </resources>
