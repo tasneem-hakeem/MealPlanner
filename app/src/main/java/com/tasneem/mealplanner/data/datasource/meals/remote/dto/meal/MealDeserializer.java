@@ -1,7 +1,5 @@
 package com.tasneem.mealplanner.data.datasource.meals.remote.dto.meal;
 
-import android.util.Log;
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -40,8 +38,8 @@ public class MealDeserializer implements JsonDeserializer<MealDto> {
             String ingredient = getAsStringSafe(obj, ingredientKey);
             String measure = getAsStringSafe(obj, measureKey);
 
-            Log.d("MealDeserializer", "ingredient = " + ingredient);
-            Log.d("MealDeserializer", "measure = " + measure);
+            /*Log.d("MealDeserializer", "ingredient = " + ingredient);
+            Log.d("MealDeserializer", "measure = " + measure);*/
 
             if (ingredient != null && !ingredient.trim().isEmpty()) {
                 ingredients.add(
