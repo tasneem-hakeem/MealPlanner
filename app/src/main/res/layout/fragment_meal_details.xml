@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Hero Image -->
             <ImageView
                 android:id="@+id/ivMealImage"
                 android:layout_width="0dp"
@@ -28,7 +27,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
-            <!-- Back Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnBack"
                 style="@style/Widget.Material3.Button.IconButton"
@@ -50,7 +48,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Favorite Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnFavorite"
                 style="@style/Widget.Material3.Button.IconButton"
@@ -72,7 +69,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Content Container -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardContent"
                 android:layout_width="0dp"
@@ -92,7 +88,6 @@
                     android:orientation="vertical"
                     android:paddingBottom="24dp">
 
-                    <!-- Sheet Handle -->
                     <View
                         android:layout_width="32dp"
                         android:layout_height="4dp"
@@ -101,7 +96,6 @@
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/bg_top_rounded_sheet" />
 
-                    <!-- Header Section -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -111,7 +105,6 @@
                         android:baselineAligned="false"
                         android:orientation="vertical">
 
-                        <!-- Title -->
                         <TextView
                             android:id="@+id/tvMealTitle"
                             android:layout_width="wrap_content"
@@ -120,7 +113,6 @@
                             android:textColor="@color/text_primary"
                             tools:text="Blood Orange Upside Down Cake" />
 
-                        <!-- Category -->
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -148,7 +140,6 @@
 
                     </LinearLayout>
 
-                    <!-- Video Tutorial Card -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardVideoTutorial"
                         style="@style/Widget.MealPlanner.Card"
@@ -168,14 +159,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <!-- YouTube Player (behind thumbnail initially) -->
                             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                                 android:id="@+id/youtube_player_view"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:visibility="gone" />
 
-                            <!-- Video Thumbnail Overlay (shown initially) -->
                             <FrameLayout
                                 android:id="@+id/videoThumbnailOverlay"
                                 android:layout_width="match_parent"
@@ -192,7 +181,6 @@
                                     android:scaleType="centerCrop"
                                     tools:src="@tools:sample/backgrounds/scenic" />
 
-                                <!-- Play Button -->
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:id="@+id/fabPlayVideo"
                                     android:layout_width="56dp"
@@ -205,7 +193,6 @@
                                     app:srcCompat="@drawable/ic_play"
                                     app:tint="@color/white" />
 
-                                <!-- Tutorial Badge -->
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -224,7 +211,6 @@
                         </FrameLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Ingredients Section -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -233,7 +219,6 @@
                         android:layout_marginEnd="24dp"
                         android:orientation="vertical">
 
-                        <!-- Ingredients Header -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -258,7 +243,6 @@
                                 tools:text="8 items" />
                         </LinearLayout>
 
-                        <!-- Ingredients List -->
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rvIngredients"
                             android:layout_width="match_parent"
@@ -269,16 +253,15 @@
                             tools:listitem="@layout/item_ingredient" />
                     </LinearLayout>
 
-                    <!-- Steps Section -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="32dp"
                         android:layout_marginEnd="24dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingBottom="80dp">
 
-                        <!-- Steps Header -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -292,40 +275,28 @@
                             style="@style/TextAppearance.MealPlanner.BodyMedium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
-                        <!-- Steps List -->
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvSteps"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:itemCount="3"
-                            tools:listitem="@layout/item_step" />
                     </LinearLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Add to Plan Button (Fixed at bottom) -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAddToPlan"
-                style="@style/Widget.MealPlanner.Button.Primary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/add_to_planner"
-                app:icon="@drawable/icon_calendar"
-                app:iconGravity="textStart"
-                app:iconSize="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddToPlan"
+        style="@style/Widget.MealPlanner.Button.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/add_to_planner"
+        app:icon="@drawable/icon_calendar"
+        app:iconGravity="textStart"
+        app:iconSize="20dp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_view"
