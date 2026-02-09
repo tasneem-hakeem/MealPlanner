@@ -73,11 +73,6 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
     }
 
     @Override
-    public void onVideoClicked() {
-        // TODO: handle video play
-    }
-
-    @Override
     public void onAddToPlanClicked() {
         // TODO: handle att to plan
     }

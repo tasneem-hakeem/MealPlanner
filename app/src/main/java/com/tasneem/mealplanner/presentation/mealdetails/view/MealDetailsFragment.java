@@ -1,5 +1,7 @@
 package com.tasneem.mealplanner.presentation.mealdetails.view;
 
+import static android.view.View.GONE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.databinding.FragmentMealDetailsBinding;
@@ -18,10 +22,15 @@ import com.tasneem.mealplanner.presentation.mealdetails.presenter.MealDetailsPre
 import com.tasneem.mealplanner.presentation.mealdetails.presenter.MealDetailsPresenterImpl;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class MealDetailsFragment extends Fragment implements MealDetailsView {
     private MealDetailsPresenter presenter;
     private FragmentMealDetailsBinding binding;
-    private IngredientAdapter adapter;
+    private IngredientAdapter ingredientAdapter;
+    private YouTubePlayer youTubePlayer;
+    private String currentVideoUrl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,42 +45,75 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
 
         presenter = new MealDetailsPresenterImpl(requireActivity().getApplication());
         presenter.attachView(this);
-        presenter.onViewStarted();
 
-        adapter = new IngredientAdapter();
-        binding.rvIngredients.setAdapter(adapter);
+        setupRecyclerView();
+        initVideoPlayer();
+
+        presenter.onViewStarted();
+    }
+
+    private void setupRecyclerView() {
+        ingredientAdapter = new IngredientAdapter();
+        binding.rvIngredients.setAdapter(ingredientAdapter);
         binding.rvIngredients.setLayoutManager(
                 new GridLayoutManager(requireContext(), 2, LinearLayoutManager.HORIZONTAL, false)
         );
     }
 
+    private void initVideoPlayer() {
+        getLifecycle().addObserver(binding.youtubePlayerView);
+
+        binding.youtubePlayerView.addYouTubePlayerListener(
+                new AbstractYouTubePlayerListener() {
+                    @Override
+                    public void onReady(@NonNull YouTubePlayer player) {
+                        youTubePlayer = player;
+                    }
+                }
+        );
+
+        binding.fabPlayVideo.setOnClickListener(v -> {
+            if (currentVideoUrl != null && !currentVideoUrl.isEmpty()) {
+                playVideo(currentVideoUrl);
+            }
+        });
+    }
+
     @Override
     public void showLoading() {
         binding.lottieView.setVisibility(View.VISIBLE);
-        binding.contentContainer.setVisibility(View.GONE);
+        binding.contentContainer.setVisibility(GONE);
     }
 
     @Override
     public void hideLoading() {
-        binding.lottieView.setVisibility(View.GONE);
+        binding.lottieView.setVisibility(GONE);
         binding.contentContainer.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showMealDetails(Meal meal) {
-        adapter.setIngredients(meal.getIngredients());
+        currentVideoUrl = meal.getVideoUrl();
+        ingredientAdapter.setIngredients(meal.getIngredients());
+
         binding.tvMealTitle.setText(meal.getName());
         binding.tvCategory.setText(meal.getCategory());
         binding.tvIngredientsCount.setText(String.valueOf(meal.getIngredients().size()));
+
         GlideUtil.loadImage(
                 binding.getRoot(),
                 meal.getImageUrl(),
                 binding.ivMealImage
         );
+
+        GlideUtil.loadImage(
+                binding.getRoot(),
+                meal.getImageUrl(),
+                binding.ivVideoThumbnail
+        );
+
         binding.btnAddToPlan.setOnClickListener(v -> presenter.onAddToPlanClicked());
         binding.btnBack.setOnClickListener(v -> navigateBack());
-//        binding.btnFavorite.setOnClickListener(v -> presenter.onFavoriteClicked(meal.isFavorite()));
-        binding.fabPlayVideo.setOnClickListener(v -> presenter.onVideoClicked());
     }
 
     @Override
@@ -81,12 +123,12 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
 
     @Override
     public void showError(String message) {
-
+        // TODO: show error
     }
 
     @Override
     public void showNoInternetError(String message) {
-
+        // TODO: show no internet error
     }
 
     @Override
@@ -96,16 +138,45 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
 
     @Override
     public void playVideo(String videoUrl) {
+        if (youTubePlayer != null && videoUrl != null && !videoUrl.isEmpty()) {
+            String videoId = extractYoutubeId(videoUrl);
+            if (!videoId.isEmpty()) {
+                binding.videoThumbnailOverlay.setVisibility(GONE);
+                binding.youtubePlayerView.setVisibility(View.VISIBLE);
 
+                youTubePlayer.loadVideo(videoId, 0);
+            }
+        }
+    }
+
+    private String extractYoutubeId(String youtubeUrl) {
+        String pattern = "^(?:https?://)?(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)([\\w-]{11}).*$";
+        Pattern compiledPattern = Pattern.compile(pattern);
+        Matcher matcher = compiledPattern.matcher(youtubeUrl);
+
+        if (matcher.matches()) {
+            return matcher.group(1);
+        } else {
+            return "";
+        }
     }
 
     @Override
     public void showAddedToPlanMessage() {
-
+        // TODO: show added to plan message
     }
 
     @Override
     public void showAddToPlanError(String message) {
+        // TODO: show add to plan error
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (youTubePlayer != null) {
+            youTubePlayer.pause();
+        }
+        presenter.detachView();
     }
 }

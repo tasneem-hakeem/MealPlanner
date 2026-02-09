@@ -7,6 +7,5 @@ public interface MealDetailsPresenter {
     void detachView();
     void onViewStarted();
     void onFavoriteClicked(Boolean isFavorite);
-    void onVideoClicked();
     void onAddToPlanClicked();
 }

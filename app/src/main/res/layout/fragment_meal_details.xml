@@ -108,6 +108,7 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="24dp"
+                        android:baselineAligned="false"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -115,6 +116,15 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
+
+                            <!-- Title -->
+                            <TextView
+                                android:id="@+id/tvMealTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/TextAppearance.MealPlanner.HeadlineSmall"
+                                android:textColor="@color/text_primary"
+                                tools:text="Blood Orange Upside Down Cake" />
 
                             <!-- Category -->
                             <LinearLayout
@@ -140,46 +150,8 @@
                                     android:textColor="@color/text_secondary"
                                     tools:text="Mediterranean Delight" />
                             </LinearLayout>
-
-                            <!-- Title -->
-                            <TextView
-                                android:id="@+id/tvMealTitle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="@style/TextAppearance.MealPlanner.HeadlineSmall"
-                                android:textColor="@color/text_primary"
-                                tools:text="Blood Orange Upside Down Cake" />
                         </LinearLayout>
 
-                        <!-- Time Badge -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:background="@drawable/time_badge_background"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingStart="12dp"
-                            android:paddingTop="6dp"
-                            android:paddingEnd="12dp"
-                            android:paddingBottom="6dp">
-
-                            <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
-                                android:layout_marginEnd="6dp"
-                                android:contentDescription="@string/time_icon"
-                                android:src="@drawable/ic_clock"
-                                app:tint="@color/primary" />
-
-                            <TextView
-                                android:id="@+id/tvTime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="@style/TextAppearance.MealPlanner.Caption"
-                                android:textColor="@color/primary"
-                                tools:text="30 MINS" />
-                        </LinearLayout>
                     </LinearLayout>
 
                     <!-- Video Tutorial Card -->
@@ -202,43 +174,59 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <!-- Video Thumbnail -->
-                            <ImageView
-                                android:id="@+id/ivVideoThumbnail"
+                            <!-- YouTube Player (behind thumbnail initially) -->
+                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                android:id="@+id/youtube_player_view"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:alpha="0.6"
-                                android:contentDescription="@string/video_thumbnail"
-                                android:scaleType="centerCrop"
-                                tools:src="@tools:sample/backgrounds/scenic" />
+                                android:visibility="gone"/>
 
-                            <!-- Play Button -->
-                            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                android:id="@+id/fabPlayVideo"
-                                android:layout_width="56dp"
-                                android:layout_height="56dp"
-                                android:layout_gravity="center"
-                                android:contentDescription="@string/play_button"
-                                app:backgroundTint="@color/primary"
-                                app:elevation="8dp"
-                                app:fabSize="normal"
-                                app:srcCompat="@drawable/ic_play"
-                                app:tint="@color/white" />
+                            <!-- Video Thumbnail Overlay (shown initially) -->
+                            <FrameLayout
+                                android:id="@+id/videoThumbnailOverlay"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:clickable="true"
+                                android:focusable="true">
 
-                            <!-- Tutorial Badge -->
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom|start"
-                                android:layout_margin="12dp"
-                                android:background="@drawable/tutorial_badge_background"
-                                android:paddingStart="8dp"
-                                android:paddingTop="4dp"
-                                android:paddingEnd="8dp"
-                                android:paddingBottom="4dp"
-                                android:text="@string/tutorial_video"
-                                android:textAppearance="@style/TextAppearance.MealPlanner.Caption"
-                                android:textColor="@color/text_primary" />
+                                <ImageView
+                                    android:id="@+id/ivVideoThumbnail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:alpha="0.6"
+                                    android:contentDescription="@string/video_thumbnail"
+                                    android:scaleType="centerCrop"
+                                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                                <!-- Play Button -->
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:id="@+id/fabPlayVideo"
+                                    android:layout_width="56dp"
+                                    android:layout_height="56dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@string/play_button"
+                                    app:backgroundTint="@color/primary"
+                                    app:elevation="8dp"
+                                    app:fabSize="normal"
+                                    app:srcCompat="@drawable/ic_play"
+                                    app:tint="@color/white" />
+
+                                <!-- Tutorial Badge -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|start"
+                                    android:layout_margin="12dp"
+                                    android:background="@drawable/tutorial_badge_background"
+                                    android:paddingStart="8dp"
+                                    android:paddingTop="4dp"
+                                    android:paddingEnd="8dp"
+                                    android:paddingBottom="4dp"
+                                    android:text="@string/tutorial_video"
+                                    android:textAppearance="@style/TextAppearance.MealPlanner.Caption"
+                                    android:textColor="@color/text_primary" />
+                            </FrameLayout>
+
                         </FrameLayout>
                     </com.google.android.material.card.MaterialCardView>
 
