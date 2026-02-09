@@ -133,6 +133,6 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
     @Override
     public void onMealClicked(String mealId) {
-        presenter.onMealClicked(mealId);
+        navigateToMealDetails(mealId);
     }
 }
