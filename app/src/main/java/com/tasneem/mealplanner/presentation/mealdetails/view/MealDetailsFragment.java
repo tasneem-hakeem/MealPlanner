@@ -2,6 +2,7 @@ package com.tasneem.mealplanner.presentation.mealdetails.view;
 
 import static android.view.View.GONE;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
     private IngredientAdapter ingredientAdapter;
     private YouTubePlayer youTubePlayer;
     private String currentVideoUrl;
+    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +44,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentMealDetailsBinding.bind(view);
-
+        context = requireContext();
         presenter = new MealDetailsPresenterImpl(requireActivity().getApplication());
         presenter.attachView(this);
 
@@ -56,7 +58,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
         ingredientAdapter = new IngredientAdapter();
         binding.rvIngredients.setAdapter(ingredientAdapter);
         binding.rvIngredients.setLayoutManager(
-                new GridLayoutManager(requireContext(), 2, LinearLayoutManager.HORIZONTAL, false)
+                new GridLayoutManager(context, 2, LinearLayoutManager.HORIZONTAL, false)
         );
     }
 
@@ -98,7 +100,11 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
 
         binding.tvMealTitle.setText(meal.getName());
         binding.tvCategory.setText(meal.getCategory());
+        binding.tvCountry.setText(meal.getOriginCountry());
+        String ingredientLiteral = context.getString(R.string.ingredients);
         binding.tvIngredientsCount.setText(String.valueOf(meal.getIngredients().size()));
+        binding.tvIngredientsCount.append(" " + ingredientLiteral);
+        binding.tvSteps.setText(meal.getSteps());
 
         GlideUtil.loadImage(
                 binding.getRoot(),
