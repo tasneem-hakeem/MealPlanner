@@ -39,10 +39,10 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
     }
 
     @Override
-    public void onViewStarted() {
+    public void onViewStarted(String mealId) {
         if (view == null) return;
-        // TODO: handle meal id
-        loadMealDetails("52772");
+
+        loadMealDetails(mealId);
     }
 
     private void loadMealDetails(String mealId) {

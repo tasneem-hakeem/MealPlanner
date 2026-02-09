@@ -7,7 +7,20 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.tasneem.mealplanner.presentation.home.view.HomeFragment"
-        android:label="Home" />
+        android:label="Home">
+        <action
+            android:id="@+id/action_homeFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mealDetailsFragment"
+        android:name="com.tasneem.mealplanner.presentation.mealdetails.view.MealDetailsFragment"
+        android:label="Meal Details">
+        <argument
+            android:name="mealId"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"

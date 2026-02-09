@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -119,7 +120,10 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
     @Override
     public void navigateToMealDetails(String mealId) {
-        // TODO: Navigate to Meal Details screen
+        HomeFragmentDirections.ActionHomeFragmentToMealDetailsFragment action =
+                HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(mealId);
+
+        NavHostFragment.findNavController(this).navigate(action);
     }
 
     @Override

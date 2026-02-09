@@ -1,6 +1,7 @@
 package com.tasneem.mealplanner;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,18 +12,20 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.tasneem.mealplanner.databinding.ActivityMainBinding;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -32,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navHostFragment);
         NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
-        NavigationUI.setupWithNavController(bottomNav, navController);
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.mealDetailsFragment) {
+                binding.bottomNavigationView.setVisibility(View.GONE);
+            } else {
+                binding.bottomNavigationView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
     }
 }

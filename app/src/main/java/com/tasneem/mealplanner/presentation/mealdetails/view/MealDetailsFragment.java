@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.tasneem.mealplanner.R;
@@ -48,10 +50,27 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
         presenter = new MealDetailsPresenterImpl(requireActivity().getApplication());
         presenter.attachView(this);
 
+        handleArgsAndStart();
         setupRecyclerView();
         initVideoPlayer();
+    }
 
-        presenter.onViewStarted();
+    private void handleArgsAndStart() {
+        Bundle args = getArguments();
+        String mealId = null;
+
+        if (args != null) {
+            mealId = MealDetailsFragmentArgs.fromBundle(args).getMealId();
+        }
+
+        if (mealId != null) {
+            presenter.onViewStarted(mealId);
+        } else {
+            Snackbar.make(binding.getRoot(), "No meal selected", Snackbar.LENGTH_SHORT).show();
+            NavHostFragment.findNavController(this).navigateUp();
+        }
+
+        presenter.onViewStarted(mealId);
     }
 
     private void setupRecyclerView() {
@@ -139,7 +158,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
 
     @Override
     public void navigateBack() {
-
+        NavHostFragment.findNavController(this).navigateUp();
     }
 
     @Override
