@@ -136,9 +136,4 @@ public class HomePresenterImpl implements HomePresenter {
                 );
         disposables.add(disposable);
     }
-
-    @Override
-    public void onMealClicked(String mealId) {
-        view.navigateToMealDetails(mealId);
-    }
 }

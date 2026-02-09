@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="24dp">
+
+    <!-- Step Number Column -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="top"
+        android:orientation="vertical">
+
+        <!-- Step Number -->
+        <TextView
+            android:id="@+id/tvStepNumber"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/step_number_background"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MealPlanner.Caption"
+            android:textColor="@color/white"
+            tools:text="1" />
+
+        <!-- Connector Line -->
+        <View
+            android:id="@+id/viewConnectorLine"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:background="@color/outline"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <!-- Step Content -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Step Title -->
+        <TextView
+            android:id="@+id/tvStepTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textAppearance="@style/TextAppearance.MealPlanner.TitleMedium"
+            android:textColor="@color/text_primary"
+            tools:text="Prep the oranges" />
+
+        <!-- Step Description -->
+        <TextView
+            android:id="@+id/tvStepDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="4dp"
+            android:textAppearance="@style/TextAppearance.MealPlanner.BodyMedium"
+            android:textColor="@color/text_secondary"
+            tools:text="Slice blood oranges thinly and arrange them at the bottom of the cake pan over the caramel base." />
+
+    </LinearLayout>
+
+</LinearLayout>

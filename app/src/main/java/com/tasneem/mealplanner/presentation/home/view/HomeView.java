@@ -21,7 +21,7 @@ public interface HomeView {
     void showHealthyMeals(List<Meal> meals);
     void showBreakfastSuggestions(List<Meal> meals);
 
-    void showError(String message);
+    void onAddToPlannerClicked();
 
-    void navigateToMealDetails(String mealId);
+    void showError(String message);
 }

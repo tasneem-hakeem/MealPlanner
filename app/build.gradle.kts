@@ -74,7 +74,8 @@ dependencies {
     implementation(libs.room.rxjava3)
     // Lottie
     implementation(libs.lottie)
-
+    // core for youtube video playing
+    implementation(libs.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

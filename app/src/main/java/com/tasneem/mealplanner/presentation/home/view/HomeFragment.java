@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -41,6 +42,10 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
         presenter.attachView(this);
         presenter.onViewStarted();
 
+        setUpRecyclers();
+    }
+
+    private void setUpRecyclers() {
         healthyMealsAdapter = new MealsAdapter(this);
         binding.rvHealthyMeals.setAdapter(healthyMealsAdapter);
         binding.rvHealthyMeals.setLayoutManager(
@@ -99,6 +104,8 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
                     meal.getImageUrl(),
                     binding.imgMeal
             );
+
+            binding.cardMealOfTheDay.setOnClickListener(v -> onMealClicked(meal.getId()));
         }
     }
 
@@ -113,13 +120,21 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
     }
 
     @Override
-    public void showError(String message) {
-
+    public void onAddToPlannerClicked() {
+        // TODO: handle this
     }
 
     @Override
-    public void navigateToMealDetails(String mealId) {
-        // TODO: Navigate to Meal Details screen
+    public void showError(String message) {
+        //TODO: show error layout
+    }
+
+    @Override
+    public void onMealClicked(String mealId) {
+        HomeFragmentDirections.ActionHomeFragmentToMealDetailsFragment action =
+                HomeFragmentDirections.actionHomeFragmentToMealDetailsFragment(mealId);
+
+        NavHostFragment.findNavController(this).navigate(action);
     }
 
     @Override
@@ -129,10 +144,5 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
         if (presenter != null) {
             presenter.detachView();
         }
-    }
-
-    @Override
-    public void onMealClicked(String mealId) {
-        presenter.onMealClicked(mealId);
     }
 }
