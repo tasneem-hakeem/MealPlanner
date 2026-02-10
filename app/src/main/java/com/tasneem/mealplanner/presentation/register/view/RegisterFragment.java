@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.tasneem.mealplanner.R;
@@ -122,7 +123,7 @@ public class RegisterFragment extends Fragment implements RegisterView {
 
     @Override
     public void navigateToLogin() {
-        // TODO: Navigate to Login screen
+        NavHostFragment.findNavController(this).navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment());
     }
 
     @Override

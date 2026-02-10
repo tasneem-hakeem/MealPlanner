@@ -91,7 +91,10 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
     @Override
     public void showUserName(String name) {
-        binding.tvHi.setText(getString(R.string.hi_user, name));
+        if (name.isEmpty())
+            binding.tvHi.setText(getString(R.string.home));
+        else
+            binding.tvHi.setText(getString(R.string.hi_user, name));
     }
 
     @Override

@@ -249,4 +249,9 @@
         <item name="itemIconSize">24dp</item>
     </style>
 
+    <style name="BottomNavIndicator">
+        <item name="android:background">@drawable/bottom_nav_indicator</item>
+    </style>
+
+
 </resources>

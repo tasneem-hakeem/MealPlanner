@@ -30,7 +30,7 @@
     <string name="plan_now">خطط الآن</string>
     <string name="add_to_planner">أضف إلى البرنامج</string>
     <string name="meal_image">صورة الوجبة</string>
-    <string name="hi_user">أهلاً، %1$s</string>
+    <string name="hi_user">مرحبًا %1$s</string>
     <string name="you_may_try">يمكنك تجربة...</string>
     <string name="hello_breakfast">ابدأ يومك! 🍩</string>
     <string name="back_button">Back Button</string>
