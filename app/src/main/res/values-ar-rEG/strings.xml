@@ -49,5 +49,5 @@
     <string name="no_internet_connection">لا يوجد اتصال بالإنترنت</string>
     <string name="ingredient_icon">Ingredient Icon</string>
     <string name="ingredients">Iمكونات</string>
-
+    <string name="no_meal_selected">لم يتم اختيار وجبة</string>
 </resources>

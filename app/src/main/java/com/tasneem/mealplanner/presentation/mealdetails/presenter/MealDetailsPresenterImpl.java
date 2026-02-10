@@ -69,6 +69,7 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
 
     @Override
     public void onFavoriteClicked(Boolean isFavorite) {
+        // TODO: add to fav
         view.updateFavoriteStatus(isFavorite);
     }
 

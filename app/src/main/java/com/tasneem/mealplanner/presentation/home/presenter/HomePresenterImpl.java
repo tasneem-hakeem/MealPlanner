@@ -2,7 +2,6 @@ package com.tasneem.mealplanner.presentation.home.presenter;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import com.tasneem.mealplanner.data.datasource.auth.model.User;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepository;
@@ -89,8 +88,6 @@ public class HomePresenterImpl implements HomePresenter {
                             allHealthyMeals.addAll(seafood);
                             allHealthyMeals.addAll(veg);
                             allHealthyMeals.addAll(vegan);
-
-                            Log.d("HomePresenter", String.valueOf(allHealthyMeals.size()));
 
                             return allHealthyMeals;
                         }

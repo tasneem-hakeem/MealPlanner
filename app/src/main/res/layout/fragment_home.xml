@@ -12,14 +12,36 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp">
 
+        <include
+            android:id="@+id/layoutNoInternet"
+            layout="@layout/error_no_internet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/layoutSomethingWrong"
+            layout="@layout/error_something_wrong"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginBottom="16dp"
             app:cardBackgroundColor="@color/primary"
             app:cardCornerRadius="@dimen/corner_radius_medium"
             app:cardElevation="4dp"
-            android:layout_marginBottom="16dp"
             app:layout_constraintEnd_toStartOf="@+id/tvHi"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@id/cardMealOfTheDay"
@@ -39,8 +61,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:textColor="@color/text_primary"
             android:textAllCaps="false"
+            android:textColor="@color/text_primary"
             app:layout_constraintBottom_toBottomOf="@+id/cardView"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="@+id/cardView"
