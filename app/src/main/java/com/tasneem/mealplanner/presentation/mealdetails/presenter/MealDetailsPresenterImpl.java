@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.tasneem.mealplanner.R;
+import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepository;
 import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepositoryImpl;
 import com.tasneem.mealplanner.presentation.mealdetails.view.MealDetailsView;
@@ -20,9 +21,10 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
     private final MealsRepository repository;
     private final CompositeDisposable disposables = new CompositeDisposable();
     private final Context context;
+    private boolean isFavorite = false;
 
     public MealDetailsPresenterImpl(Application application) {
-        repository = new MealsRepositoryImpl();
+        repository = new MealsRepositoryImpl(application);
         this.context = application.getApplicationContext();
     }
 
@@ -43,6 +45,7 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
         if (view == null) return;
 
         loadMealDetails(mealId);
+        checkIfMealIsFavorite(mealId);
     }
 
     private void loadMealDetails(String mealId) {
@@ -68,13 +71,80 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
     }
 
     @Override
-    public void onFavoriteClicked(Boolean isFavorite) {
-        // TODO: add to fav
-        view.updateFavoriteStatus(isFavorite);
+    public void checkIfMealIsFavorite(String mealId) {
+        Disposable disposable = repository.getFavoriteById(mealId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        meal -> {
+                            isFavorite = true;
+                            if (view != null) {
+                                view.updateFavoriteIcon(true);
+                            }
+                        },
+                        throwable -> {
+                            isFavorite = false;
+                            if (view != null) {
+                                view.updateFavoriteIcon(false);
+                            }
+                        }
+                );
+        disposables.add(disposable);
+    }
+
+    @Override
+    public void onFavoriteClicked(Meal meal) {
+        if (isFavorite) {
+            removeFromFavorites(meal);
+        } else {
+            addToFavorites(meal);
+        }
+    }
+
+    private void addToFavorites(Meal meal) {
+        Disposable disposable = repository.addMealToFavorite(meal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> {
+                            isFavorite = true;
+                            if (view != null) {
+                                view.updateFavoriteIcon(true);
+                                view.showAddedToFavoritesMessage();
+                            }
+                        },
+                        throwable -> {
+                            if (view != null) {
+                                view.showFavoriteError(context.getString(R.string.add_to_favorites_failed));
+                            }
+                        }
+                );
+        disposables.add(disposable);
+    }
+
+    private void removeFromFavorites(Meal meal) {
+        Disposable disposable = repository.deleteFavoriteById(meal.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> {
+                            isFavorite = false;
+                            if (view != null) {
+                                view.updateFavoriteIcon(false);
+                                view.showRemovedFromFavoritesMessage();
+                            }
+                        },
+                        throwable -> {
+                            if (view != null) {
+                                view.showFavoriteError(context.getString(R.string.remove_from_favorites_failed));
+                            }
+                        }
+                );
+        disposables.add(disposable);
     }
 
     @Override
     public void onAddToPlanClicked() {
-        // TODO: handle att to plan
+        // TODO: handle add to plan
     }
 }

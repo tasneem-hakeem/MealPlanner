@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MealPlanner.Card.Recipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/card_background"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/card_stroke"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivRecipeImage"
+            android:layout_width="0dp"
+            android:layout_height="176dp"
+            android:alpha="0.8"
+            android:contentDescription="@string/meal_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/img_placeholder" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:contentDescription="@string/remove_from_favorite"
+            android:src="@drawable/ic_heart_filled"
+            app:backgroundTint="@color/white"
+            app:elevation="4dp"
+            app:fabCustomSize="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/favorite" />
+
+        <TextView
+            android:id="@+id/tvFavoriteMealTitle"
+            style="@style/TextAppearance.MealPlanner.TitleLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/text_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivRecipeImage"
+            tools:text="Classic Avocado Toast" />
+
+        <ImageView
+            android:id="@+id/ivCategoryIcon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/category"
+            android:src="@drawable/ic_ingredient"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFavoriteMealTitle"
+            app:tint="@color/text_secondary" />
+
+        <TextView
+            android:id="@+id/tvFavCategory"
+            style="@style/TextAppearance.MealPlanner.BodySmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/text_secondary"
+            app:layout_constraintBottom_toBottomOf="@id/ivCategoryIcon"
+            app:layout_constraintStart_toEndOf="@id/ivCategoryIcon"
+            app:layout_constraintTop_toTopOf="@id/ivCategoryIcon"
+            tools:text="Breakfast" />
+
+        <ImageView
+            android:id="@+id/ivCountryIcon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:contentDescription="@string/country"
+            android:src="@drawable/ic_earth"
+            app:layout_constraintBottom_toBottomOf="@id/ivCategoryIcon"
+            app:layout_constraintStart_toEndOf="@id/tvFavCategory"
+            app:layout_constraintTop_toTopOf="@id/ivCategoryIcon" />
+
+        <TextView
+            android:id="@+id/tvFavCountry"
+            style="@style/TextAppearance.MealPlanner.BodySmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/text_secondary"
+            app:layout_constraintBottom_toBottomOf="@id/ivCountryIcon"
+            app:layout_constraintStart_toEndOf="@id/ivCountryIcon"
+            app:layout_constraintTop_toTopOf="@id/ivCountryIcon"
+            tools:text="320 kcal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

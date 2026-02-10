@@ -6,6 +6,8 @@ import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
 public interface MealsRepository {
@@ -30,4 +32,12 @@ public interface MealsRepository {
     Single<List<String>> getCategoriesList();
 
     Single<List<String>> getAreasList();
+
+    Flowable<List<Meal>> getAllFavorites();
+
+    Single<Meal> getFavoriteById(String id);
+
+    Completable deleteFavoriteById(String id);
+
+    Completable addMealToFavorite(Meal meal);
 }

@@ -291,7 +291,7 @@
         android:insetRight="0dp"
         android:insetBottom="0dp"
         app:cornerRadius="20dp"
-        app:icon="@drawable/icon_heart"
+        app:icon="@drawable/ic_heart_outlined"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="24dp"
