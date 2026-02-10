@@ -35,6 +35,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
     private YouTubePlayer youTubePlayer;
     private String currentVideoUrl;
     private Context context;
+    private Meal currentMeal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -112,6 +113,7 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
 
     @Override
     public void showMealDetails(Meal meal) {
+        currentMeal = meal;
         currentVideoUrl = meal.getVideoUrl();
         ingredientAdapter.setIngredients(meal.getIngredients());
 
@@ -137,11 +139,36 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
 
         binding.btnAddToPlan.setOnClickListener(v -> presenter.onAddToPlanClicked());
         binding.btnBack.setOnClickListener(v -> navigateBack());
+
+        binding.btnFavorite.setOnClickListener(v -> {
+            if (currentMeal != null) {
+                presenter.onFavoriteClicked(currentMeal);
+            }
+        });
     }
 
     @Override
-    public void updateFavoriteStatus(Boolean isFavorite) {
-        // TODO: update favorite status
+    public void updateFavoriteIcon(boolean isFavorite) {
+        if (isFavorite) {
+            binding.btnFavorite.setIconResource(R.drawable.ic_heart_filled);
+        } else {
+            binding.btnFavorite.setIconResource(R.drawable.ic_heart_outlined);
+        }
+    }
+
+    @Override
+    public void showAddedToFavoritesMessage() {
+        Snackbar.make(binding.getRoot(), R.string.meal_added_to_favorites_successfully, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showRemovedFromFavoritesMessage() {
+        Snackbar.make(binding.getRoot(), R.string.meal_removed_from_favorites_successfully, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showFavoriteError(String message) {
+        Snackbar.make(binding.getRoot(), message, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

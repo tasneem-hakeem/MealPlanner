@@ -9,10 +9,10 @@ public class Meal {
     private final String originCountry;
     private final String steps;
     private final String imageUrl;
-    private final String videoUrl;
-    private final String sourceUrl;
-    private final String lastEditTime;
-    private final List<Ingredient> ingredients;
+    private String videoUrl;
+    private String sourceUrl;
+    private String lastEditTime;
+    private List<Ingredient> ingredients;
 
     public Meal(String id, String name, String category, String originCountry, String steps, String imageUrl, String videoUrl, String sourceUrl, String lastEditTime, List<Ingredient> ingredients) {
         this.id = id;
@@ -25,6 +25,15 @@ public class Meal {
         this.sourceUrl = sourceUrl;
         this.lastEditTime = lastEditTime;
         this.ingredients = ingredients;
+    }
+
+    public Meal(String id, String name, String category, String originCountry, String steps, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.originCountry = originCountry;
+        this.steps = steps;
+        this.imageUrl = imageUrl;
     }
 
     public String getId() {

@@ -28,7 +28,7 @@ public class HomePresenterImpl implements HomePresenter {
     private final CompositeDisposable disposables = new CompositeDisposable();
 
     public HomePresenterImpl(Application application) {
-        this.mealsRepository = new MealsRepositoryImpl();
+        this.mealsRepository = new MealsRepositoryImpl(application);
         this.authRepository = new AuthenticationRepositoryImpl();
         this.context = application.getApplicationContext();
     }

@@ -1,0 +1,13 @@
+package com.tasneem.mealplanner.presentation.favorites.view;
+
+import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+
+import java.util.List;
+
+public interface FavoriteMealView {
+    void showFavoriteMeals(List<Meal> meals);
+
+    void showError(String message);
+
+    void onRemoveFromFavClicked(String mealId);
+}

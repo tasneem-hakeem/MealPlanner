@@ -1,5 +1,9 @@
 package com.tasneem.mealplanner.data.datasource.meals.repository;
 
+import android.app.Application;
+
+import com.tasneem.mealplanner.data.datasource.meals.favorites.local.datasource.FavoriteMealLocalDatasource;
+import com.tasneem.mealplanner.data.datasource.meals.favorites.mappers.FavoriteMealEntityMapper;
 import com.tasneem.mealplanner.data.datasource.meals.mapper.CategoryMapper;
 import com.tasneem.mealplanner.data.datasource.meals.mapper.IngredientMapper;
 import com.tasneem.mealplanner.data.datasource.meals.mapper.MealsMapper;
@@ -14,14 +18,18 @@ import com.tasneem.mealplanner.data.datasource.meals.remote.dto.categorieslist.C
 import java.util.List;
 import java.util.stream.Collectors;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
 public class MealsRepositoryImpl implements MealsRepository {
 
     private final MealsRemoteDatasource remote;
+    private final FavoriteMealLocalDatasource favoriteDatasource;
 
-    public MealsRepositoryImpl() {
+    public MealsRepositoryImpl(Application application) {
         this.remote = new MealsRemoteDatasourceImpl();
+        this.favoriteDatasource = new FavoriteMealLocalDatasource(application.getApplicationContext());
     }
 
     @Override
@@ -90,5 +98,25 @@ public class MealsRepositoryImpl implements MealsRepository {
                 .stream()
                 .map(AreasDto::getAreaName)
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    public Flowable<List<Meal>> getAllFavorites() {
+        return favoriteDatasource.getAllFavorites().map(FavoriteMealEntityMapper::fromList);
+    }
+
+    @Override
+    public Single<Meal> getFavoriteById(String id) {
+        return favoriteDatasource.getFavoriteById(id).map(FavoriteMealEntityMapper::from);
+    }
+
+    @Override
+    public Completable deleteFavoriteById(String id) {
+        return favoriteDatasource.deleteFavoriteById(id);
+    }
+
+    @Override
+    public Completable addMealToFavorite(Meal meal) {
+        return favoriteDatasource.insertFavoriteMeal(FavoriteMealEntityMapper.to(meal));
     }
 }
