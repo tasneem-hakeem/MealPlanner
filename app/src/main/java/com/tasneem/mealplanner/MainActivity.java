@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -33,16 +34,25 @@ public class MainActivity extends AppCompatActivity {
 
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navHostFragment);
+        NavController navController = getNavController(navHostFragment);
+
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
+    }
+
+    @NonNull
+    private NavController getNavController(NavHostFragment navHostFragment) {
         NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.mealDetailsFragment) {
+            if (destination.getId() == R.id.mealDetailsFragment ||
+                    destination.getId() == R.id.loginFragment ||
+                    destination.getId() == R.id.registerFragment
+            ) {
                 binding.bottomNavigationView.setVisibility(View.GONE);
             } else {
                 binding.bottomNavigationView.setVisibility(View.VISIBLE);
             }
         });
-
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
+        return navController;
     }
 }

@@ -1,5 +1,7 @@
 package com.tasneem.mealplanner.presentation.home.view;
 
+import static android.view.View.GONE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,7 +93,10 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
     @Override
     public void showUserName(String name) {
-        binding.tvHi.setText(getString(R.string.hi_user, name));
+        if (name.isEmpty())
+            binding.tvHi.setText(getString(R.string.home));
+        else
+            binding.tvHi.setText(getString(R.string.hi_user, name));
     }
 
     @Override
@@ -126,7 +131,21 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
     @Override
     public void showError(String message) {
-        //TODO: show error layout
+        binding.layoutNoInternet.getRoot().setVisibility(View.VISIBLE);
+        binding.healthyMealsLoading.setVisibility(GONE);
+        binding.breakfastSuggestionsLoading.setVisibility(GONE);
+        binding.mealOfTheDayLoading.setVisibility(GONE);
+        hideContent();
+    }
+
+    private void hideContent() {
+        binding.cardMealOfTheDay.setVisibility(GONE);
+        binding.headerTitle.setVisibility(GONE);
+        binding.headerTitle2.setVisibility(GONE);
+        binding.rvHealthyMeals.setVisibility(GONE);
+        binding.rvBreakfastSuggestions.setVisibility(GONE);
+        binding.cardView.setVisibility(GONE);
+        binding.tvHi.setVisibility(GONE);
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.auth.model.AuthResult;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepository;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepositoryImpl;
@@ -114,15 +113,15 @@ public class LoginPresenterImpl implements LoginPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-            isSignedIn -> {
-                        if (isSignedIn) {
-                            getCurrentUserAndNavigate();
+                        isSignedIn -> {
+                            if (isSignedIn) {
+                                getCurrentUserAndNavigate();
+                            }
+                        },
+                        throwable -> {
+                            view.showError(throwable.getMessage());
+                            Log.e(TAG, "Error checking user logged in", throwable);
                         }
-                    },
-                    throwable -> {
-                        view.showError(throwable.getMessage());
-                        Log.e(TAG, "Error checking user logged in", throwable);
-                    }
 
                 );
         compositeDisposable.add(disposable);
@@ -150,8 +149,6 @@ public class LoginPresenterImpl implements LoginPresenter {
         view.hideLoading();
 
         if (result.isSuccess()) {
-            view.showSuccess(context.getString(R.string.login_successful));
-            Log.d(TAG, result.getUser().toString());
             view.clearInputFields();
             view.navigateToHome(result.getUser());
         } else {

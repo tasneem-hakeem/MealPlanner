@@ -66,11 +66,9 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
         if (mealId != null) {
             presenter.onViewStarted(mealId);
         } else {
-            Snackbar.make(binding.getRoot(), "No meal selected", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), R.string.no_meal_selected, Snackbar.LENGTH_SHORT).show();
             NavHostFragment.findNavController(this).navigateUp();
         }
-
-        presenter.onViewStarted(mealId);
     }
 
     private void setupRecyclerView() {
@@ -148,12 +146,16 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
 
     @Override
     public void showError(String message) {
-        // TODO: show error
+        binding.lottieView.setVisibility(GONE);
+        binding.contentContainer.setVisibility(GONE);
+        binding.layoutSomethingWrong.getRoot().setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showNoInternetError(String message) {
-        // TODO: show no internet error
+        binding.lottieView.setVisibility(GONE);
+        binding.contentContainer.setVisibility(GONE);
+        binding.layoutNoInternet.getRoot().setVisibility(View.VISIBLE);
     }
 
     @Override

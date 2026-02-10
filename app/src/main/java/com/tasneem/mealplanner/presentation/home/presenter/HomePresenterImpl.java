@@ -2,8 +2,8 @@ package com.tasneem.mealplanner.presentation.home.presenter;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
+import com.tasneem.mealplanner.data.datasource.auth.model.User;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepository;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepositoryImpl;
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
@@ -89,8 +89,6 @@ public class HomePresenterImpl implements HomePresenter {
                             allHealthyMeals.addAll(veg);
                             allHealthyMeals.addAll(vegan);
 
-                            Log.d("HomePresenter", String.valueOf(allHealthyMeals.size()));
-
                             return allHealthyMeals;
                         }
                 )
@@ -127,13 +125,22 @@ public class HomePresenterImpl implements HomePresenter {
     }
 
     private void getUserName() {
-        // TODO: handle if not logged in to send placeholder name to the view
-        Disposable disposable = authRepository.getCurrentUser()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(user -> view.showUserName(user.getDisplayName()),
-                        throwable -> view.showError(throwable.getMessage())
-                );
+        Disposable disposable =
+                authRepository.isUserSignedIn()
+                        .subscribeOn(Schedulers.io())
+                        .flatMap(isSignedIn -> {
+                            if (!isSignedIn) {
+                                return Single.just("");
+                            }
+                            return authRepository.getCurrentUser()
+                                    .map(User::getDisplayName);
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                userName -> view.showUserName(userName),
+                                throwable -> view.showError(throwable.getMessage())
+                        );
+
         disposables.add(disposable);
     }
 }
