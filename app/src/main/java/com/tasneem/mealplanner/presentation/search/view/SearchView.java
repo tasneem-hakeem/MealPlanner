@@ -1,5 +1,6 @@
 package com.tasneem.mealplanner.presentation.search.view;
 
+import com.tasneem.mealplanner.data.datasource.meals.model.Area;
 import com.tasneem.mealplanner.data.datasource.meals.model.Category;
 import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
@@ -14,6 +15,8 @@ public interface SearchView {
 
     void showCategories(List<Category> categories);
 
+    void showAreas(List<Area> areas);
+
     void showEmptyState();
 
     void showLoading();
@@ -23,8 +26,4 @@ public interface SearchView {
     void showError(String message);
 
     void navigateToMealDetails(String mealId);
-
-    void navigateToCategoryMeals(String categoryName);
-
-    void navigateToIngredientMeals(String ingredientName);
 }

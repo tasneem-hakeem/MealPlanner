@@ -55,8 +55,6 @@
                 style="@style/Widget.MealPlanner.TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/icon_email"
-                android:drawablePadding="8dp"
                 android:hint="@string/search"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -143,8 +141,31 @@
                 app:spanCount="3"
                 tools:itemCount="6"
                 tools:listitem="@layout/item_category_circle" />
+
+            <!-- Browse Areas/Countries Section -->
+            <TextView
+                android:id="@+id/browseAreasTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="Browse Countries"
+                android:textAppearance="@style/TextAppearance.MealPlanner.TitleLarge" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/areasRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3"
+                tools:itemCount="6"
+                tools:listitem="@layout/item_area_circle" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

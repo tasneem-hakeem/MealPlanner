@@ -26,7 +26,7 @@ public final class GlideUtil {
         Glide.with(view)
                 .load(url)
                 .placeholder(R.drawable.img_placeholder)
-                .error(R.drawable.img_placeholder)
+                .error(R.drawable.error_placeholder)
                 .centerCrop()
                 .into(imageView);
     }

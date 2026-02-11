@@ -23,6 +23,7 @@ import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.databinding.FragmentMealDetailsBinding;
 import com.tasneem.mealplanner.presentation.mealdetails.presenter.MealDetailsPresenter;
 import com.tasneem.mealplanner.presentation.mealdetails.presenter.MealDetailsPresenterImpl;
+import com.tasneem.mealplanner.presentation.utils.GetFlagsUtil;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
 import java.util.regex.Matcher;
@@ -120,6 +121,11 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
         binding.tvMealTitle.setText(meal.getName());
         binding.tvCategory.setText(meal.getCategory());
         binding.tvCountry.setText(meal.getOriginCountry());
+        GlideUtil.loadImage(
+                binding.getRoot(),
+                GetFlagsUtil.getFlagUrl(meal.getOriginCountry()),
+                binding.ivCountryIcon
+        );
         String ingredientLiteral = context.getString(R.string.ingredients);
         binding.tvIngredientsCount.setText(String.valueOf(meal.getIngredients().size()));
         binding.tvIngredientsCount.append(" " + ingredientLiteral);

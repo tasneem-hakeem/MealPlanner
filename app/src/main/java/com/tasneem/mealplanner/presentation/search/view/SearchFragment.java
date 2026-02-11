@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.tasneem.mealplanner.data.datasource.meals.model.Area;
 import com.tasneem.mealplanner.data.datasource.meals.model.Category;
 import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
@@ -21,6 +22,7 @@ import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepositoryI
 import com.tasneem.mealplanner.databinding.FragmentSearchBinding;
 import com.tasneem.mealplanner.presentation.search.presenter.SearchPresenter;
 import com.tasneem.mealplanner.presentation.search.presenter.SearchPresenterImpl;
+import com.tasneem.mealplanner.presentation.search.view.adapter.AreasAdapter;
 import com.tasneem.mealplanner.presentation.search.view.adapter.CategoriesAdapter;
 import com.tasneem.mealplanner.presentation.search.view.adapter.SearchResultsAdapter;
 import com.tasneem.mealplanner.presentation.search.view.adapter.TrendingIngredientsAdapter;
@@ -39,6 +41,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
     private TrendingIngredientsAdapter trendingAdapter;
     private CategoriesAdapter categoriesAdapter;
+    private AreasAdapter areasAdapter;
     private SearchResultsAdapter searchResultsAdapter;
 
     private boolean isSearchMode = false;
@@ -47,7 +50,7 @@ public class SearchFragment extends Fragment implements SearchView {
     private final CompositeDisposable disposables = new CompositeDisposable();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -57,33 +60,42 @@ public class SearchFragment extends Fragment implements SearchView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initializePresenter();
+        MealsRepositoryImpl repository = new MealsRepositoryImpl(requireActivity().getApplication());
+        presenter = new SearchPresenterImpl(repository);
+        presenter.attachView(this);
+
         setupRecyclerViews();
-        setupSearchWith();
+        setupSearch();
         loadInitialData();
     }
 
-    private void initializePresenter() {
-        MealsRepositoryImpl repository = new MealsRepositoryImpl(requireActivity().getApplication());
-        presenter = new SearchPresenterImpl(this, repository);
-    }
-
     private void setupRecyclerViews() {
-        trendingAdapter = new TrendingIngredientsAdapter(ingredient ->
-                presenter.onIngredientClicked(ingredient.getName())
-        );
+        trendingAdapter = new TrendingIngredientsAdapter(ingredient -> {
+            clearSearchInput();
+            presenter.onIngredientClicked(ingredient.getName());
+        });
         binding.trendingIngredientsRecyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)
         );
         binding.trendingIngredientsRecyclerView.setAdapter(trendingAdapter);
 
-        categoriesAdapter = new CategoriesAdapter(category ->
-                presenter.onCategoryClicked(category.getName())
-        );
+        categoriesAdapter = new CategoriesAdapter(category -> {
+            clearSearchInput();
+            presenter.onCategoryClicked(category.getName());
+        });
         binding.categoriesRecyclerView.setLayoutManager(
                 new GridLayoutManager(requireContext(), 2, LinearLayoutManager.HORIZONTAL, false)
         );
         binding.categoriesRecyclerView.setAdapter(categoriesAdapter);
+
+        areasAdapter = new AreasAdapter(area -> {
+            clearSearchInput();
+            presenter.onAreaClicked(area.getName());
+        });
+        binding.areasRecyclerView.setLayoutManager(
+                new GridLayoutManager(requireContext(), 2, LinearLayoutManager.HORIZONTAL, false)
+        );
+        binding.areasRecyclerView.setAdapter(areasAdapter);
 
         searchResultsAdapter = new SearchResultsAdapter(meal ->
                 presenter.onMealClicked(meal.getId())
@@ -94,7 +106,7 @@ public class SearchFragment extends Fragment implements SearchView {
         binding.searchResultsRecyclerView.setAdapter(searchResultsAdapter);
     }
 
-    private void setupSearchWith() {
+    private void setupSearch() {
         disposables.add(
                 searchSubject
                         .debounce(300, TimeUnit.MILLISECONDS)
@@ -108,8 +120,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
         binding.searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -117,8 +128,7 @@ public class SearchFragment extends Fragment implements SearchView {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) {}
         });
     }
 
@@ -130,6 +140,10 @@ public class SearchFragment extends Fragment implements SearchView {
             switchToSearchMode();
             presenter.searchMealsByName(query);
         }
+    }
+
+    private void clearSearchInput() {
+        binding.searchEditText.setText("");
     }
 
     private void loadInitialData() {
@@ -144,6 +158,8 @@ public class SearchFragment extends Fragment implements SearchView {
             binding.trendingIngredientsRecyclerView.setVisibility(View.GONE);
             binding.browseCategoriesTitle.setVisibility(View.GONE);
             binding.categoriesRecyclerView.setVisibility(View.GONE);
+            binding.browseAreasTitle.setVisibility(View.GONE);
+            binding.areasRecyclerView.setVisibility(View.GONE);
 
             binding.contentScrollView.setVisibility(View.GONE);
             binding.searchResultsRecyclerView.setVisibility(View.VISIBLE);
@@ -158,6 +174,8 @@ public class SearchFragment extends Fragment implements SearchView {
             binding.trendingIngredientsRecyclerView.setVisibility(View.VISIBLE);
             binding.browseCategoriesTitle.setVisibility(View.VISIBLE);
             binding.categoriesRecyclerView.setVisibility(View.VISIBLE);
+            binding.browseAreasTitle.setVisibility(View.VISIBLE);
+            binding.areasRecyclerView.setVisibility(View.VISIBLE);
 
             binding.contentScrollView.setVisibility(View.VISIBLE);
             binding.searchResultsRecyclerView.setVisibility(View.GONE);
@@ -167,8 +185,7 @@ public class SearchFragment extends Fragment implements SearchView {
     @Override
     public void showSearchResults(List<Meal> meals) {
         searchResultsAdapter.setMeals(meals);
-        binding.searchResultsRecyclerView.setVisibility(View.VISIBLE);
-        binding.contentScrollView.setVisibility(View.GONE);
+        switchToSearchMode();
     }
 
     @Override
@@ -182,27 +199,35 @@ public class SearchFragment extends Fragment implements SearchView {
     }
 
     @Override
+    public void showAreas(List<Area> areas) {
+        areasAdapter.setAreas(areas);
+    }
+
+    @Override
     public void showEmptyState() {
         searchResultsAdapter.clearMeals();
-        binding.searchResultsRecyclerView.setVisibility(View.GONE);
-        binding.contentScrollView.setVisibility(View.VISIBLE);
+        showError("No meals found");
+        binding.searchResultsRecyclerView.setVisibility(View.VISIBLE);
+        binding.contentScrollView.setVisibility(View.GONE);
     }
 
     @Override
     public void showLoading() {
         binding.contentScrollView.setVisibility(View.GONE);
+        binding.searchResultsRecyclerView.setVisibility(View.GONE);
         binding.searchLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
         binding.searchLoading.setVisibility(View.GONE);
-        binding.contentScrollView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showError(String message) {
-        // TODO
+        if (getContext() != null) {
+            android.widget.Toast.makeText(getContext(), message, android.widget.Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -214,20 +239,10 @@ public class SearchFragment extends Fragment implements SearchView {
     }
 
     @Override
-    public void navigateToCategoryMeals(String categoryName) {
-        // navigate to category meals
-    }
-
-    @Override
-    public void navigateToIngredientMeals(String ingredientName) {
-        // navigate to ingredient meals
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
         disposables.clear();
-        presenter.onDestroy();
+        presenter.detachView();
         binding = null;
     }
 }
