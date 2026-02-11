@@ -6,11 +6,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.databinding.ItemSearchResultBinding;
+import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,16 +69,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             binding.mealName.setText(meal.getName());
             binding.mealCategory.setText(meal.getCategory());
 
-            // Load meal image using Glide
-            Glide.with(binding.getRoot().getContext())
-                    .load(meal.getImageUrl())
-                    .placeholder(R.drawable.img_placeholder)
-                    .error(R.drawable.img_placeholder)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .centerCrop()
-                    .into(binding.mealImage);
+            GlideUtil.loadImage(
+                    binding.getRoot(),
+                    meal.getImageUrl(),
+                    binding.mealImage
+            );
 
-            // Set click listener
             binding.getRoot().setOnClickListener(v -> listener.onMealClick(meal));
         }
     }

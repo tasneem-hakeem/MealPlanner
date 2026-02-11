@@ -6,11 +6,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.meals.model.Category;
 import com.tasneem.mealplanner.databinding.ItemCategoryCircleBinding;
+import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,14 +68,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         void bind(Category category) {
             binding.categoryName.setText(category.getName());
 
-            // Load category image using Glide
-            Glide.with(binding.getRoot().getContext())
-                    .load(category.getImageUrl())
-                    .placeholder(R.drawable.img_placeholder)
-                    .error(R.drawable.img_placeholder)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .centerCrop()
-                    .into(binding.categoryImage);
+            GlideUtil.loadImage(
+                    binding.getRoot(),
+                    category.getImageUrl(),
+                    binding.categoryImage
+            );
 
             binding.getRoot().setOnClickListener(v -> listener.onCategoryClick(category));
         }

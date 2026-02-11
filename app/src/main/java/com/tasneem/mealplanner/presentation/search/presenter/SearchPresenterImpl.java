@@ -106,9 +106,8 @@ public class SearchPresenterImpl implements SearchPresenter {
 
     @Override
     public void onMealClicked(String mealId) {
-        if (mealId != null && !mealId.isEmpty()) {
-            view.navigateToMealDetails(mealId);
-        }
+        if (mealId == null) return;
+        view.navigateToMealDetails(mealId);
     }
 
     @Override

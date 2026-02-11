@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -58,7 +59,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
         initializePresenter();
         setupRecyclerViews();
-        setupSearchWithRxJava();
+        setupSearchWith();
         loadInitialData();
     }
 
@@ -93,7 +94,7 @@ public class SearchFragment extends Fragment implements SearchView {
         binding.searchResultsRecyclerView.setAdapter(searchResultsAdapter);
     }
 
-    private void setupSearchWithRxJava() {
+    private void setupSearchWith() {
         disposables.add(
                 searchSubject
                         .debounce(300, TimeUnit.MILLISECONDS)
@@ -166,6 +167,8 @@ public class SearchFragment extends Fragment implements SearchView {
     @Override
     public void showSearchResults(List<Meal> meals) {
         searchResultsAdapter.setMeals(meals);
+        binding.searchResultsRecyclerView.setVisibility(View.VISIBLE);
+        binding.contentScrollView.setVisibility(View.GONE);
     }
 
     @Override
@@ -181,12 +184,14 @@ public class SearchFragment extends Fragment implements SearchView {
     @Override
     public void showEmptyState() {
         searchResultsAdapter.clearMeals();
+        binding.searchResultsRecyclerView.setVisibility(View.GONE);
+        binding.contentScrollView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showLoading() {
-        binding.searchLoading.setVisibility(View.VISIBLE);
         binding.contentScrollView.setVisibility(View.GONE);
+        binding.searchLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -197,12 +202,15 @@ public class SearchFragment extends Fragment implements SearchView {
 
     @Override
     public void showError(String message) {
-        //
+        // TODO
     }
 
     @Override
     public void navigateToMealDetails(String mealId) {
-        // navigate to meal details
+        SearchFragmentDirections.ActionSearchFragmentToMealDetailsFragment action =
+                SearchFragmentDirections.actionSearchFragmentToMealDetailsFragment(mealId);
+
+        NavHostFragment.findNavController(this).navigate(action);
     }
 
     @Override
@@ -212,7 +220,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
     @Override
     public void navigateToIngredientMeals(String ingredientName) {
-
+        // navigate to ingredient meals
     }
 
     @Override
