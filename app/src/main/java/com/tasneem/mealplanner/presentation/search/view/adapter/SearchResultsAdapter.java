@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.databinding.ItemSearchResultBinding;
+import com.tasneem.mealplanner.presentation.utils.GetFlagsUtil;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
 import java.util.ArrayList;
@@ -73,6 +74,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
                     binding.getRoot(),
                     meal.getImageUrl(),
                     binding.mealImage
+            );
+
+            GlideUtil.loadImage(
+                    binding.getRoot(),
+                    GetFlagsUtil.getFlagUrl(meal.getOriginCountry()),
+                    binding.ivCountryIcon
             );
 
             binding.getRoot().setOnClickListener(v -> listener.onMealClick(meal));

@@ -45,12 +45,13 @@ public class SearchFragment extends Fragment implements SearchView {
     private SearchResultsAdapter searchResultsAdapter;
 
     private boolean isSearchMode = false;
+    private boolean isBrowsingMode = false; // جديد: للتفريق بين البحث بالنص والتصفح
 
     private final PublishSubject<String> searchSubject = PublishSubject.create();
     private final CompositeDisposable disposables = new CompositeDisposable();
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -66,12 +67,16 @@ public class SearchFragment extends Fragment implements SearchView {
 
         setupRecyclerViews();
         setupSearch();
+        setupBackButton();
         loadInitialData();
     }
 
     private void setupRecyclerViews() {
+        // Trending Ingredients RecyclerView
         trendingAdapter = new TrendingIngredientsAdapter(ingredient -> {
+            // عند الضغط على ingredient
             clearSearchInput();
+            switchToBrowsingMode(); // إخفاء حقل البحث
             presenter.onIngredientClicked(ingredient.getName());
         });
         binding.trendingIngredientsRecyclerView.setLayoutManager(
@@ -79,8 +84,11 @@ public class SearchFragment extends Fragment implements SearchView {
         );
         binding.trendingIngredientsRecyclerView.setAdapter(trendingAdapter);
 
+        // Categories RecyclerView
         categoriesAdapter = new CategoriesAdapter(category -> {
+            // عند الضغط على category
             clearSearchInput();
+            switchToBrowsingMode(); // إخفاء حقل البحث
             presenter.onCategoryClicked(category.getName());
         });
         binding.categoriesRecyclerView.setLayoutManager(
@@ -88,8 +96,11 @@ public class SearchFragment extends Fragment implements SearchView {
         );
         binding.categoriesRecyclerView.setAdapter(categoriesAdapter);
 
+        // Areas RecyclerView
         areasAdapter = new AreasAdapter(area -> {
+            // عند الضغط على area/country
             clearSearchInput();
+            switchToBrowsingMode(); // إخفاء حقل البحث
             presenter.onAreaClicked(area.getName());
         });
         binding.areasRecyclerView.setLayoutManager(
@@ -97,6 +108,7 @@ public class SearchFragment extends Fragment implements SearchView {
         );
         binding.areasRecyclerView.setAdapter(areasAdapter);
 
+        // Search Results RecyclerView
         searchResultsAdapter = new SearchResultsAdapter(meal ->
                 presenter.onMealClicked(meal.getId())
         );
@@ -132,11 +144,23 @@ public class SearchFragment extends Fragment implements SearchView {
         });
     }
 
+    /**
+     * إعداد زر الرجوع
+     */
+    private void setupBackButton() {
+        binding.btnBack.setOnClickListener(v -> {
+            // الرجوع للوضع الافتراضي
+            switchToDefaultMode();
+            presenter.clearSearch();
+        });
+    }
+
     private void handleSearchQuery(String query) {
         if (query == null || query.trim().isEmpty()) {
             switchToDefaultMode();
             presenter.clearSearch();
         } else {
+            // عند البحث بالنص، نعرض حقل البحث
             switchToSearchMode();
             presenter.searchMealsByName(query);
         }
@@ -150,10 +174,18 @@ public class SearchFragment extends Fragment implements SearchView {
         presenter.loadInitialData();
     }
 
+    /**
+     * وضع البحث: عند الكتابة في حقل البحث
+     * - يخفي الـ categories والـ ingredients والـ areas
+     * - يعرض النتائج
+     * - يبقي حقل البحث ظاهر
+     */
     private void switchToSearchMode() {
         if (!isSearchMode) {
             isSearchMode = true;
+            isBrowsingMode = false;
 
+            // إخفاء القوائم
             binding.trendingIngredientsTitle.setVisibility(View.GONE);
             binding.trendingIngredientsRecyclerView.setVisibility(View.GONE);
             binding.browseCategoriesTitle.setVisibility(View.GONE);
@@ -163,13 +195,53 @@ public class SearchFragment extends Fragment implements SearchView {
 
             binding.contentScrollView.setVisibility(View.GONE);
             binding.searchResultsRecyclerView.setVisibility(View.VISIBLE);
+
+            // إبقاء حقل البحث ظاهر
+            binding.searchBarContainer.setVisibility(View.VISIBLE);
+
+            // إخفاء زر الرجوع
+            binding.btnBack.setVisibility(View.GONE);
         }
     }
 
-    private void switchToDefaultMode() {
-        if (isSearchMode) {
-            isSearchMode = false;
+    /**
+     * وضع التصفح: عند الضغط على category أو ingredient أو area
+     * - يخفي الـ categories والـ ingredients والـ areas
+     * - يعرض النتائج
+     * - يخفي حقل البحث
+     * - يعرض زر الرجوع
+     */
+    private void switchToBrowsingMode() {
+        isSearchMode = true;
+        isBrowsingMode = true;
 
+        // إخفاء القوائم
+        binding.trendingIngredientsTitle.setVisibility(View.GONE);
+        binding.trendingIngredientsRecyclerView.setVisibility(View.GONE);
+        binding.browseCategoriesTitle.setVisibility(View.GONE);
+        binding.categoriesRecyclerView.setVisibility(View.GONE);
+        binding.browseAreasTitle.setVisibility(View.GONE);
+        binding.areasRecyclerView.setVisibility(View.GONE);
+
+        binding.contentScrollView.setVisibility(View.GONE);
+        binding.searchResultsRecyclerView.setVisibility(View.VISIBLE);
+
+        // إخفاء حقل البحث
+        binding.searchBarContainer.setVisibility(View.GONE);
+
+        // إظهار زر الرجوع
+        binding.btnBack.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * الوضع الافتراضي: الصفحة الرئيسية
+     */
+    private void switchToDefaultMode() {
+        if (isSearchMode || isBrowsingMode) {
+            isSearchMode = false;
+            isBrowsingMode = false;
+
+            // إظهار القوائم
             binding.trendingIngredientsTitle.setVisibility(View.VISIBLE);
             binding.trendingIngredientsRecyclerView.setVisibility(View.VISIBLE);
             binding.browseCategoriesTitle.setVisibility(View.VISIBLE);
@@ -179,13 +251,29 @@ public class SearchFragment extends Fragment implements SearchView {
 
             binding.contentScrollView.setVisibility(View.VISIBLE);
             binding.searchResultsRecyclerView.setVisibility(View.GONE);
+
+            // إظهار حقل البحث
+            binding.searchBarContainer.setVisibility(View.VISIBLE);
+
+            // إخفاء زر الرجوع
+            binding.btnBack.setVisibility(View.GONE);
         }
     }
+
+    // ==================== SearchView Interface Implementation ====================
 
     @Override
     public void showSearchResults(List<Meal> meals) {
         searchResultsAdapter.setMeals(meals);
-        switchToSearchMode();
+
+        // إذا كنا في وضع التصفح، نتأكد من إخفاء حقل البحث
+        if (isBrowsingMode) {
+            binding.searchBarContainer.setVisibility(View.GONE);
+            binding.btnBack.setVisibility(View.VISIBLE);
+        }
+
+        binding.searchResultsRecyclerView.setVisibility(View.VISIBLE);
+        binding.contentScrollView.setVisibility(View.GONE);
     }
 
     @Override

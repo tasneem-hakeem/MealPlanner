@@ -20,6 +20,23 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/cooking_loader" />
 
+    <!-- Back Button (Hidden by default) -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back_button"
+        android:padding="12dp"
+        android:src="@drawable/ic_back"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/text_primary"
+        tools:visibility="visible" />
+
     <!-- Search Bar Container -->
     <LinearLayout
         android:id="@+id/searchBarContainer"
@@ -61,6 +78,7 @@
 
     </LinearLayout>
 
+    <!-- Search Results RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResultsRecyclerView"
         android:layout_width="match_parent"
@@ -68,13 +86,14 @@
         android:clipToPadding="false"
         android:orientation="vertical"
         android:paddingStart="16dp"
+        android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBarContainer"
+        app:layout_constraintTop_toBottomOf="@+id/btnBack"
         tools:listitem="@layout/item_search_result" />
 
     <!-- ScrollView for content -->

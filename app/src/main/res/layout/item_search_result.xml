@@ -58,5 +58,51 @@
             app:layout_constraintTop_toBottomOf="@id/meal_name"
             tools:text="Italian" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/meal_name"
+            app:layout_constraintTop_toBottomOf="@+id/meal_category">
+
+            <ImageView
+                android:id="@+id/ivCategoryIcon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/category"
+                android:src="@drawable/ic_ingredient"
+                app:tint="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/tvCategory"
+                style="@style/TextAppearance.MealPlanner.BodySmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/text_secondary"
+                tools:text="Breakfast" />
+
+            <ImageView
+                android:id="@+id/ivCountryIcon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/country"
+                android:src="@drawable/ic_earth" />
+
+            <TextView
+                android:id="@+id/tvCountry"
+                style="@style/TextAppearance.MealPlanner.BodySmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/text_secondary"
+                tools:text="Spanish" />
+        </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
