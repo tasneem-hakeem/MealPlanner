@@ -40,4 +40,12 @@ public interface MealsRepository {
     Completable deleteFavoriteById(String id);
 
     Completable addMealToFavorite(Meal meal);
+
+    Flowable<List<Meal>> getAllPlannedMeals();
+
+    Single<Meal> getPlannedById(String id);
+
+    Completable deletePlannedById(String id);
+
+    Completable addMealToPlanned(Meal meal);
 }

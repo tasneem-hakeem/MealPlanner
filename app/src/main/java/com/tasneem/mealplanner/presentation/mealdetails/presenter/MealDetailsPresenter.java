@@ -7,7 +7,7 @@ public interface MealDetailsPresenter {
     void attachView(MealDetailsView view);
     void detachView();
     void onViewStarted(String mealId);
-    void onAddToPlanClicked();
+    void onAddToPlanClicked(Meal meal, String selectedDate);
     void onFavoriteClicked(Meal meal);
     void checkIfMealIsFavorite(String mealId);
 }

@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
-import com.tasneem.mealplanner.databinding.ItemMealBinding;
+import com.tasneem.mealplanner.databinding.ItemHomeMealBinding;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
     @NonNull
     @Override
     public MealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemMealBinding binding = ItemMealBinding.inflate(
+        ItemHomeMealBinding binding = ItemHomeMealBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
@@ -49,9 +49,9 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.MealViewHold
     }
 
     class MealViewHolder extends RecyclerView.ViewHolder {
-        private final ItemMealBinding binding;
+        private final ItemHomeMealBinding binding;
 
-        public MealViewHolder(ItemMealBinding binding) {
+        public MealViewHolder(ItemHomeMealBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
