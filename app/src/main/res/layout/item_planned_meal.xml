@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mealCard"
+    style="@style/Widget.MealPlanner.Card.Meal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/Widget.MealPlanner.Card.Meal"
     android:layout_marginBottom="12dp"
     app:cardElevation="2dp">
 
@@ -21,9 +20,9 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
-            app:shapeAppearance="@style/ShapeAppearance.MealPlanner.MediumComponent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.MealPlanner.MediumComponent"
             tools:src="@drawable/img_placeholder" />
 
         <!-- Meal Name -->
@@ -33,10 +32,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textAppearance="@style/TextAppearance.MealPlanner.TitleMedium"
             android:textColor="@color/text_primary"
-            android:maxLines="2"
-            android:ellipsize="end"
             app:layout_constraintEnd_toStartOf="@id/deleteButton"
             app:layout_constraintStart_toEndOf="@id/mealImage"
             app:layout_constraintTop_toTopOf="@id/mealImage"
@@ -45,13 +44,13 @@
         <!-- Category Chip -->
         <com.google.android.material.chip.Chip
             android:id="@+id/mealCategory"
+            style="@style/Widget.MealPlanner.Chip.Info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="6dp"
-            style="@style/Widget.MealPlanner.Chip.Info"
-            app:chipMinHeight="28dp"
             app:chipIconVisible="false"
+            app:chipMinHeight="28dp"
             app:layout_constraintStart_toEndOf="@id/mealImage"
             app:layout_constraintTop_toBottomOf="@id/mealName"
             tools:text="Pasta" />
@@ -62,29 +61,31 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
-            android:textAppearance="@style/TextAppearance.MealPlanner.Caption"
-            android:textColor="@color/text_tertiary"
             android:drawablePadding="4dp"
             android:gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.MealPlanner.Caption"
+            android:textColor="@color/text_tertiary"
             app:drawableStartCompat="@drawable/ic_ingredient"
             app:drawableTint="@color/text_tertiary"
+            app:layout_constraintBottom_toBottomOf="@id/mealCategory"
             app:layout_constraintStart_toEndOf="@id/mealCategory"
             app:layout_constraintTop_toTopOf="@id/mealCategory"
-            app:layout_constraintBottom_toBottomOf="@id/mealCategory"
             tools:text="ITALIAN" />
 
-        <!-- Delete Button -->
-        <ImageView
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/deleteButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_ingredient"
-            android:padding="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="@color/error"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:contentDescription="@string/remove_from_favorite"
+            android:src="@drawable/ic_delete"
+            app:backgroundTint="@color/surface"
+            app:elevation="4dp"
+            app:fabCustomSize="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="Delete meal" />
+            app:tint="@color/favorite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
