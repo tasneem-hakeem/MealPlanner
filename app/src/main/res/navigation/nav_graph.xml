@@ -71,7 +71,7 @@
 
     <fragment
         android:id="@+id/plannerFragment"
-        android:name="com.tasneem.mealplanner.presentation.planner.view.PlannerFragment"
+        android:name="com.tasneem.mealplanner.presentation.planned.view.PlannedMealFragment"
         android:label="fragment_planner"
         tools:layout="@layout/fragment_planner" />
     <fragment

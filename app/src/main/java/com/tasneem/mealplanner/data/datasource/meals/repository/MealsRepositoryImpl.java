@@ -14,6 +14,8 @@ import com.tasneem.mealplanner.data.datasource.meals.remote.MealsRemoteDatasourc
 import com.tasneem.mealplanner.data.datasource.meals.remote.MealsRemoteDatasourceImpl;
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.areaslist.AreasDto;
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.categorieslist.CategoriesDto;
+import com.tasneem.mealplanner.data.datasource.plannedmeals.local.datasource.PlannedMealLocalDatasource;
+import com.tasneem.mealplanner.data.datasource.plannedmeals.mappers.PlannedMealEntityMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,10 +28,12 @@ public class MealsRepositoryImpl implements MealsRepository {
 
     private final MealsRemoteDatasource remote;
     private final FavoriteMealLocalDatasource favoriteDatasource;
+    private final PlannedMealLocalDatasource plannedDatasource;
 
     public MealsRepositoryImpl(Application application) {
         this.remote = new MealsRemoteDatasourceImpl();
         this.favoriteDatasource = new FavoriteMealLocalDatasource(application.getApplicationContext());
+        this.plannedDatasource = new PlannedMealLocalDatasource(application.getApplicationContext());
     }
 
     @Override
@@ -118,5 +122,30 @@ public class MealsRepositoryImpl implements MealsRepository {
     @Override
     public Completable addMealToFavorite(Meal meal) {
         return favoriteDatasource.insertFavoriteMeal(FavoriteMealEntityMapper.to(meal));
+    }
+
+    @Override
+    public Flowable<List<Meal>> getAllPlannedMeals() {
+        return plannedDatasource.getAllPlannedMeals().map(PlannedMealEntityMapper::fromList);
+    }
+
+    @Override
+    public Single<Meal> getPlannedById(String id) {
+        return plannedDatasource.getPlannedMealById(id).map(PlannedMealEntityMapper::from);
+    }
+
+    @Override
+    public Completable deletePlannedById(String id) {
+        return plannedDatasource.deletePlannedById(id);
+    }
+
+    @Override
+    public Completable addMealToPlanned(Meal meal) {
+        return plannedDatasource.insertPlannedMeal(PlannedMealEntityMapper.to(meal));
+    }
+
+    @Override
+    public Flowable<List<Meal>> getPlannedMealsByDate(String date) {
+        return plannedDatasource.getPlannedMealsByDate(date).map(PlannedMealEntityMapper::fromList);
     }
 }

@@ -1,5 +1,7 @@
 package com.tasneem.mealplanner.data.datasource.meals.model;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
 
 public class Meal {
@@ -9,6 +11,7 @@ public class Meal {
     private final String originCountry;
     private final String steps;
     private final String imageUrl;
+    @Nullable private String date;
     private String videoUrl;
     private String sourceUrl;
     private String lastEditTime;
@@ -34,6 +37,16 @@ public class Meal {
         this.originCountry = originCountry;
         this.steps = steps;
         this.imageUrl = imageUrl;
+    }
+
+    public Meal(String id, String name, String category, String originCountry, String steps, String imageUrl, @Nullable String date) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.originCountry = originCountry;
+        this.steps = steps;
+        this.imageUrl = imageUrl;
+        this.date = date;
     }
 
     public String getId() {
@@ -69,4 +82,13 @@ public class Meal {
     }
 
     public List<Ingredient> getIngredients() {return ingredients;}
+
+    @Nullable
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(@Nullable String date) {
+        this.date = date;
+    }
 }

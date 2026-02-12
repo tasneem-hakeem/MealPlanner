@@ -12,6 +12,7 @@ public interface MealDetailsView {
     void playVideo(String videoUrl);
     void showAddedToPlanMessage();
     void showAddToPlanError(String message);
+    void showDatePickerDialog(Meal meal);
     void updateFavoriteIcon(boolean isFavorite);
     void showAddedToFavoritesMessage();
     void showRemovedFromFavoritesMessage();
