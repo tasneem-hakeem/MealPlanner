@@ -1,8 +1,8 @@
-package com.tasneem.mealplanner.data.datasource.meals.favorites.local.datasource;
+package com.tasneem.mealplanner.data.datasource.favoritemeals.local.datasource;
 
 import android.content.Context;
 
-import com.tasneem.mealplanner.data.datasource.meals.favorites.local.dao.FavoriteMealDao;
+import com.tasneem.mealplanner.data.datasource.favoritemeals.local.dao.FavoriteMealDao;
 import com.tasneem.mealplanner.data.db.AppDatabase;
 import com.tasneem.mealplanner.data.db.entity.FavoriteMeal;
 

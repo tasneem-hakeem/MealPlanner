@@ -1,4 +1,4 @@
-package com.tasneem.mealplanner.data.datasource.meals.favorites.local.dao;
+package com.tasneem.mealplanner.data.datasource.favoritemeals.local.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

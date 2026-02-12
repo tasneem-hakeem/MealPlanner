@@ -1,4 +1,4 @@
-package com.tasneem.mealplanner.data.datasource.meals.favorites.mappers;
+package com.tasneem.mealplanner.data.datasource.favoritemeals.mappers;
 
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.data.db.entity.FavoriteMeal;

@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.tasneem.mealplanner.data.datasource.meals.favorites.local.dao.FavoriteMealDao;
+import com.tasneem.mealplanner.data.datasource.favoritemeals.local.dao.FavoriteMealDao;
 import com.tasneem.mealplanner.data.db.converter.IngredientConverter;
 import com.tasneem.mealplanner.data.db.entity.FavoriteMeal;
 
