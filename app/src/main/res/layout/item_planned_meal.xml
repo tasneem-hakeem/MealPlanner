@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mealCard"
+    style="@style/Widget.MealPlanner.Card.Meal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Meal Image -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/mealImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.MealPlanner.MediumComponent"
+            tools:src="@drawable/img_placeholder" />
+
+        <!-- Meal Name -->
+        <TextView
+            android:id="@+id/mealName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.MealPlanner.TitleMedium"
+            android:textColor="@color/text_primary"
+            app:layout_constraintEnd_toStartOf="@id/deleteButton"
+            app:layout_constraintStart_toEndOf="@id/mealImage"
+            app:layout_constraintTop_toTopOf="@id/mealImage"
+            tools:text="Spaghetti Carbonara" />
+
+        <!-- Category Chip -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/mealCategory"
+            style="@style/Widget.MealPlanner.Chip.Info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            app:chipIconVisible="false"
+            app:chipMinHeight="28dp"
+            app:layout_constraintStart_toEndOf="@id/mealImage"
+            app:layout_constraintTop_toBottomOf="@id/mealName"
+            tools:text="Pasta" />
+
+        <!-- Country -->
+        <TextView
+            android:id="@+id/mealCountry"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.MealPlanner.Caption"
+            android:textColor="@color/text_tertiary"
+            app:drawableStartCompat="@drawable/ic_ingredient"
+            app:drawableTint="@color/text_tertiary"
+            app:layout_constraintBottom_toBottomOf="@id/mealCategory"
+            app:layout_constraintStart_toEndOf="@id/mealCategory"
+            app:layout_constraintTop_toTopOf="@id/mealCategory"
+            tools:text="ITALIAN" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/deleteButton"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:contentDescription="@string/remove_from_favorite"
+            android:src="@drawable/ic_delete"
+            app:backgroundTint="@color/surface"
+            app:elevation="4dp"
+            app:fabCustomSize="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/favorite" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

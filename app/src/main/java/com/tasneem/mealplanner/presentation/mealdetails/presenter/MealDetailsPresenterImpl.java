@@ -144,7 +144,17 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
     }
 
     @Override
-    public void onAddToPlanClicked() {
-        // TODO: handle add to plan
+    public void onAddToPlanClicked(Meal meal, String selectedDate) {
+        meal.setDate(selectedDate);
+
+        disposables.add(
+                repository.addMealToPlanned(meal)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                () -> view.showAddedToPlanMessage(),
+                                error -> view.showAddToPlanError(error.getMessage())
+                        )
+        );
     }
 }

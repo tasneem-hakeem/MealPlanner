@@ -2,6 +2,7 @@ package com.tasneem.mealplanner.presentation.mealdetails.view;
 
 import static android.view.View.GONE;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +27,10 @@ import com.tasneem.mealplanner.presentation.mealdetails.presenter.MealDetailsPre
 import com.tasneem.mealplanner.presentation.utils.GetFlagsUtil;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -131,21 +136,11 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
         binding.tvIngredientsCount.append(" " + ingredientLiteral);
         binding.tvSteps.setText(meal.getSteps());
 
-        GlideUtil.loadImage(
-                binding.getRoot(),
-                meal.getImageUrl(),
-                binding.ivMealImage
-        );
+        GlideUtil.loadImage(binding.getRoot(), meal.getImageUrl(), binding.ivMealImage);
+        GlideUtil.loadImage(binding.getRoot(), meal.getImageUrl(), binding.ivVideoThumbnail);
 
-        GlideUtil.loadImage(
-                binding.getRoot(),
-                meal.getImageUrl(),
-                binding.ivVideoThumbnail
-        );
-
-        binding.btnAddToPlan.setOnClickListener(v -> presenter.onAddToPlanClicked());
+        binding.btnAddToPlan.setOnClickListener(v -> showDatePickerDialog(currentMeal));
         binding.btnBack.setOnClickListener(v -> navigateBack());
-
         binding.btnFavorite.setOnClickListener(v -> {
             if (currentMeal != null) {
                 presenter.onFavoriteClicked(currentMeal);
@@ -223,12 +218,46 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
 
     @Override
     public void showAddedToPlanMessage() {
-        // TODO: show added to plan message
+        Snackbar.make(binding.getRoot(), R.string.meal_added_to_planner, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void showAddToPlanError(String message) {
-        // TODO: show add to plan error
+        Snackbar.make(binding.getRoot(), R.string.add_to_planner_failed, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showDatePickerDialog(Meal meal) {
+        Calendar calendar = Calendar.getInstance();
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                requireContext(),
+                (view, year, month, dayOfMonth) -> {
+                    Calendar selectedDate = Calendar.getInstance();
+                    selectedDate.set(year, month, dayOfMonth);
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    String formattedDate = dateFormat.format(selectedDate.getTime());
+
+                    Meal plannedMeal = new Meal(
+                            meal.getId(),
+                            meal.getName(),
+                            meal.getCategory(),
+                            meal.getOriginCountry(),
+                            meal.getSteps(),
+                            meal.getImageUrl()
+                    );
+
+                    presenter.onAddToPlanClicked(plannedMeal, formattedDate);
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
+        datePickerDialog.show();
     }
 
     @Override
