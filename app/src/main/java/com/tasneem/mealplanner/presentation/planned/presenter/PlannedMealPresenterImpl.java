@@ -1,11 +1,10 @@
 package com.tasneem.mealplanner.presentation.planned.presenter;
+
 import android.util.Log;
 
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepository;
 import com.tasneem.mealplanner.presentation.planned.view.PlannedMealView;
-
-import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -15,18 +14,31 @@ public class PlannedMealPresenterImpl implements PlannedMealPresenter {
 
     private static final String TAG = "PlannedMealPresenter";
 
-    private final PlannedMealView view;
+    private PlannedMealView view;
     private final MealsRepository repository;
     private final CompositeDisposable compositeDisposable;
 
-    public PlannedMealPresenterImpl(PlannedMealView view, MealsRepository repository) {
-        this.view = view;
+    public PlannedMealPresenterImpl(MealsRepository repository) {
         this.repository = repository;
         this.compositeDisposable = new CompositeDisposable();
+        Log.d("TAG", "PlannedMealPresenterImpl: ");
+    }
+
+    @Override
+    public void attachView(PlannedMealView view) {
+        this.view = view;
+    }
+
+    @Override
+    public void detachView() {
+        this.view = null;
+        compositeDisposable.clear();
     }
 
     @Override
     public void loadMealsForDate(String date) {
+        if (view == null) return;
+
         Log.d(TAG, "loadMealsForDate: " + date);
         view.showLoading();
 
@@ -61,6 +73,8 @@ public class PlannedMealPresenterImpl implements PlannedMealPresenter {
 
     @Override
     public void deleteMeal(String mealId) {
+        if (view == null) return;
+
         Log.d(TAG, "deleteMeal: " + mealId);
         compositeDisposable.add(
                 repository.deletePlannedById(mealId)
@@ -77,11 +91,5 @@ public class PlannedMealPresenterImpl implements PlannedMealPresenter {
                                 }
                         )
         );
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.d(TAG, "onDestroy - clearing disposables");
-        compositeDisposable.clear();
     }
 }

@@ -6,21 +6,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
-import com.google.android.material.card.MaterialCardView;
-import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepositoryImpl;
+import com.tasneem.mealplanner.databinding.FragmentPlannerBinding;
 import com.tasneem.mealplanner.presentation.planned.presenter.PlannedMealPresenter;
 import com.tasneem.mealplanner.presentation.planned.presenter.PlannedMealPresenterImpl;
 
@@ -33,12 +29,7 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
 
     private PlannedMealPresenter presenter;
     private PlannedMealsAdapter adapter;
-
-    private com.applandeo.materialcalendarview.CalendarView calendarView;
-    private RecyclerView mealsRecyclerView;
-    private ProgressBar progressBar;
-    private MaterialCardView emptyStateCard;
-    private TextView emptyStateText;
+    private FragmentPlannerBinding binding;
 
     private String selectedDate;
     private SimpleDateFormat dateFormat;
@@ -46,51 +37,44 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_planner, container, false);
-
-        initViews(view);
-        initPresenter();
-        initRecyclerView();
-        initCalendar();
-
-        return view;
+        binding = FragmentPlannerBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
-    private void initViews(View view) {
-        calendarView = view.findViewById(R.id.calendarView);
-        mealsRecyclerView = view.findViewById(R.id.mealsRecyclerView);
-        progressBar = view.findViewById(R.id.progressBar);
-        emptyStateCard = view.findViewById(R.id.emptyStateCard);
-        emptyStateText = view.findViewById(R.id.emptyStateText);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        initPresenter();
+        presenter.attachView(this);
+        initRecyclerView();
+        initCalendar();
     }
 
     private void initPresenter() {
-        presenter = new PlannedMealPresenterImpl(this, new MealsRepositoryImpl(requireActivity().getApplication()));
+        presenter = new PlannedMealPresenterImpl(new MealsRepositoryImpl(requireActivity().getApplication()));
     }
 
     private void initRecyclerView() {
         adapter = new PlannedMealsAdapter(this);
-        mealsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mealsRecyclerView.setAdapter(adapter);
+        binding.mealsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.mealsRecyclerView.setAdapter(adapter);
     }
 
     private void initCalendar() {
-        // Set today's date as selected
         Calendar today = Calendar.getInstance();
         try {
-            calendarView.setDate(today);
+            binding.calendarView.setDate(today);
         } catch (OutOfDateRangeException e) {
             Log.d("Calendar", "Invalid date selected");
         }
         selectedDate = dateFormat.format(today.getTime());
 
-        // Load meals for today
         presenter.loadMealsForDate(selectedDate);
 
-        // Set calendar click listener
-        calendarView.setOnDayClickListener(eventDay -> {
+        binding.calendarView.setOnDayClickListener(eventDay -> {
             Calendar clickedDay = eventDay.getCalendar();
             selectedDate = dateFormat.format(clickedDay.getTime());
             presenter.loadMealsForDate(selectedDate);
@@ -99,28 +83,28 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
 
     @Override
     public void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
-        mealsRecyclerView.setVisibility(View.GONE);
-        emptyStateCard.setVisibility(View.GONE);
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.mealsRecyclerView.setVisibility(View.GONE);
+        binding.emptyStateCard.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-        progressBar.setVisibility(View.GONE);
+        binding.progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showMeals(List<Meal> meals) {
-        mealsRecyclerView.setVisibility(View.VISIBLE);
-        emptyStateCard.setVisibility(View.GONE);
+        binding.mealsRecyclerView.setVisibility(View.VISIBLE);
+        binding.emptyStateCard.setVisibility(View.GONE);
         adapter.setMeals(meals);
     }
 
     @Override
     public void showEmptyState() {
-        mealsRecyclerView.setVisibility(View.GONE);
-        emptyStateCard.setVisibility(View.VISIBLE);
-        emptyStateText.setText("No meals planned for this day");
+        binding.mealsRecyclerView.setVisibility(View.GONE);
+        binding.emptyStateCard.setVisibility(View.VISIBLE);
+        binding.emptyStateText.setText("No meals planned for this day");
     }
 
     @Override
@@ -137,7 +121,6 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
     @Override
     public void onMealClick(Meal meal) {
         // Navigate to meal details
-        // You can implement navigation here
         Toast.makeText(getContext(), "Meal clicked: " + meal.getName(), Toast.LENGTH_SHORT).show();
     }
 
@@ -152,8 +135,11 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        presenter.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+        if (presenter != null) {
+            presenter.detachView();
+        }
     }
 }
