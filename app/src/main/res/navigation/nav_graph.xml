@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
     <fragment
@@ -71,5 +74,13 @@
         android:name="com.tasneem.mealplanner.presentation.planner.view.PlannerFragment"
         android:label="fragment_planner"
         tools:layout="@layout/fragment_planner" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.tasneem.mealplanner.presentation.profile.view.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
 </navigation>
