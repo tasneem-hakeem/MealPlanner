@@ -49,6 +49,23 @@
             app:tint="@color/text_primary"
             tools:visibility="visible" />
 
+        <TextView
+            android:id="@+id/tvBrowsingTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.MealPlanner.TitleLarge"
+            android:textColor="@color/text_primary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Breakfast"
+            tools:visibility="visible" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/searchInputLayout"
             style="@style/Widget.MealPlanner.TextInputLayout"

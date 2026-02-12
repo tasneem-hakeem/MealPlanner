@@ -54,7 +54,7 @@ public class SearchFragment extends Fragment implements SearchView {
     private final CompositeDisposable disposables = new CompositeDisposable();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -77,6 +77,7 @@ public class SearchFragment extends Fragment implements SearchView {
     private void setupRecyclerViews() {
         trendingAdapter = new TrendingIngredientsAdapter(ingredient -> {
             clearSearchInput();
+            setBrowsingTitle(ingredient.getName());
             switchToBrowsingMode();
             presenter.onIngredientClicked(ingredient.getName());
         });
@@ -87,6 +88,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
         categoriesAdapter = new CategoriesAdapter(category -> {
             clearSearchInput();
+            setBrowsingTitle(category.getName());
             switchToBrowsingMode();
             presenter.onCategoryClicked(category.getName());
         });
@@ -97,6 +99,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
         areasAdapter = new AreasAdapter(area -> {
             clearSearchInput();
+            setBrowsingTitle(area.getName());
             switchToBrowsingMode();
             presenter.onAreaClicked(area.getName());
         });
@@ -144,6 +147,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
     private void setupBackButton() {
         binding.btnBack.setOnClickListener(v -> {
+            clearBrowsingTitle();
             switchToDefaultMode();
             presenter.clearSearch();
         });
@@ -161,6 +165,14 @@ public class SearchFragment extends Fragment implements SearchView {
 
     private void clearSearchInput() {
         binding.searchEditText.setText("");
+    }
+
+    private void setBrowsingTitle(String title) {
+        binding.tvBrowsingTitle.setText(title);
+    }
+
+    private void clearBrowsingTitle() {
+        binding.tvBrowsingTitle.setText("");
     }
 
     private void loadInitialData() {
@@ -184,6 +196,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
             binding.searchInputLayout.setVisibility(View.VISIBLE);
             binding.btnBack.setVisibility(View.GONE);
+            binding.tvBrowsingTitle.setVisibility(View.GONE);
         }
     }
 
@@ -203,7 +216,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
         binding.searchInputLayout.setVisibility(View.GONE);
         binding.btnBack.setVisibility(View.VISIBLE);
-
+        binding.tvBrowsingTitle.setVisibility(View.VISIBLE);
     }
 
     private void switchToDefaultMode() {
@@ -223,6 +236,7 @@ public class SearchFragment extends Fragment implements SearchView {
 
             binding.searchInputLayout.setVisibility(View.VISIBLE);
             binding.btnBack.setVisibility(View.GONE);
+            binding.tvBrowsingTitle.setVisibility(View.GONE);
         }
     }
 
