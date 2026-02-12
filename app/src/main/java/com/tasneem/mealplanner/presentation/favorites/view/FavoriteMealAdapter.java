@@ -8,14 +8,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.databinding.ItemFavoriteMealBinding;
+import com.tasneem.mealplanner.presentation.home.view.OnMealClickListener;
+import com.tasneem.mealplanner.presentation.utils.GetFlagsUtil;
+import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteMealAdapter extends RecyclerView.Adapter<FavoriteMealAdapter.FavoriteMealViewHolder> {
     private List<Meal> meals = new ArrayList<>();
+    private final OnMealClickListener listener;
 
-    public FavoriteMealAdapter() {
+    public FavoriteMealAdapter(OnMealClickListener listener) {
+        this.listener = listener;
     }
 
     public void setMeals(List<Meal> meals) {
@@ -57,6 +62,13 @@ public class FavoriteMealAdapter extends RecyclerView.Adapter<FavoriteMealAdapte
             binding.tvFavoriteMealTitle.setText(meal.getName());
             binding.tvFavCategory.setText(meal.getCategory());
             binding.tvFavCountry.setText(meal.getOriginCountry());
+            GlideUtil.loadImage(binding.getRoot(), GetFlagsUtil.getFlagUrl(meal.getOriginCountry()), binding.ivCountryIcon);
+            GlideUtil.loadImage(binding.getRoot(), meal.getImageUrl(), binding.ivRecipeImage);
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onMealClicked(meal.getId());
+                }
+            });
         }
     }
 }

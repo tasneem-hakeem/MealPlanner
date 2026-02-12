@@ -38,7 +38,7 @@
     <string name="hi_user">Welcome\n%1$s</string>
     <string name="meal_image">Meal Image</string>
     <string name="you_may_try">You May Try...</string>
-    <string name="hello_breakfast">Hello, Breakfast! 🥞</string>
+    <string name="hello_breakfast">Breakfast!</string>
     <string name="back_button">Back Button</string>
     <string name="time_icon">Time Icon</string>
     <string name="video_thumbnail">Video Thumbnail</string>
@@ -59,4 +59,13 @@
     <string name="meal_removed_from_favorites_successfully">Meal removed from favorites successfully</string>
     <string name="meal_added_to_favorites_successfully">Meal added to favorites successfully!</string>
     <string name="healthy_and_tasty">Healthy and Tasty</string>
+    <string name="error_load_trending_ingredients">Failed to load trending ingredients</string>
+    <string name="error_load_categories">Failed to load categories</string>
+    <string name="error_load_areas">Failed to load areas</string>
+    <string name="error_search_failed">Search failed</string>
+    <string name="error_load_meals_category">Failed to load meals for category</string>
+    <string name="error_load_meals_ingredient">Failed to load meals for ingredient</string>
+    <string name="error_load_meals_area">Failed to load meals for area</string>
+    <string name="search_error">"Search error: "</string>
+    <string name="no_meals_found">No meals found</string>
 </resources>

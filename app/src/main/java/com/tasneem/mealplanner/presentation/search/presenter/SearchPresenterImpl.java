@@ -1,5 +1,6 @@
 package com.tasneem.mealplanner.presentation.search.presenter;
 
+import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.meals.model.Area;
 import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
 import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepository;
@@ -58,7 +59,10 @@ public class SearchPresenterImpl implements SearchPresenter {
                                 },
                                 error -> {
                                     if (view != null) {
-                                        view.showError("Failed to load trending ingredients: " + error.getMessage());
+                                        view.showError(
+                                                R.string.error_load_trending_ingredients,
+                                                error.getMessage()
+                                        );
                                     }
                                 }
                         )
@@ -78,7 +82,10 @@ public class SearchPresenterImpl implements SearchPresenter {
                                 },
                                 error -> {
                                     if (view != null) {
-                                        view.showError("Failed to load categories: " + error.getMessage());
+                                        view.showError(
+                                                R.string.error_load_categories,
+                                                error.getMessage()
+                                        );
                                     }
                                 }
                         )
@@ -99,7 +106,10 @@ public class SearchPresenterImpl implements SearchPresenter {
                                 },
                                 error -> {
                                     if (view != null) {
-                                        view.showError("Failed to load areas: " + error.getMessage());
+                                        view.showError(
+                                                R.string.error_load_areas,
+                                                error.getMessage()
+                                        );
                                     }
                                 }
                         )
@@ -147,7 +157,10 @@ public class SearchPresenterImpl implements SearchPresenter {
                                 },
                                 error -> {
                                     if (view != null) {
-                                        view.showError("Search failed: " + error.getMessage());
+                                        view.showError(
+                                                R.string.error_search_failed,
+                                                error.getMessage()
+                                        );
                                     }
                                 }
                         )
@@ -185,7 +198,10 @@ public class SearchPresenterImpl implements SearchPresenter {
                                 },
                                 error -> {
                                     if (view != null) {
-                                        view.showError("Failed to load meals for category: " + error.getMessage());
+                                        view.showError(
+                                                R.string.error_load_meals_category,
+                                                error.getMessage()
+                                        );
                                     }
                                 }
                         )
@@ -223,7 +239,10 @@ public class SearchPresenterImpl implements SearchPresenter {
                                 },
                                 error -> {
                                     if (view != null) {
-                                        view.showError("Failed to load meals for ingredient: " + error.getMessage());
+                                        view.showError(
+                                                R.string.error_load_meals_ingredient,
+                                                error.getMessage()
+                                        );
                                     }
                                 }
                         )
@@ -261,7 +280,10 @@ public class SearchPresenterImpl implements SearchPresenter {
                                 },
                                 error -> {
                                     if (view != null) {
-                                        view.showError("Failed to load meals for area: " + error.getMessage());
+                                        view.showError(
+                                                R.string.error_load_meals_area,
+                                                error.getMessage()
+                                        );
                                     }
                                 }
                         )

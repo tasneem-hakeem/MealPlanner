@@ -63,14 +63,12 @@ public class AreasAdapter extends RecyclerView.Adapter<AreasAdapter.ViewHolder> 
         void bind(Area area) {
             binding.areaName.setText(area.getName());
 
-            // Load area flag using Glide
             GlideUtil.loadImage(
                     binding.getRoot(),
                     area.getFlagUrl(),
                     binding.areaFlag
             );
 
-            // Set click listener
             binding.getRoot().setOnClickListener(v -> listener.onAreaClick(area));
         }
     }

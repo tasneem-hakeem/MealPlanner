@@ -1,5 +1,7 @@
 package com.tasneem.mealplanner.presentation.search.view;
 
+import androidx.annotation.StringRes;
+
 import com.tasneem.mealplanner.data.datasource.meals.model.Area;
 import com.tasneem.mealplanner.data.datasource.meals.model.Category;
 import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
@@ -23,7 +25,7 @@ public interface SearchView {
 
     void hideLoading();
 
-    void showError(String message);
+    void showError(@StringRes int messageResId, String errorDetails);
 
     void navigateToMealDetails(String mealId);
 }

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.databinding.ItemFavoriteMealBinding;
 import com.tasneem.mealplanner.databinding.ItemSearchResultBinding;
 import com.tasneem.mealplanner.presentation.utils.GetFlagsUtil;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
@@ -40,7 +41,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemSearchResultBinding binding = ItemSearchResultBinding.inflate(
+        ItemFavoriteMealBinding binding = ItemFavoriteMealBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
@@ -59,21 +60,22 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private final ItemSearchResultBinding binding;
+        private final ItemFavoriteMealBinding binding;
 
-        ViewHolder(ItemSearchResultBinding binding) {
+        ViewHolder(ItemFavoriteMealBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
         void bind(Meal meal) {
-            binding.mealName.setText(meal.getName());
-            binding.mealCategory.setText(meal.getCategory());
+            binding.tvFavoriteMealTitle.setText(meal.getName());
+            binding.tvFavCategory.setText(meal.getCategory());
+            binding.tvFavCountry.setText(meal.getOriginCountry());
 
             GlideUtil.loadImage(
                     binding.getRoot(),
                     meal.getImageUrl(),
-                    binding.mealImage
+                    binding.ivRecipeImage
             );
 
             GlideUtil.loadImage(

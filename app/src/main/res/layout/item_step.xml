@@ -6,14 +6,12 @@
     android:orientation="horizontal"
     android:paddingBottom="24dp">
 
-    <!-- Step Number Column -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="top"
         android:orientation="vertical">
 
-        <!-- Step Number -->
         <TextView
             android:id="@+id/tvStepNumber"
             android:layout_width="24dp"
@@ -24,7 +22,6 @@
             android:textColor="@color/white"
             tools:text="1" />
 
-        <!-- Connector Line -->
         <View
             android:id="@+id/viewConnectorLine"
             android:layout_width="2dp"
@@ -38,7 +35,6 @@
 
     </LinearLayout>
 
-    <!-- Step Content -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -46,7 +42,6 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <!-- Step Title -->
         <TextView
             android:id="@+id/tvStepTitle"
             android:layout_width="match_parent"
@@ -56,7 +51,6 @@
             android:textColor="@color/text_primary"
             tools:text="Prep the oranges" />
 
-        <!-- Step Description -->
         <TextView
             android:id="@+id/tvStepDescription"
             android:layout_width="match_parent"

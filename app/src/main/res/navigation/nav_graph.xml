@@ -50,7 +50,11 @@
         android:id="@+id/favoritesFragment"
         android:name="com.tasneem.mealplanner.presentation.favorites.view.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"
