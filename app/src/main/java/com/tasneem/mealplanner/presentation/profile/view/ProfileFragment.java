@@ -33,7 +33,7 @@ public class ProfileFragment extends Fragment implements ProfileView {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentProfileBinding.bind(view);
 
-        presenter = new ProfilePresenterImpl(requireActivity().getApplication());
+        presenter = new ProfilePresenterImpl();
 
         presenter.loadUserProfile();
 

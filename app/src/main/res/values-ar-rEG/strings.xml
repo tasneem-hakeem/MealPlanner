@@ -73,13 +73,4 @@
     <string name="search_error">خطأ في البحث: </string>
     <string name="no_meals_found">لا يوجد وجبات الان</string>
     <string name="meal_added_to_planner">Meal Added To Planner</string>
-    <string name="error_load_trending_ingredients">Failed to load trending ingredients</string>
-    <string name="error_load_categories">Failed to load categories</string>
-    <string name="error_load_areas">Failed to load areas</string>
-    <string name="error_search_failed">Search failed</string>
-    <string name="error_load_meals_category">Failed to load meals for category</string>
-    <string name="error_load_meals_ingredient">Failed to load meals for ingredient</string>
-    <string name="error_load_meals_area">Failed to load meals for area</string>
-    <string name="search_error">"Search error: "</string>
-    <string name="no_meals_found">No meals found</string>
 </resources>
