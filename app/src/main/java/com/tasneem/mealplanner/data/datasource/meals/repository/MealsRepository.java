@@ -48,4 +48,6 @@ public interface MealsRepository {
     Completable deletePlannedById(String id);
 
     Completable addMealToPlanned(Meal meal);
+
+    Flowable<List<Meal>> getPlannedMealsByDate(String date);
 }

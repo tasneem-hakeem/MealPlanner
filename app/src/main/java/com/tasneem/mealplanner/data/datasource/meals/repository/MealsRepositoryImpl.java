@@ -143,4 +143,9 @@ public class MealsRepositoryImpl implements MealsRepository {
     public Completable addMealToPlanned(Meal meal) {
         return plannedDatasource.insertPlannedMeal(PlannedMealEntityMapper.to(meal));
     }
+
+    @Override
+    public Flowable<List<Meal>> getPlannedMealsByDate(String date) {
+        return plannedDatasource.getPlannedMealsByDate(date).map(PlannedMealEntityMapper::fromList);
+    }
 }

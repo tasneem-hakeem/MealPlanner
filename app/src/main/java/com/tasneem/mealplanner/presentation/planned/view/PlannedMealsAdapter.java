@@ -1,11 +1,17 @@
 package com.tasneem.mealplanner.presentation.planned.view;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.card.MaterialCardView;
+import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
 import com.tasneem.mealplanner.databinding.ItemPlannedMealBinding;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
@@ -15,38 +21,34 @@ import java.util.List;
 
 public class PlannedMealsAdapter extends RecyclerView.Adapter<PlannedMealsAdapter.MealViewHolder> {
 
-    private List<Meal> meals;
-    private final OnMealDeleteListener deleteListener;
+    private List<Meal> meals = new ArrayList<>();
+    private OnMealClickListener listener;
 
-    public interface OnMealDeleteListener {
-        void onDeleteMeal(Meal meal);
+    public interface OnMealClickListener {
+        void onMealClick(Meal meal);
+        void onDeleteClick(Meal meal);
     }
 
-    public PlannedMealsAdapter(OnMealDeleteListener deleteListener) {
-        this.meals = new ArrayList<>();
-        this.deleteListener = deleteListener;
+    public PlannedMealsAdapter(OnMealClickListener listener) {
+        this.listener = listener;
     }
 
-    public void updateMeals(List<Meal> newMeals) {
-        this.meals = newMeals;
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public MealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemPlannedMealBinding binding = ItemPlannedMealBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false
-        );
-        return new MealViewHolder(binding);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_planned_meal, parent, false);
+        return new MealViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MealViewHolder holder, int position) {
-        Meal meal = meals.get(position);
-        holder.bind(meal);
+        holder.bind(meals.get(position));
     }
 
     @Override
@@ -55,36 +57,43 @@ public class PlannedMealsAdapter extends RecyclerView.Adapter<PlannedMealsAdapte
     }
 
     class MealViewHolder extends RecyclerView.ViewHolder {
+        private final MaterialCardView cardView;
+        private final ImageView mealImage;
+        private final TextView mealName;
+        private final TextView mealCategory;
+        private final TextView mealCountry;
+        private final ImageView deleteButton;
 
-        private final ItemPlannedMealBinding binding;
-
-        public MealViewHolder(@NonNull ItemPlannedMealBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        public MealViewHolder(@NonNull View itemView) {
+            super(itemView);
+            cardView = itemView.findViewById(R.id.mealCard);
+            mealImage = itemView.findViewById(R.id.mealImage);
+            mealName = itemView.findViewById(R.id.mealName);
+            mealCategory = itemView.findViewById(R.id.mealCategory);
+            mealCountry = itemView.findViewById(R.id.mealCountry);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
         }
 
         public void bind(Meal meal) {
-            binding.tvMealName.setText(meal.getName());
+            mealName.setText(meal.getName());
+            mealCategory.setText(meal.getCategory());
+            mealCountry.setText(meal.getOriginCountry());
 
             GlideUtil.loadImage(
                     itemView,
                     meal.getImageUrl(),
-                    binding.ivMealImage
+                    mealImage
             );
-
-            binding.tvMealTime.setText(meal.getCategory());
-
-            binding.tvMealServing.setText(meal.getOriginCountry());
-
-            binding.btnDeleteMeal.setOnClickListener(v -> {
-                if (deleteListener != null) {
-                    deleteListener.onDeleteMeal(meal);
+            cardView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onMealClick(meal);
                 }
             });
 
-            binding.mealCard.setOnClickListener(v -> {
-                // TODO: Navigate to meal details
-                // You can add a click listener interface similar to delete
+            deleteButton.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onDeleteClick(meal);
+                }
             });
         }
     }

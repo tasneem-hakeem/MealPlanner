@@ -1,198 +1,159 @@
 package com.tasneem.mealplanner.presentation.planned.view;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
+import com.google.android.material.card.MaterialCardView;
 import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
-import com.tasneem.mealplanner.databinding.FragmentPlannerBinding;
-import com.tasneem.mealplanner.databinding.ItemCalendarBinding;
+import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepositoryImpl;
 import com.tasneem.mealplanner.presentation.planned.presenter.PlannedMealPresenter;
 import com.tasneem.mealplanner.presentation.planned.presenter.PlannedMealPresenterImpl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
-public class PlannedMealFragment extends Fragment implements PlannedMealView {
+public class PlannedMealFragment extends Fragment implements PlannedMealView, PlannedMealsAdapter.OnMealClickListener {
 
-    private static final String TAG = "PlannedMealFragment";
-
-    private FragmentPlannerBinding binding;
     private PlannedMealPresenter presenter;
     private PlannedMealsAdapter adapter;
+
+    private com.applandeo.materialcalendarview.CalendarView calendarView;
+    private RecyclerView mealsRecyclerView;
+    private ProgressBar progressBar;
+    private MaterialCardView emptyStateCard;
+    private TextView emptyStateText;
+
+    private String selectedDate;
+    private SimpleDateFormat dateFormat;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentPlannerBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        View view = inflater.inflate(R.layout.fragment_planner, container, false);
+
+        initViews(view);
+        initPresenter();
+        initRecyclerView();
+        initCalendar();
+
+        return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initializePresenter();
-        presenter.attachView(this);
-        setupRecyclerView();
-        setupClickListeners();
-        setupCalendar();
-        presenter.loadPlannedMeals();
+    private void initViews(View view) {
+        calendarView = view.findViewById(R.id.calendarView);
+        mealsRecyclerView = view.findViewById(R.id.mealsRecyclerView);
+        progressBar = view.findViewById(R.id.progressBar);
+        emptyStateCard = view.findViewById(R.id.emptyStateCard);
+        emptyStateText = view.findViewById(R.id.emptyStateText);
+
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     }
 
-    private void initializePresenter() {
-        presenter = new PlannedMealPresenterImpl(requireActivity().getApplication());
+    private void initPresenter() {
+        presenter = new PlannedMealPresenterImpl(this, new MealsRepositoryImpl(requireActivity().getApplication()));
     }
 
-    private void setupRecyclerView() {
-        adapter = new PlannedMealsAdapter(meal -> presenter.deleteMeal(meal.getId()));
-        binding.rvPlannedMeals.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.rvPlannedMeals.setAdapter(adapter);
+    private void initRecyclerView() {
+        adapter = new PlannedMealsAdapter(this);
+        mealsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mealsRecyclerView.setAdapter(adapter);
     }
 
-    private void setupCalendar() {
-        List<PlannedMealPresenterImpl.CalendarDay> days = presenter.getCalendarDays();
-
-        Log.d(TAG, "Setting up calendar with " + days.size() + " days");
-
-        binding.calendarContainer.removeAllViews();
-
-        for (int i = 0; i < days.size(); i++) {
-            final int position = i;
-            PlannedMealPresenterImpl.CalendarDay day = days.get(i);
-
-            Log.d(TAG, "Adding day: " + day.dayName + " " + day.dayOfMonth + " selected: " + day.isSelected);
-
-            ItemCalendarBinding dayBinding = ItemCalendarBinding.inflate(
-                    LayoutInflater.from(requireContext()),
-                    binding.calendarContainer,
-                    false
-            );
-
-            dayBinding.tvDayName.setText(day.dayName);
-            dayBinding.tvDayNumber.setText(String.valueOf(day.dayOfMonth));
-
-            updateDayView(dayBinding, day.isSelected);
-
-            dayBinding.getRoot().setOnClickListener(v -> {
-                Log.d(TAG, "Day clicked: position " + position);
-                presenter.onDaySelected(position);
-            });
-
-            binding.calendarContainer.addView(dayBinding.getRoot());
+    private void initCalendar() {
+        // Set today's date as selected
+        Calendar today = Calendar.getInstance();
+        try {
+            calendarView.setDate(today);
+        } catch (OutOfDateRangeException e) {
+            Log.d("Calendar", "Invalid date selected");
         }
+        selectedDate = dateFormat.format(today.getTime());
 
-        Log.d(TAG, "Calendar setup complete. Container has " + binding.calendarContainer.getChildCount() + " children");
-    }
+        // Load meals for today
+        presenter.loadMealsForDate(selectedDate);
 
-    private void updateDayView(ItemCalendarBinding dayBinding, boolean isSelected) {
-        dayBinding.tvDayNumber.setSelected(isSelected);
-
-        if (isSelected) {
-            dayBinding.tvDayName.setTextColor(getResources().getColor(R.color.primary, null));
-            dayBinding.tvDayNumber.setTextColor(getResources().getColor(R.color.white, null));
-        } else {
-            dayBinding.tvDayName.setTextColor(getResources().getColor(R.color.text_tertiary, null));
-            dayBinding.tvDayNumber.setTextColor(getResources().getColor(R.color.text_primary, null));
-        }
-    }
-
-    private void setupClickListeners() {
-        binding.btnAddMeal.setOnClickListener(v -> presenter.onAddMealClicked());
-        binding.btnAddMealEmpty.setOnClickListener(v -> presenter.onAddMealClicked());
-    }
-
-    @Override
-    public void showPlannedMeals(List<Meal> meals) {
-        Log.d(TAG, "Showing " + meals.size() + " planned meals");
-        if (meals.isEmpty()) {
-            Log.d(TAG, "Meals list is empty!");
-        } else {
-            for (Meal meal : meals) {
-                Log.d(TAG, "Meal: " + meal.getName() + ", Date: " + meal.getDate());
-            }
-        }
-        adapter.updateMeals(meals);
+        // Set calendar click listener
+        calendarView.setOnDayClickListener(eventDay -> {
+            Calendar clickedDay = eventDay.getCalendar();
+            selectedDate = dateFormat.format(clickedDay.getTime());
+            presenter.loadMealsForDate(selectedDate);
+        });
     }
 
     @Override
     public void showLoading() {
-        binding.loadingLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        mealsRecyclerView.setVisibility(View.GONE);
+        emptyStateCard.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-        binding.loadingLayout.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
-    public void showError(String message) {
-        Log.e(TAG, "Error: " + message);
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+    public void showMeals(List<Meal> meals) {
+        mealsRecyclerView.setVisibility(View.VISIBLE);
+        emptyStateCard.setVisibility(View.GONE);
+        adapter.setMeals(meals);
     }
 
     @Override
     public void showEmptyState() {
-        Log.d(TAG, "Showing empty state");
-        binding.emptyStateLayout.setVisibility(View.VISIBLE);
-        binding.rvPlannedMeals.setVisibility(View.GONE);
+        mealsRecyclerView.setVisibility(View.GONE);
+        emptyStateCard.setVisibility(View.VISIBLE);
+        emptyStateText.setText("No meals planned for this day");
     }
 
     @Override
-    public void hideEmptyState() {
-        Log.d(TAG, "Hiding empty state");
-        binding.emptyStateLayout.setVisibility(View.GONE);
-        binding.rvPlannedMeals.setVisibility(View.VISIBLE);
+    public void showError(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void updateSelectedDate(String dateText) {
-        Log.d(TAG, "Update selected date: " + dateText);
-        binding.tvSelectedDate.setText(dateText);
+    public void showDeleteSuccess() {
+        Toast.makeText(getContext(), "Meal removed from plan", Toast.LENGTH_SHORT).show();
+        presenter.loadMealsForDate(selectedDate);
     }
 
     @Override
-    public void updateTotalCalories(int calories) {
-        binding.tvTotalCalories.setText(calories + " kcal");
+    public void onMealClick(Meal meal) {
+        // Navigate to meal details
+        // You can implement navigation here
+        Toast.makeText(getContext(), "Meal clicked: " + meal.getName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void showMealDeleted() {
-        Toast.makeText(requireContext(), "Meal deleted successfully", Toast.LENGTH_SHORT).show();
+    public void onDeleteClick(Meal meal) {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Remove Meal")
+                .setMessage("Remove " + meal.getName() + " from your plan?")
+                .setPositiveButton("Remove", (dialog, which) -> presenter.deleteMeal(meal.getId()))
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     @Override
-    public void navigateToAddMeal(String selectedDate) {
-        Toast.makeText(requireContext(), "Navigate to add meal for " + selectedDate, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void updateCalendarSelection(int position) {
-        Log.d(TAG, "Updating calendar selection to position: " + position);
-
-        for (int i = 0; i < binding.calendarContainer.getChildCount(); i++) {
-            View dayView = binding.calendarContainer.getChildAt(i);
-
-            ItemCalendarBinding dayBinding = ItemCalendarBinding.bind(dayView);
-
-            boolean isSelected = i == position;
-            updateDayView(dayBinding, isSelected);
-        }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (presenter != null) {
-            presenter.detachView();
-        }
-        binding = null;
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
     }
 }

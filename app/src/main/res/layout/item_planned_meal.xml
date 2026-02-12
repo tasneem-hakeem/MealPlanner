@@ -1,114 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mealCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    style="@style/Widget.MealPlanner.Card.Meal"
     android:layout_marginBottom="12dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="@color/card_stroke"
-    app:cardBackgroundColor="@color/surface">
+    app:cardElevation="2dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        android:gravity="center_vertical">
+        android:padding="12dp">
 
+        <!-- Meal Image -->
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivMealImage"
+            android:id="@+id/mealImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/RoundedImageView"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            app:shapeAppearance="@style/ShapeAppearance.MealPlanner.MediumComponent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_placeholder" />
 
-        <LinearLayout
+        <!-- Meal Name -->
+        <TextView
+            android:id="@+id/mealName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp">
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.MealPlanner.TitleMedium"
+            android:textColor="@color/text_primary"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@id/deleteButton"
+            app:layout_constraintStart_toEndOf="@id/mealImage"
+            app:layout_constraintTop_toTopOf="@id/mealImage"
+            tools:text="Spaghetti Carbonara" />
 
-            <TextView
-                android:id="@+id/tvMealName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Spinach-Mushroom Strata"
-                android:textColor="@color/text_primary"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:lineSpacingMultiplier="1.2" />
+        <!-- Category Chip -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/mealCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            style="@style/Widget.MealPlanner.Chip.Info"
+            app:chipMinHeight="28dp"
+            app:chipIconVisible="false"
+            app:layout_constraintStart_toEndOf="@id/mealImage"
+            app:layout_constraintTop_toBottomOf="@id/mealName"
+            tools:text="Pasta" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="6dp">
+        <!-- Country -->
+        <TextView
+            android:id="@+id/mealCountry"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MealPlanner.Caption"
+            android:textColor="@color/text_tertiary"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/ic_ingredient"
+            app:drawableTint="@color/text_tertiary"
+            app:layout_constraintStart_toEndOf="@id/mealCategory"
+            app:layout_constraintTop_toTopOf="@id/mealCategory"
+            app:layout_constraintBottom_toBottomOf="@id/mealCategory"
+            tools:text="ITALIAN" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginEnd="12dp">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/ic_clock"
-                        android:tint="@color/text_tertiary" />
-
-                    <TextView
-                        android:id="@+id/tvMealTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20 Mins"
-                        android:textColor="@color/text_tertiary"
-                        android:textSize="12sp"
-                        android:layout_marginStart="4dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/icon_knife_spoon"
-                        android:tint="@color/text_tertiary" />
-
-                    <TextView
-                        android:id="@+id/tvMealServing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3 Serving"
-                        android:textColor="@color/text_tertiary"
-                        android:textSize="12sp"
-                        android:layout_marginStart="4dp" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/btnDeleteMeal"
+        <!-- Delete Button -->
+        <ImageView
+            android:id="@+id/deleteButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_clock"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/text_tertiary"
+            android:src="@drawable/ic_ingredient"
             android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="Delete meal" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

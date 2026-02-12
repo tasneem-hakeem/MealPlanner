@@ -34,4 +34,8 @@ public class PlannedMealLocalDatasource {
     public Single<PlannedMeal> getPlannedMealById(String id) {
         return plannedMealDao.getPlannedMealById(id);
     }
+
+    public Flowable<List<PlannedMeal>> getPlannedMealsByDate(String date) {
+        return plannedMealDao.getMealsByDate(date);
+    }
 }

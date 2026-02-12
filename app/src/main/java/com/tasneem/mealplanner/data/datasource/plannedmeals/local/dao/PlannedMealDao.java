@@ -26,4 +26,7 @@ public interface PlannedMealDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable insertPlannedMeal(PlannedMeal meal);
+
+    @Query("SELECT * FROM planned_meals WHERE date = :date")
+    Flowable<List<PlannedMeal>> getMealsByDate(String date);
 }
