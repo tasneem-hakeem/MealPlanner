@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.databinding.ItemHomeMealBinding;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 

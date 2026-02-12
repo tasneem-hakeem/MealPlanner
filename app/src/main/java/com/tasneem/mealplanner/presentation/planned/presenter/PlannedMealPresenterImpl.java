@@ -2,7 +2,7 @@ package com.tasneem.mealplanner.presentation.planned.presenter;
 
 import android.util.Log;
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepository;
 import com.tasneem.mealplanner.presentation.planned.view.PlannedMealView;
 

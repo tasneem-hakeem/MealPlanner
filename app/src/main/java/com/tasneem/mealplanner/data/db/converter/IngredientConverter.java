@@ -4,7 +4,7 @@ import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
+import com.tasneem.mealplanner.data.datasource.model.Ingredient;
 
 import java.lang.reflect.Type;
 import java.util.List;

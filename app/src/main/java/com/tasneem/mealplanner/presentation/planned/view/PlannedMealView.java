@@ -1,7 +1,7 @@
 package com.tasneem.mealplanner.presentation.planned.view;
 
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 
 import java.util.List;
 

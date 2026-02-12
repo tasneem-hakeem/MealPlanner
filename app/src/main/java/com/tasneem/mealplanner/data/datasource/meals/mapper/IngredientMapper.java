@@ -1,6 +1,6 @@
 package com.tasneem.mealplanner.data.datasource.meals.mapper;
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
+import com.tasneem.mealplanner.data.datasource.model.Ingredient;
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.ingredient.IngredientDto;
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.meal.MealIngredientDto;
 

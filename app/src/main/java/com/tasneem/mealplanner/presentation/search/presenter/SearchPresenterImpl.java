@@ -1,8 +1,8 @@
 package com.tasneem.mealplanner.presentation.search.presenter;
 
 import com.tasneem.mealplanner.R;
-import com.tasneem.mealplanner.data.datasource.meals.model.Area;
-import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
+import com.tasneem.mealplanner.data.datasource.model.Area;
+import com.tasneem.mealplanner.data.datasource.model.Ingredient;
 import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepository;
 import com.tasneem.mealplanner.presentation.search.view.SearchView;
 import com.tasneem.mealplanner.presentation.utils.GetFlagsUtil;

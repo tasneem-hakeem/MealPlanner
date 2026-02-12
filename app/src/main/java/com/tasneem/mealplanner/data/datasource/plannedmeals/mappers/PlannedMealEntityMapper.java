@@ -1,6 +1,6 @@
 package com.tasneem.mealplanner.data.datasource.plannedmeals.mappers;
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.data.db.entity.PlannedMeal;
 
 import java.util.List;

@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.tasneem.mealplanner.R;
-import com.tasneem.mealplanner.data.datasource.meals.model.Area;
-import com.tasneem.mealplanner.data.datasource.meals.model.Category;
-import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Area;
+import com.tasneem.mealplanner.data.datasource.model.Category;
+import com.tasneem.mealplanner.data.datasource.model.Ingredient;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepositoryImpl;
 import com.tasneem.mealplanner.databinding.FragmentSearchBinding;
 import com.tasneem.mealplanner.presentation.search.presenter.SearchPresenter;

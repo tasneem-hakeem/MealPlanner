@@ -1,8 +1,8 @@
 package com.tasneem.mealplanner.data.datasource.meals.repository;
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Category;
-import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Category;
+import com.tasneem.mealplanner.data.datasource.model.Ingredient;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 
 import java.util.List;
 
@@ -14,8 +14,6 @@ public interface MealsRepository {
     Single<Meal> getRandomMeal();
 
     Single<List<Meal>> getMealsByName(String name);
-
-    Single<List<Meal>> getMealsByFirstLetter(char firstLetter);
 
     Single<Meal> getMealDetailsById(String id);
 
@@ -29,8 +27,6 @@ public interface MealsRepository {
 
     Single<List<Ingredient>> getAllIngredients();
 
-    Single<List<String>> getCategoriesList();
-
     Single<List<String>> getAreasList();
 
     Flowable<List<Meal>> getAllFavorites();
@@ -40,10 +36,6 @@ public interface MealsRepository {
     Completable deleteFavoriteById(String id);
 
     Completable addMealToFavorite(Meal meal);
-
-    Flowable<List<Meal>> getAllPlannedMeals();
-
-    Single<Meal> getPlannedById(String id);
 
     Completable deletePlannedById(String id);
 

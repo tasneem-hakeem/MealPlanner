@@ -1,6 +1,6 @@
 package com.tasneem.mealplanner.presentation.mealdetails.presenter;
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.presentation.mealdetails.view.MealDetailsView;
 
 public interface MealDetailsPresenter {

@@ -1,6 +1,6 @@
 package com.tasneem.mealplanner.data.datasource.meals.mapper;
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Category;
+import com.tasneem.mealplanner.data.datasource.model.Category;
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.category.CategoryDto;
 
 import java.util.ArrayList;

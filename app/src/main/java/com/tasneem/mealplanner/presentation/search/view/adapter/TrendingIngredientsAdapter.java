@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
 import com.tasneem.mealplanner.R;
-import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
+import com.tasneem.mealplanner.data.datasource.model.Ingredient;
 import com.tasneem.mealplanner.databinding.ItemChipTrendingBinding;
 
 import java.util.ArrayList;

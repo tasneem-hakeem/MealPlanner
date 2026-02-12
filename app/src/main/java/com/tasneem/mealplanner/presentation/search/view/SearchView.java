@@ -2,10 +2,10 @@ package com.tasneem.mealplanner.presentation.search.view;
 
 import androidx.annotation.StringRes;
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Area;
-import com.tasneem.mealplanner.data.datasource.meals.model.Category;
-import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Area;
+import com.tasneem.mealplanner.data.datasource.model.Category;
+import com.tasneem.mealplanner.data.datasource.model.Ingredient;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 
 import java.util.List;
 

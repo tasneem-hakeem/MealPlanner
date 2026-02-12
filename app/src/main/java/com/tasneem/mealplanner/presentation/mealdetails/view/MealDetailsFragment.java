@@ -20,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.tasneem.mealplanner.R;
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.databinding.FragmentMealDetailsBinding;
 import com.tasneem.mealplanner.presentation.mealdetails.presenter.MealDetailsPresenter;
 import com.tasneem.mealplanner.presentation.mealdetails.presenter.MealDetailsPresenterImpl;
@@ -28,7 +28,6 @@ import com.tasneem.mealplanner.presentation.utils.GetFlagsUtil;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.regex.Matcher;

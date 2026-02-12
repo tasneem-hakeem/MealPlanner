@@ -1,7 +1,7 @@
 package com.tasneem.mealplanner.data.datasource.meals.mapper;
 
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
-import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Ingredient;
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.meal.MealDto;
 
 import java.util.ArrayList;

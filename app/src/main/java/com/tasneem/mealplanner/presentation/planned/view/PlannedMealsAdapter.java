@@ -9,11 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.tasneem.mealplanner.R;
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
-import com.tasneem.mealplanner.databinding.ItemPlannedMealBinding;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.presentation.utils.GlideUtil;
 
 import java.util.ArrayList;

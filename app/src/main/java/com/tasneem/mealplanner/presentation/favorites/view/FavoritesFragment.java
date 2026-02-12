@@ -14,11 +14,10 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.tasneem.mealplanner.R;
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.databinding.FragmentFavoritesBinding;
 import com.tasneem.mealplanner.presentation.favorites.presenter.FavoriteMealPresenter;
 import com.tasneem.mealplanner.presentation.favorites.presenter.FavoriteMealPresenterImpl;
-import com.tasneem.mealplanner.presentation.home.view.HomeFragmentDirections;
 import com.tasneem.mealplanner.presentation.home.view.OnMealClickListener;
 
 import java.util.List;

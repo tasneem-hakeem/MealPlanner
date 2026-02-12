@@ -1,4 +1,4 @@
-package com.tasneem.mealplanner.data.datasource.meals.model;
+package com.tasneem.mealplanner.data.datasource.model;
 
 public class Area {
     private final String name;

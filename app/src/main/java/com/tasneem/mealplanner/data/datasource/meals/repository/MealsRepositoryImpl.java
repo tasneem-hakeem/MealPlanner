@@ -7,9 +7,9 @@ import com.tasneem.mealplanner.data.datasource.favoritemeals.mappers.FavoriteMea
 import com.tasneem.mealplanner.data.datasource.meals.mapper.CategoryMapper;
 import com.tasneem.mealplanner.data.datasource.meals.mapper.IngredientMapper;
 import com.tasneem.mealplanner.data.datasource.meals.mapper.MealsMapper;
-import com.tasneem.mealplanner.data.datasource.meals.model.Category;
-import com.tasneem.mealplanner.data.datasource.meals.model.Ingredient;
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Category;
+import com.tasneem.mealplanner.data.datasource.model.Ingredient;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.data.datasource.meals.remote.MealsRemoteDatasource;
 import com.tasneem.mealplanner.data.datasource.meals.remote.MealsRemoteDatasourceImpl;
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.areaslist.AreasDto;
@@ -49,12 +49,6 @@ public class MealsRepositoryImpl implements MealsRepository {
     }
 
     @Override
-    public Single<List<Meal>> getMealsByFirstLetter(char firstLetter) {
-        return remote.getMealsByFirstLetter(firstLetter)
-                .map(response -> MealsMapper.fromList(response.getMeals()));
-    }
-
-    @Override
     public Single<Meal> getMealDetailsById(String id) {
         return remote.getMealDetailsById(id)
                 .map(response -> MealsMapper.fromList(response.getMeals()).get(0));
@@ -89,14 +83,6 @@ public class MealsRepositoryImpl implements MealsRepository {
     }
 
     @Override
-    public Single<List<String>> getCategoriesList() {
-        return remote.getCategoriesList().map(response -> response.getCategories()
-                .stream()
-                .map(CategoriesDto::getCategoryName)
-                .collect(Collectors.toList()));
-    }
-
-    @Override
     public Single<List<String>> getAreasList() {
         return remote.getAreasList().map(response -> response.getAreas()
                 .stream()
@@ -122,16 +108,6 @@ public class MealsRepositoryImpl implements MealsRepository {
     @Override
     public Completable addMealToFavorite(Meal meal) {
         return favoriteDatasource.insertFavoriteMeal(FavoriteMealEntityMapper.to(meal));
-    }
-
-    @Override
-    public Flowable<List<Meal>> getAllPlannedMeals() {
-        return plannedDatasource.getAllPlannedMeals().map(PlannedMealEntityMapper::fromList);
-    }
-
-    @Override
-    public Single<Meal> getPlannedById(String id) {
-        return plannedDatasource.getPlannedMealById(id).map(PlannedMealEntityMapper::from);
     }
 
     @Override

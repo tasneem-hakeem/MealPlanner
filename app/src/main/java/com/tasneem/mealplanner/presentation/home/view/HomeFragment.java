@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.tasneem.mealplanner.R;
-import com.tasneem.mealplanner.data.datasource.meals.model.Meal;
+import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.databinding.FragmentHomeBinding;
 import com.tasneem.mealplanner.presentation.home.presenter.HomePresenter;
 import com.tasneem.mealplanner.presentation.home.presenter.HomePresenterImpl;
