@@ -3,7 +3,7 @@ package com.tasneem.mealplanner.presentation.planned.presenter;
 import android.util.Log;
 
 import com.tasneem.mealplanner.data.datasource.model.Meal;
-import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepository;
+import com.tasneem.mealplanner.data.datasource.repository.MealsRepository;
 import com.tasneem.mealplanner.presentation.planned.view.PlannedMealView;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;

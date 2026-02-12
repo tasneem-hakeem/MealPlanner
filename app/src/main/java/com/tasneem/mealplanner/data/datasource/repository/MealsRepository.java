@@ -1,4 +1,4 @@
-package com.tasneem.mealplanner.data.datasource.meals.repository;
+package com.tasneem.mealplanner.data.datasource.repository;
 
 import com.tasneem.mealplanner.data.datasource.model.Category;
 import com.tasneem.mealplanner.data.datasource.model.Ingredient;

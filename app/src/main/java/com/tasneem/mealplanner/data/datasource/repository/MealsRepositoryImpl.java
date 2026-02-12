@@ -1,4 +1,4 @@
-package com.tasneem.mealplanner.data.datasource.meals.repository;
+package com.tasneem.mealplanner.data.datasource.repository;
 
 import android.app.Application;
 
@@ -13,7 +13,6 @@ import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.data.datasource.meals.remote.MealsRemoteDatasource;
 import com.tasneem.mealplanner.data.datasource.meals.remote.MealsRemoteDatasourceImpl;
 import com.tasneem.mealplanner.data.datasource.meals.remote.dto.areaslist.AreasDto;
-import com.tasneem.mealplanner.data.datasource.meals.remote.dto.categorieslist.CategoriesDto;
 import com.tasneem.mealplanner.data.datasource.plannedmeals.local.datasource.PlannedMealLocalDatasource;
 import com.tasneem.mealplanner.data.datasource.plannedmeals.mappers.PlannedMealEntityMapper;
 

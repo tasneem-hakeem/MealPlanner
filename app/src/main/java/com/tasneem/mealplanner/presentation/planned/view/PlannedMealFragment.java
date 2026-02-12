@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.tasneem.mealplanner.data.datasource.model.Meal;
-import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepositoryImpl;
+import com.tasneem.mealplanner.data.datasource.repository.MealsRepositoryImpl;
 import com.tasneem.mealplanner.databinding.FragmentPlannerBinding;
 import com.tasneem.mealplanner.presentation.planned.presenter.PlannedMealPresenter;
 import com.tasneem.mealplanner.presentation.planned.presenter.PlannedMealPresenterImpl;

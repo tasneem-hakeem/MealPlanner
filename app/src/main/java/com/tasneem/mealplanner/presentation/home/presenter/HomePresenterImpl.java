@@ -7,8 +7,8 @@ import com.tasneem.mealplanner.data.datasource.auth.model.User;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepository;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepositoryImpl;
 import com.tasneem.mealplanner.data.datasource.model.Meal;
-import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepository;
-import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepositoryImpl;
+import com.tasneem.mealplanner.data.datasource.repository.MealsRepository;
+import com.tasneem.mealplanner.data.datasource.repository.MealsRepositoryImpl;
 import com.tasneem.mealplanner.presentation.home.view.HomeView;
 
 import java.util.ArrayList;

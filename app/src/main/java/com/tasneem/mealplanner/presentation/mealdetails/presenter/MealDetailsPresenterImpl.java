@@ -5,8 +5,8 @@ import android.content.Context;
 
 import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.model.Meal;
-import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepository;
-import com.tasneem.mealplanner.data.datasource.meals.repository.MealsRepositoryImpl;
+import com.tasneem.mealplanner.data.datasource.repository.MealsRepository;
+import com.tasneem.mealplanner.data.datasource.repository.MealsRepositoryImpl;
 import com.tasneem.mealplanner.presentation.mealdetails.view.MealDetailsView;
 
 import java.io.IOException;
