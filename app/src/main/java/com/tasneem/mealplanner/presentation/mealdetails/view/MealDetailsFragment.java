@@ -1,6 +1,7 @@
 package com.tasneem.mealplanner.presentation.mealdetails.view;
 
 import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -169,6 +170,15 @@ public class MealDetailsFragment extends Fragment implements MealDetailsView {
     @Override
     public void showFavoriteError(String message) {
         Snackbar.make(binding.getRoot(), message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoginLayout() {
+        binding.layoutNotLoggedIn.getRoot().setVisibility(VISIBLE);
+        binding.lottieView.setVisibility(GONE);
+        binding.contentContainer.setVisibility(GONE);
+        binding.layoutNotLoggedIn.btnSignIn.setOnClickListener(v -> NavHostFragment.findNavController(this)
+                .navigate(R.id.action_mealDetailsFragment_to_loginFragment));
     }
 
     @Override

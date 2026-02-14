@@ -10,4 +10,6 @@ public interface PlannedMealPresenter {
     void loadMealsForDate(String date);
 
     void deleteMeal(String mealId);
+
+    void checkUserLoggedIn();
 }

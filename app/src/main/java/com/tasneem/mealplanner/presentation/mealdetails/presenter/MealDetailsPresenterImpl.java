@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.tasneem.mealplanner.R;
+import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepository;
+import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepositoryImpl;
 import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.data.datasource.repository.MealsRepository;
 import com.tasneem.mealplanner.data.datasource.repository.MealsRepositoryImpl;
@@ -19,12 +21,14 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class MealDetailsPresenterImpl implements MealDetailsPresenter {
     private MealDetailsView view;
     private final MealsRepository repository;
+    private final AuthenticationRepository auth;
     private final CompositeDisposable disposables = new CompositeDisposable();
     private final Context context;
     private boolean isFavorite = false;
 
     public MealDetailsPresenterImpl(Application application) {
         repository = new MealsRepositoryImpl(application);
+        auth = new AuthenticationRepositoryImpl();
         this.context = application.getApplicationContext();
     }
 

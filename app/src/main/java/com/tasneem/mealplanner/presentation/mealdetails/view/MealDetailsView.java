@@ -17,4 +17,5 @@ public interface MealDetailsView {
     void showAddedToFavoritesMessage();
     void showRemovedFromFavoritesMessage();
     void showFavoriteError(String message);
+    void showLoginLayout();
 }

@@ -1,5 +1,8 @@
 package com.tasneem.mealplanner.presentation.planned.view;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,9 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
+import com.tasneem.mealplanner.R;
 import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.data.datasource.repository.MealsRepositoryImpl;
 import com.tasneem.mealplanner.databinding.FragmentPlannerBinding;
@@ -46,15 +51,14 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
         super.onViewCreated(view, savedInstanceState);
 
         dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-
         initPresenter();
         presenter.attachView(this);
-        initRecyclerView();
-        initCalendar();
+        presenter.checkUserLoggedIn();
     }
 
     private void initPresenter() {
         presenter = new PlannedMealPresenterImpl(new MealsRepositoryImpl(requireActivity().getApplication()));
+        presenter.checkUserLoggedIn();
     }
 
     private void initRecyclerView() {
@@ -94,6 +98,26 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
     }
 
     @Override
+    public void showLoginLayout() {
+        binding.layoutNotLoggedIn.getRoot().setVisibility(VISIBLE);
+        binding.layoutNotLoggedIn.btnSignIn.setOnClickListener(v -> NavHostFragment.findNavController(this)
+                .navigate(R.id.action_plannerFragment_to_loginFragment));
+        binding.appBarLayout.setVisibility(GONE);
+        binding.plannerContentContainer.setVisibility(GONE);
+    }
+
+    @Override
+    public void showPlannerContent() {
+        binding.layoutNotLoggedIn.getRoot().setVisibility(GONE);
+        binding.appBarLayout.setVisibility(VISIBLE);
+        binding.plannerContentContainer.setVisibility(VISIBLE);
+
+        initRecyclerView();
+        initCalendar();
+    }
+
+
+    @Override
     public void showMeals(List<Meal> meals) {
         binding.mealsRecyclerView.setVisibility(View.VISIBLE);
         binding.emptyStateCard.setVisibility(View.GONE);
@@ -114,14 +138,14 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
 
     @Override
     public void showDeleteSuccess() {
-        Toast.makeText(getContext(), "Meal removed from plan", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Meal removed from plan", Toast.LENGTH_SHORT).show();
         presenter.loadMealsForDate(selectedDate);
     }
 
     @Override
     public void onMealClick(Meal meal) {
         // Navigate to meal details
-        Toast.makeText(getContext(), "Meal clicked: " + meal.getName(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Meal clicked: " + meal.getName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

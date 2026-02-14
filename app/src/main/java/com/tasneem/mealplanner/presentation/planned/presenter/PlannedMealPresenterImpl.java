@@ -2,12 +2,15 @@ package com.tasneem.mealplanner.presentation.planned.presenter;
 
 import android.util.Log;
 
+import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepository;
+import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepositoryImpl;
 import com.tasneem.mealplanner.data.datasource.model.Meal;
 import com.tasneem.mealplanner.data.datasource.repository.MealsRepository;
 import com.tasneem.mealplanner.presentation.planned.view.PlannedMealView;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class PlannedMealPresenterImpl implements PlannedMealPresenter {
@@ -16,10 +19,12 @@ public class PlannedMealPresenterImpl implements PlannedMealPresenter {
 
     private PlannedMealView view;
     private final MealsRepository repository;
+    private final AuthenticationRepository auth;
     private final CompositeDisposable compositeDisposable;
 
     public PlannedMealPresenterImpl(MealsRepository repository) {
         this.repository = repository;
+        this.auth = new AuthenticationRepositoryImpl();
         this.compositeDisposable = new CompositeDisposable();
         Log.d("TAG", "PlannedMealPresenterImpl: ");
     }
@@ -92,4 +97,28 @@ public class PlannedMealPresenterImpl implements PlannedMealPresenter {
                         )
         );
     }
+
+    @Override
+    public void checkUserLoggedIn() {
+        if (view == null) return;
+
+        Disposable disposable = auth.isUserSignedIn()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        isSignedIn -> {
+                            Log.d(TAG, "User is " + isSignedIn);
+
+                            if (isSignedIn) {
+                                view.showPlannerContent();
+                            } else {
+                                view.showLoginLayout();
+                            }
+                        },
+                        throwable -> view.showError(throwable.getMessage())
+                );
+
+        compositeDisposable.add(disposable);
+    }
+
 }

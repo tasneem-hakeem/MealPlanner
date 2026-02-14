@@ -8,6 +8,8 @@ import java.util.List;
 public interface PlannedMealView {
     void showLoading();
     void hideLoading();
+    void showLoginLayout();
+    void showPlannerContent();
     void showMeals(List<Meal> meals);
     void showEmptyState();
     void showError(String message);

@@ -8,6 +8,17 @@
     android:background="@color/background">
 
     <include
+        android:id="@+id/layoutNotLoggedIn"
+        layout="@layout/layout_not_logged_in"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
         android:id="@+id/layoutNoInternet"
         layout="@layout/error_no_internet"
         android:layout_width="match_parent"
