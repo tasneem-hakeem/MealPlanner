@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.mealDetailsFragment ||
                     destination.getId() == R.id.loginFragment ||
-                    destination.getId() == R.id.registerFragment
+                    destination.getId() == R.id.registerFragment ||
+                    destination.getId() == R.id.splashFragment
             ) {
                 binding.bottomNavigationView.setVisibility(View.GONE);
             } else {

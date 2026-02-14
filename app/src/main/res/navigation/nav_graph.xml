@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -53,7 +53,7 @@
         android:id="@+id/favoritesFragment"
         android:name="com.tasneem.mealplanner.presentation.favorites.view.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" >
+        tools:layout="@layout/fragment_favorites">
         <action
             android:id="@+id/action_favoritesFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
@@ -66,7 +66,7 @@
         android:id="@+id/searchFragment"
         android:name="com.tasneem.mealplanner.presentation.search.view.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
@@ -80,10 +80,22 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.tasneem.mealplanner.presentation.profile.view.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.tasneem.mealplanner.presentation.splash.view.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment2_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
 </navigation>
