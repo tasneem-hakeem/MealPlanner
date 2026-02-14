@@ -62,6 +62,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
             String BASE_IMAGE_URL = "https://www.themealdb.com/images/ingredients/";
             String IMAGE_PREVIEW_SIZE = "-small.png";
             GlideUtil.loadImage(itemView,  BASE_IMAGE_URL + ingredient.getName() + IMAGE_PREVIEW_SIZE, binding.ivIngredientIcon);
+            GlideUtil.loadImage(itemView,  "https://www.themealdb.com/images/ingredients/" + ingredient.getName() + "-small.png", binding.ivIngredientIcon);
         }
     }
 }

@@ -6,5 +6,6 @@ public interface FavoriteMealPresenter {
     void attachView(FavoriteMealView view);
     void detachView();
     void onViewStarted();
+    void checkUserLoggedIn();
     void removeFromFavorite(String mealId);
 }

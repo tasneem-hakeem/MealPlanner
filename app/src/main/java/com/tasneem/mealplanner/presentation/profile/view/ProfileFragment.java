@@ -34,7 +34,7 @@ public class ProfileFragment extends Fragment implements ProfileView {
         binding = FragmentProfileBinding.bind(view);
 
         presenter = new ProfilePresenterImpl();
-
+        presenter.attachView(this);
         presenter.loadUserProfile();
 
         binding.btnLogout.setOnClickListener(v ->

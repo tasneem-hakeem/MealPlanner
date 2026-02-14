@@ -1,5 +1,6 @@
 package com.tasneem.mealplanner.presentation.favorites.view;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class FavoritesFragment extends Fragment implements FavoriteMealView, OnM
         presenter = new FavoriteMealPresenterImpl(requireActivity().getApplication());
         presenter.attachView(this);
         presenter.onViewStarted();
+        presenter.checkUserLoggedIn();
 
         adapter = new FavoriteMealAdapter(this);
         binding.rvFavoriteMeals.setAdapter(adapter);
@@ -55,6 +57,14 @@ public class FavoritesFragment extends Fragment implements FavoriteMealView, OnM
     @Override
     public void showError(String message) {
         binding.layoutSomethingWrong.getRoot().setVisibility(VISIBLE);
+    }
+
+    @Override
+    public void showLoginLayout() {
+        binding.layoutNotLoggedIn.getRoot().setVisibility(VISIBLE);
+        binding.layoutNotLoggedIn.btnSignIn.setOnClickListener(v -> NavHostFragment.findNavController(this)
+                .navigate(R.id.action_favoritesFragment_to_loginFragment));
+        binding.rvFavoriteMeals.setVisibility(GONE);
     }
 
     @Override

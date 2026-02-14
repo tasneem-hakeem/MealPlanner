@@ -56,7 +56,10 @@ public class LoginFragment extends Fragment implements LoginView {
         presenter.checkUserLoggedIn();
 
         setupPasswordToggle();
+
+        binding.txtViewGuest.setOnClickListener(v -> LoginFragment.this.navigateToHome(new User()));
     }
+
 
     private void setupPasswordToggle() {
         binding.tilPassword.setEndIconOnClickListener(v -> {

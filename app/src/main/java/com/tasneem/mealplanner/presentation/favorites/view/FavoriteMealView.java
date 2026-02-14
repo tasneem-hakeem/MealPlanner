@@ -9,5 +9,7 @@ public interface FavoriteMealView {
 
     void showError(String message);
 
+    void showLoginLayout();
+
     void onRemoveFromFavClicked(String mealId);
 }

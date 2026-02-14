@@ -1,5 +1,7 @@
 package com.tasneem.mealplanner.presentation.profile.presenter;
 
+import android.util.Log;
+
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepository;
 import com.tasneem.mealplanner.data.datasource.auth.repository.AuthenticationRepositoryImpl;
 import com.tasneem.mealplanner.presentation.profile.view.ProfileView;
@@ -24,6 +26,9 @@ public class ProfilePresenterImpl implements ProfilePresenter {
                         .subscribe(user -> {
                             if (user != null) {
                                 view.showUserData(user);
+                                Log.d("ProfilePresenterImpl", "User data: " + user);
+                            } else {
+                                view.showError("User data is null");
                             }
                         }, throwable -> view.showError(throwable.getMessage()))
         );
@@ -35,7 +40,10 @@ public class ProfilePresenterImpl implements ProfilePresenter {
         disposables.add(
                 authRepository.signOut()
                         .subscribe(
-                                () -> view.navigateToLogin(),
+                                () -> {
+                                    authRepository.signOut();
+                                    view.navigateToLogin();
+                                },
                                 throwable -> view.showError(throwable.getMessage())
                         )
         );

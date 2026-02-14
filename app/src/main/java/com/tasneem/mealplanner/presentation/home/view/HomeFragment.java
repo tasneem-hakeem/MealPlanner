@@ -46,9 +46,7 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
         setUpRecyclers();
 
-        binding.profileImage.setOnClickListener(v ->
-                NavHostFragment.findNavController(this)
-                        .navigate(R.id.action_homeFragment_to_profileFragment)
+          binding.profileImage.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.action_homeFragment_to_profileFragment)
         );
     }
 
