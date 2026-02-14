@@ -49,7 +49,7 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
         if (view == null) return;
 
         loadMealDetails(mealId);
-        checkIfMealIsFavorite(mealId);
+        executeIfLoggedIn(() -> checkIfMealIsFavorite(mealId));
     }
 
     private void loadMealDetails(String mealId) {
@@ -98,12 +98,15 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
 
     @Override
     public void onFavoriteClicked(Meal meal) {
-        if (isFavorite) {
-            removeFromFavorites(meal);
-        } else {
-            addToFavorites(meal);
-        }
+        executeIfLoggedIn(() -> {
+            if (isFavorite) {
+                removeFromFavorites(meal);
+            } else {
+                addToFavorites(meal);
+            }
+        });
     }
+
 
     private void addToFavorites(Meal meal) {
         Disposable disposable = repository.addMealToFavorite(meal)
@@ -149,16 +152,43 @@ public class MealDetailsPresenterImpl implements MealDetailsPresenter {
 
     @Override
     public void onAddToPlanClicked(Meal meal, String selectedDate) {
-        meal.setDate(selectedDate);
 
-        disposables.add(
-                repository.addMealToPlanned(meal)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                () -> view.showAddedToPlanMessage(),
-                                error -> view.showAddToPlanError(error.getMessage())
-                        )
-        );
+        executeIfLoggedIn(() -> {
+
+            meal.setDate(selectedDate);
+
+            disposables.add(
+                    repository.addMealToPlanned(meal)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(
+                                    () -> view.showAddedToPlanMessage(),
+                                    error -> view.showAddToPlanError(error.getMessage())
+                            )
+            );
+
+        });
     }
+
+
+    private void executeIfLoggedIn(Runnable action) {
+        Disposable disposable = auth.isUserSignedIn()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        isSignedIn -> {
+                            if (isSignedIn) {
+                                action.run();
+                            } else {
+                                if (view != null) view.showLoginLayout();
+                            }
+                        },
+                        throwable -> {
+                            if (view != null) view.showError(throwable.getMessage());
+                        }
+                );
+
+        disposables.add(disposable);
+    }
+
 }
