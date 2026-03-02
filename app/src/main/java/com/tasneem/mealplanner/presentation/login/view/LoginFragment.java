@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -133,7 +134,12 @@ public class LoginFragment extends Fragment implements LoginView {
 
     @Override
     public void navigateToHome(User user) {
-        NavHostFragment.findNavController(this).navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment());
+        NavHostFragment.findNavController(this).navigate(
+                LoginFragmentDirections.actionLoginFragmentToHomeFragment(),
+                new NavOptions.Builder()
+                        .setPopUpTo(R.id.loginFragment, true)
+                        .build()
+        );
     }
 
     @Override

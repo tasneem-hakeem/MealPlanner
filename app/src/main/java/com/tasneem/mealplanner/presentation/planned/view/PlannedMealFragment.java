@@ -58,7 +58,6 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
 
     private void initPresenter() {
         presenter = new PlannedMealPresenterImpl(new MealsRepositoryImpl(requireActivity().getApplication()));
-        presenter.checkUserLoggedIn();
     }
 
     private void initRecyclerView() {
@@ -128,7 +127,7 @@ public class PlannedMealFragment extends Fragment implements PlannedMealView, Pl
     public void showEmptyState() {
         binding.mealsRecyclerView.setVisibility(View.GONE);
         binding.emptyStateCard.setVisibility(View.VISIBLE);
-        binding.emptyStateText.setText("No meals planned for this day");
+        binding.emptyStateText.setText(R.string.no_meals_planned_for_this_day);
     }
 
     @Override

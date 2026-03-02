@@ -61,7 +61,7 @@
     <string name="healthy_and_tasty">صحي ولذيذ</string>
     <string name="add_to_planner_failed">فشل في إضافة الوجبة للمخطط</string>
     <string name="remove_from_planner_failed">فشل في إزالة الوجبة من المخطط</string>
-    <string name="there_are_no_meals_in_planner">مفيش وجبات في المخطط</string>
+    <string name="there_are_no_meals_in_planner">لا يوجد وجبات في المخطط</string>
     <string name="remove_from_planner">إزالة من المخطط</string>
     <string name="error_load_trending_ingredients">فشل في تحميل المكونات الرائجة</string>
     <string name="error_load_categories">فشل في تحميل التصنيفات</string>
@@ -75,4 +75,5 @@
     <string name="meal_added_to_planner">تمت إضافة الوجبة إلى الخطة</string>
     <string name="continue_as_guest">المتابعة كضيف</string>
     <string name="you_need_an_account_to_use_this_nsign_in_and_continue">أنت بحاجة إلى حساب لاستخدام هذه الخدمة.\nسجّل الدخول وتابع.</string>
+    <string name="no_meals_planned_for_this_day">لا توجد وجبات لهذا اليوم</string>
 </resources>
