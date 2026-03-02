@@ -18,6 +18,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="24dp"
+            android:contentDescription="@string/profile"
             android:src="@drawable/icon_person"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -60,8 +61,8 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/knife_and_spoon_icon"
                 android:src="@drawable/icon_knife_spoon" />

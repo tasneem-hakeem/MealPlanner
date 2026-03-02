@@ -45,8 +45,8 @@
         app:layout_constraintTop_toTopOf="@+id/horizontalGuideline">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:contentDescription="@string/knife_and_spoon_icon"
             android:src="@drawable/icon_knife_spoon" />
