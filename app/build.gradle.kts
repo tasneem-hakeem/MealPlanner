@@ -76,8 +76,10 @@ dependencies {
     implementation(libs.lottie)
     // core for youtube video playing
     implementation(libs.core)
-    //
-    implementation("com.applandeo:material-calendar-view:1.9.2")
+    // splash screen
+    implementation(libs.androidx.core.splashscreen)
+    // calendar view
+    implementation(libs.material.calendar.view)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

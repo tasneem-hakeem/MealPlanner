@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.MealPlanner" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary colors -->
@@ -34,10 +34,27 @@
         <item name="textAppearanceLabelSmall">@style/TextAppearance.MealPlanner.LabelSmall</item>
 
         <!-- Shapes -->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MealPlanner.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MealPlanner.MediumComponent</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MealPlanner.LargeComponent</item>
+        <item name="shapeAppearanceSmallComponent">
+            @style/ShapeAppearance.MealPlanner.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.MealPlanner.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">
+            @style/ShapeAppearance.MealPlanner.LargeComponent
+        </item>
     </style>
 
     <style name="Theme.MealPlanner" parent="Base.Theme.MealPlanner" />
+
+    <style name="Theme.MyApp.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon_knife_spoon</item>
+
+        <item name="windowSplashScreenIconBackgroundColor">@color/primary</item>
+
+        <item name="postSplashScreenTheme">@style/Base.Theme.MealPlanner</item>
+    </style>
+
 </resources>

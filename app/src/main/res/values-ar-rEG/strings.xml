@@ -72,5 +72,7 @@
     <string name="error_load_meals_area">فشل في تحميل وجبات المنطقة</string>
     <string name="search_error">خطأ في البحث: </string>
     <string name="no_meals_found">لا يوجد وجبات الان</string>
-    <string name="meal_added_to_planner">Meal Added To Planner</string>
+    <string name="meal_added_to_planner">تمت إضافة الوجبة إلى الخطة</string>
+    <string name="continue_as_guest">المتابعة كضيف</string>
+    <string name="you_need_an_account_to_use_this_nsign_in_and_continue">أنت بحاجة إلى حساب لاستخدام هذه الخدمة.\nسجّل الدخول وتابع.</string>
 </resources>
