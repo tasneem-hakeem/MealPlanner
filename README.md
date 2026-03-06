@@ -10,6 +10,13 @@ The project focuses on applying real Android development concepts such as reacti
 
 ---
 
+
+<img width="1738" height="970" alt="Gemini_Generated_Image_fwqkhefwqkhefwqk (1)" src="https://github.com/user-attachments/assets/8ccc8432-0c30-4695-9788-ba8776e0c2a6" />
+
+<img width="1376" height="784" alt="Gemini_Generated_Image_m0xgo7m0xgo7m0xg" src="https://github.com/user-attachments/assets/f1ad21db-79e0-4b22-ab39-7bc3f7cc03d9" />
+
+---
+
 ## 🔐 Authentication System
 
 The application integrates **Firebase Authentication** to provide secure and reliable user authentication.
@@ -98,9 +105,4 @@ com.tasneem.mealplanner
 
 ---
 
-<img width="1738" height="970" alt="Gemini_Generated_Image_fwqkhefwqkhefwqk (1)" src="https://github.com/user-attachments/assets/8ccc8432-0c30-4695-9788-ba8776e0c2a6" />
-
-<img width="1376" height="784" alt="Gemini_Generated_Image_m0xgo7m0xgo7m0xg" src="https://github.com/user-attachments/assets/f1ad21db-79e0-4b22-ab39-7bc3f7cc03d9" />
-
----
 
