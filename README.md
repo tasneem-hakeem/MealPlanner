@@ -1,6 +1,6 @@
-# 📱 Android Project – Meal Planner App
+# Android Project – Meal Planner App
 
-## 📌 Project Overview
+## Project Overview
 
 This Android application is a **Meal Planner App** that allows users to discover meals, view detailed recipes, manage favorite meals, and plan meals for specific days.
 
@@ -17,7 +17,7 @@ The project focuses on applying real Android development concepts such as reacti
 
 ---
 
-## 🔐 Authentication System
+## Authentication System
 
 The application integrates **Firebase Authentication** to provide secure and reliable user authentication.
 
@@ -32,7 +32,7 @@ Authentication is handled through Firebase, ensuring secure credential managemen
 
 ---
 
-## 🛠️ Technologies & Tools Used
+## echnologies & Tools Used
 
 - **Language:** Java
 - **Architecture Pattern:** MVP (Model – View – Presenter)
@@ -47,9 +47,9 @@ Authentication is handled through Firebase, ensuring secure credential managemen
 
 ---
 
-## ✨ Features
+## Features
 
-### 🔐 Authentication Features
+### Authentication Features
 
 - Register using Email & Password
 - Login using Email & Password
@@ -69,7 +69,7 @@ Authentication is handled through Firebase, ensuring secure credential managemen
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 The project follows a clean layered structure:
 
